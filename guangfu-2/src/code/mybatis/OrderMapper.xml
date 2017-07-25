@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.OrderMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Order" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="capacity" property="capacity" jdbcType="DOUBLE" />
+		<result column="gross" property="gross" />
+		<result column="plan" property="plan" jdbcType="INTEGER" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="address_id" property="addressId" />
+		<result column="address_text" property="addressText" jdbcType="VARCHAR" />
+		<result column="pay_way" property="payWay" jdbcType="INTEGER" />
+		<result column="step_a" property="stepA" jdbcType="INTEGER" />
+		<result column="step_b" property="stepB" jdbcType="INTEGER" />
+		<result column="step_c" property="stepC" jdbcType="INTEGER" />
+		<result column="step_d" property="stepD" jdbcType="INTEGER" />
+		<result column="step_e" property="stepE" jdbcType="INTEGER" />
+		<result column="entrust_money" property="entrustMoney" jdbcType="DECIMAL" />
+		<result column="paid_money" property="paidMoney" jdbcType="DECIMAL" />
+		<result column="privilege_code" property="privilegeCode" jdbcType="VARCHAR" />
+		<result column="server_id" property="serverId" />
+		<result column="link_man" property="linkMan" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="vas_id" property="vasId" />
+		<result column="vas_text" property="vasText" />
+		<result column="vas_money" property="vasMoney" />
+		<result column="total_money" property="totalMoney" />
+		<result column="refund_money" property="refundMoney" />
+		<result column="pay_order_id" property="payOrderId" jdbcType="VARCHAR"/>
+		<result column="pay_url" property="payUrl" jdbcType="VARCHAR"/>
+		<result column="create_pay_url_dtm" property="createPayUrlDtm" jdbcType="TIMESTAMP" />
+		<result column="ebank_pay_order_id" property="ebankPayOrderId" jdbcType="VARCHAR"/>
+		<result column="ebank_pay_url" property="ebankPayUrl" jdbcType="VARCHAR"/>
+		<result column="create_ebank_pay_url_dtm" property="createEbankPayUrlDtm" jdbcType="TIMESTAMP" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="device_a" property="deviceA" jdbcType="VARCHAR"/>
+		<result column="device_b" property="deviceB" jdbcType="VARCHAR"/>
+		<result column="device_c" property="deviceC" jdbcType="VARCHAR"/>
+		<result column="device_d" property="deviceD" jdbcType="VARCHAR"/>
+		<result column="device_e" property="deviceE" jdbcType="VARCHAR"/>
+		<result column="del" property="del" />
+		<result column="del_dtm" property="del_dtm" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+		<association property="server" javaType="com.hy.gf.model.Server" columnPrefix="server_">
+	      		<id column="server_id" property="id" jdbcType="INTEGER" />
+			<result column="server_name" property="serverName" jdbcType="VARCHAR" />
+	    </association>
+	</resultMap>
+	<resultMap type="com.hy.gf.model.User" id="User">
+		<id column="user_id" property="id" jdbcType="INTEGER" />
+		<result column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="address_text" property="addressText" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="INTEGER" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="privilege_code" property="privilegeCode" jdbcType="VARCHAR" />
+		<result column="privilege_code_init" property="privilegeCodeInit" jdbcType="VARCHAR" />
+		<result column="open_ida" property="openIda" jdbcType="VARCHAR" />
+		<result column="open_idb" property="openIdb" jdbcType="VARCHAR" />
+		<result column="open_idc" property="openIdc" jdbcType="VARCHAR" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap type="com.hy.gf.model.Server" id="Server">
+		<id column="server_id" property="id" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="server_name" property="serverName" jdbcType="VARCHAR" />
+		<result column="address_text" property="addressText" jdbcType="VARCHAR" />
+		<result column="registered_capital" property="registeredCapital" jdbcType="DECIMAL" />
+		<result column="registered_dt" property="registeredDt" jdbcType="DATE" />
+		<result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+		<result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+		<result column="saleman_phone" property="salemanPhone" jdbcType="VARCHAR" />
+		<result column="business_url" property="businessUrl" jdbcType="VARCHAR" />
+		<result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+		<result column="legal_person_phone" property="legalPersonPhone" jdbcType="VARCHAR" />
+		<result column="company_assets" property="companyAssets" jdbcType="INTEGER" />
+		<result column="business_text" property="businessText" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="capacity" property="capacity" jdbcType="INTEGER" />
+		<result column="use_couponcode" property="useCouponcode" jdbcType="VARCHAR" />
+		<result column="couponcode" property="couponcode" jdbcType="VARCHAR" />
+		<result column="texture" property="texture" jdbcType="VARCHAR" />
+		<result column="pricea" property="pricea" jdbcType="DECIMAL" />
+		<result column="priceb" property="priceb" jdbcType="DECIMAL" />
+		<result column="pricea_ring" property="priceaRing" jdbcType="INTEGER" />
+		<result column="priceb_ring" property="pricebRing" jdbcType="INTEGER" />
+		<result column="sqm_electric" property="sqmElectric" jdbcType="DOUBLE" />
+		<result column="watt_price" property="wattPrice" jdbcType="DOUBLE" />
+		<result column="aptitude" property="aptitude" jdbcType="VARCHAR" />
+		<result column="three_months" property="threeMonths" jdbcType="INTEGER" />
+		<result column="bank_draft" property="bankDraft" jdbcType="INTEGER" />
+		<result column="project_size_a" property="projectSizeA" jdbcType="INTEGER" />
+		<result column="project_size_b" property="projectSizeB" jdbcType="INTEGER" />
+		<result column="epc" property="epc" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="server_city" property="serverCity" jdbcType="VARCHAR" />
+		<result column="max_person_size" property="maxPersonSize" jdbcType="DOUBLE" />
+		<result column="max_project_size" property="maxProjectSize" jdbcType="DOUBLE" />
+		<result column="design_price" property="designPrice" jdbcType="DECIMAL" />
+		<result column="falloff" property="falloff" />
+		<result column="cvr" property="cvr" />
+		<result column="module_quality" property="moduleQuality" />
+		<result column="adjunct_quality" property="adjunctQuality" />
+		<result column="factorage" property="factorage" jdbcType="DOUBLE" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap type="com.hy.gf.model.Station" id="Station">
+		<id column="station_id" property="id" jdbcType="INTEGER" />
+		<result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+		<result column="station_name" property="stationName" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithUser" type="com.hy.gf.vo.OrderVO" extends="BaseResultMap">
+		<association property="user" column="user_id" javaType="com.hy.gf.model.User" resultMap="User" />
+		<association property="server" column="server_id" javaType="com.hy.gf.model.Server" resultMap="Server" />
+		<association property="station" column="station_id" javaType="com.hy.gf.model.Station" resultMap="Station" />
+	</resultMap>
+	
+	
+	
+	
+	
+	<sql id="Base_Column_List" >t_order.id,order_code,t_order.user_id,t_order.capacity,gross,plan,t_order.state,address_id,t_order.address_text,pay_way,step_a,step_b,step_c,step_d,step_e,entrust_money,paid_money,privilege_code,server_id,link_man,t_order.phone,t_order.type,vas_id,vas_text,vas_money,total_money,refund_money,pay_url,status,device_a,device_b,device_c,device_d,device_e,del,del_dtm,t_order.create_dtm</sql>
+	<sql id="Server_Column_List">t_server.id as server_server_id, t_server.server_name as server_server_name</sql>
+	
+	
+	<delete id="delete" parameterType="java.lang.Long" >
+		delete from t_order
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+
+	<select id="select" resultMap="ResultMapWithUser" parameterType="java.lang.Long" >
+		SELECT
+		t1.id,
+		t1.order_code,
+		t1.user_id,
+		t1.capacity,
+		t1.gross,
+		t1.plan,
+		t1.state,
+		t1.address_id,
+		t1.address_text,
+		t1.pay_way,
+		t1.step_a,
+		t1.step_b,
+		t1.step_c,
+		t1.step_d,
+		t1.step_e,
+		t1.entrust_money,
+		t1.paid_money,
+		t1.privilege_code,
+		t1.server_id,
+		t1.link_man,
+		t1.phone,
+		t1.vas_id,
+		t1.vas_text,
+		t1.vas_money,
+		t1.total_money,
+		t1.refund_money,
+		t1.pay_order_id,
+		t1.pay_url,
+		t1.create_pay_url_dtm,
+		t1.ebank_pay_order_id,
+		t1.ebank_pay_url,
+		t1.create_ebank_pay_url_dtm,
+		t1.status,
+		t1.device_a,
+		t1.device_b,
+		t1.device_c,
+		t1.device_d,
+		t1.device_e,
+		t1.create_dtm,
+		t2.id AS user_id,
+		t2.phone,
+		t2.username,
+		t2.img_url,
+		t2.email,
+		t2.sex,
+		t2.address_text,
+		t2.real_name,
+		t3.id as server_id,
+		t3.server_name,
+		t3.address_text,
+		t3.contact_name,
+		t3.contact_phone,
+		t3.saleman_phone,
+		t3.business_url,
+		t3.business_text,
+		t3.type,
+		t3.registered_capital,
+		t3.registered_dt,
+		t3.legal_person,
+		t3.legal_person_phone,
+		t3.company_assets,
+		t3.state,
+		t3.capacity,
+		t3.use_couponcode,
+		t3.couponcode,
+		t3.texture,
+		t3.pricea,
+		t3.priceb,
+		t3.pricea_ring,
+		t3.priceb_ring,
+		t3.sqm_electric,
+		t3.watt_price,
+		t3.aptitude,
+		t3.three_months,
+		t3.bank_draft,
+		t3.project_size_a,
+		t3.project_size_b,
+		t3.epc,
+		t3.user_id,
+		t3.server_city,
+		t3.max_person_size,
+		t3.max_project_size,
+		t3.design_price,
+		t3.falloff,
+		t3.cvr,
+		t3.module_quality,
+		t3.adjunct_quality,
+		t3.create_dtm,
+		t4.station_name,
+		t4.station_code
+		FROM t_order t1 LEFT JOIN t_user t2 ON t1.user_id = t2.id
+		LEFT JOIN t_server t3 ON t1.server_id = t3.id
+		LEFT JOIN t_station t4 ON t1.id = t4.order_id
+		where t1.id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Order" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_order
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="orderCode != null" >
+				order_code,
+			</if>
+			<if test="userId != null" >
+				user_id,
+			</if>
+			<if test="capacity != null" >
+				capacity,
+			</if>
+			<if test="gross != null" >
+				gross,
+			</if>
+			<if test="plan != null" >
+				plan,
+			</if>
+			<if test="state != null" >
+				state,
+			</if>
+			<if test="addressId != null" >
+				address_id,
+			</if>
+			<if test="addressText != null" >
+				address_text,
+			</if>
+			<if test="payWay != null" >
+				pay_way,
+			</if>
+			<if test="stepA != null" >
+				step_a,
+			</if>
+			<if test="stepB != null" >
+				step_b,
+			</if>
+			<if test="stepC != null" >
+				step_c,
+			</if>
+			<if test="stepD != null" >
+				step_d,
+			</if>
+			<if test="stepE != null" >
+				step_e,
+			</if>
+			<if test="entrustMoney != null" >
+				entrust_money,
+			</if>
+			<if test="paidMoney != null" >
+				paid_money,
+			</if>
+			<if test="privilegeCode != null" >
+				privilege_code,
+			</if>
+			<if test="serverId != null" >
+				server_id,
+			</if>
+			<if test="linkMan != null" >
+				link_man,
+			</if>
+			<if test="phone != null" >
+				phone,
+			</if>
+			<if test="type != null" >
+				type,
+			</if>
+			<if test="vasId != null" >
+				vas_id,
+			</if>
+			<if test="vasText != null" >
+				vas_text,
+			</if>
+			<if test="vasMoney != null" >
+				vas_money,
+			</if>
+			<if test="totalMoney != null" >
+				total_money,
+			</if>
+			<if test="refundMoney != null" >
+				refund_money,
+			</if>
+			<if test="payOrderId != null" >
+				pay_order_id,
+			</if>
+			<if test="payUrl != null" >
+				pay_url,
+			</if>
+			<if test="createPayUrlDtm != null" >
+				create_pay_url_dtm,
+			</if>
+			<if test="ebankPayOrderId != null" >
+				ebank_pay_order_id,
+			</if>
+			<if test="ebankPayUrl != null" >
+				ebank_pay_url,
+			</if>
+			<if test="createEbankPayUrlDtm != null" >
+				create_ebank_pay_url_dtm,
+			</if>
+			<if test="status != null" >
+				status,
+			</if>
+			<if test="deviceA != null" >
+				device_a,
+			</if>
+			<if test="deviceB != null" >
+				device_b,
+			</if>
+			<if test="deviceC != null" >
+				device_c,
+			</if>
+			<if test="deviceD != null" >
+				device_d,
+			</if>
+			<if test="deviceE != null" >
+				device_e,
+			</if>
+			<if test="del != null" >
+				del,
+			</if>
+			<if test="del_dtm != null" >
+				del_dtm,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orderCode != null" >
+				#{orderCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="capacity != null" >
+				#{capacity,jdbcType=DOUBLE},
+			</if>
+			<if test="gross != null" >
+				#{gross},
+			</if>
+			<if test="plan != null" >
+				#{plan,jdbcType=INTEGER},
+			</if>
+			<if test="state != null" >
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="addressId != null" >
+				#{addressId},
+			</if>
+			<if test="addressText != null" >
+				#{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="payWay != null" >
+				#{payWay,jdbcType=INTEGER},
+			</if>
+			<if test="stepA != null" >
+				#{stepA,jdbcType=INTEGER},
+			</if>
+			<if test="stepB != null" >
+				#{stepB,jdbcType=INTEGER},
+			</if>
+			<if test="stepC != null" >
+				#{stepC,jdbcType=INTEGER},
+			</if>
+			<if test="stepD != null" >
+				#{stepD,jdbcType=INTEGER},
+			</if>
+			<if test="stepE != null" >
+				#{stepE,jdbcType=INTEGER},
+			</if>
+			<if test="entrustMoney != null" >
+				#{entrustMoney,jdbcType=DECIMAL},
+			</if>
+			<if test="paidMoney != null" >
+				#{paidMoney,jdbcType=DECIMAL},
+			</if>
+			<if test="privilegeCode != null" >
+				#{privilegeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="serverId != null" >
+				#{serverId},
+			</if>
+			<if test="linkMan != null" >
+				#{linkMan,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null" >
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null" >
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="vasId != null" >
+				#{vasId},
+			</if>
+			<if test="vasText != null" >
+				#{vasText},
+			</if>
+			<if test="vasMoney != null" >
+				#{vasMoney},
+			</if>
+			<if test="totalMoney != null" >
+				#{totalMoney},
+			</if>
+			<if test="refundMoney != null" >
+				#{refundMoney},
+			</if>
+			<if test="payOrderId != null" >
+				#{pay_order_id},
+			</if>
+			<if test="payUrl != null" >
+				#{payUrl},
+			</if>
+			<if test="createPayUrlDtm != null" >
+				#{createPayUrlDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null" >
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="deviceA != null" >
+				#{deviceA},
+			</if>
+			<if test="deviceB != null" >
+				#{deviceB},
+			</if>
+			<if test="deviceC != null" >
+				#{deviceC},
+			</if>
+			<if test="deviceD != null" >
+				#{deviceD},
+			</if>
+			<if test="deviceE != null" >
+				#{deviceE},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Order" >
+		update t_order
+		<set >
+			<if test="orderCode != null" >
+				order_code = #{orderCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="capacity != null" >
+				capacity = #{capacity,jdbcType=DOUBLE},
+			</if>
+			<if test="gross != null" >
+				gross = #{gross},
+			</if>
+			<if test="plan != null" >
+				plan = #{plan,jdbcType=INTEGER},
+			</if>
+			<if test="state != null" >
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="addressId != null" >
+				address_id = #{addressId},
+			</if>
+			<if test="addressText != null" >
+				address_text = #{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="payWay != null" >
+				pay_way = #{payWay,jdbcType=INTEGER},
+			</if>
+			<if test="stepA != null" >
+				step_a = #{stepA,jdbcType=INTEGER},
+			</if>
+			<if test="stepB != null" >
+				step_b = #{stepB,jdbcType=INTEGER},
+			</if>
+			<if test="stepC != null" >
+				step_c = #{stepC,jdbcType=INTEGER},
+			</if>
+			<if test="stepD != null" >
+				step_d = #{stepD,jdbcType=INTEGER},
+			</if>
+			<if test="stepE != null" >
+				step_e = #{stepE,jdbcType=INTEGER},
+			</if>
+			<if test="entrustMoney != null" >
+				entrust_money = #{entrustMoney,jdbcType=DECIMAL},
+			</if>
+			<if test="paidMoney != null" >
+				paid_money = #{paidMoney,jdbcType=DECIMAL},
+			</if>
+			<if test="privilegeCode != null" >
+				privilege_code = #{privilegeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="serverId != null" >
+				server_id = #{serverId},
+			</if>
+			<if test="linkMan != null" >
+				link_man = #{linkMan,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null" >
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null" >
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="vasId != null" >
+				vas_id = #{vasId},
+			</if>
+			<if test="vasText != null" >
+				vas_text = #{vasText},
+			</if>
+			<if test="vasMoney != null" >
+				vas_money = #{vasMoney},
+			</if>
+			<if test="totalMoney != null" >
+				total_money = #{totalMoney},
+			</if>
+			<if test="refundMoney != null" >
+				refund_money = #{refundMoney},
+			</if>
+			<if test="payOrderId != null" >
+				pay_order_id = #{payOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="payUrl != null" >
+				pay_url = #{payUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="createPayUrlDtm != null" >
+				create_pay_url_dtm = #{createPayUrlDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ebankPayOrderId != null" >
+				ebank_pay_order_id = #{ebankPayOrderId,jdbcType=VARCHAR},
+			</if>
+			<if test="ebankPayUrl != null" >
+				ebank_pay_url = #{ebankPayUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="createEbankPayUrlDtm != null" >
+				create_ebank_pay_url_dtm = #{createEbankPayUrlDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null" >
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="deviceA != null" >
+				device_a = #{deviceA},
+			</if>
+			<if test="deviceB != null" >
+				device_b = #{deviceB},
+			</if>
+			<if test="deviceC != null" >
+				device_c = #{deviceC},
+			</if>
+			<if test="deviceD != null" >
+				device_d = #{deviceD},
+			</if>
+			<if test="deviceE != null" >
+				device_e = #{deviceE},
+			</if>
+			<if test="del != null" >
+				del = #{del},
+			</if>
+			<if test="del_dtm != null" >
+				del_dtm = #{del_dtm},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_order
+		where 1=1
+			<if test="orderCode != null" >
+				and order_code = #{orderCode,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="capacity != null" >
+				and capacity = #{capacity,jdbcType=DOUBLE}
+			</if>
+			<if test="gross != null" >
+				and gross = #{gross}
+			</if>
+			<if test="plan != null" >
+				and plan = #{plan,jdbcType=INTEGER}
+			</if>
+			<if test="state != null" >
+				and state = #{state,jdbcType=INTEGER}
+			</if>
+			<if test="addressId != null" >
+				and address_id = #{addressId}
+			</if>
+			<if test="addressText != null" >
+				and address_text = #{addressText,jdbcType=VARCHAR}
+			</if>
+			<if test="payWay != null" >
+				and pay_way = #{payWay,jdbcType=INTEGER}
+			</if>
+			<if test="stepA != null" >
+				and step_a = #{stepA,jdbcType=INTEGER}
+			</if>
+			<if test="stepB != null" >
+				and step_b = #{stepB,jdbcType=INTEGER}
+			</if>
+			<if test="stepC != null" >
+				and step_c = #{stepC,jdbcType=INTEGER}
+			</if>
+			<if test="stepD != null" >
+				and step_d = #{stepD,jdbcType=INTEGER}
+			</if>
+			<if test="stepE != null" >
+				and step_e = #{stepE,jdbcType=INTEGER}
+			</if>
+			<if test="entrustMoney != null" >
+				and entrust_money = #{entrustMoney,jdbcType=DECIMAL}
+			</if>
+			<if test="paidMoney != null" >
+				and paid_money = #{paidMoney,jdbcType=DECIMAL}
+			</if>
+			<if test="privilegeCode != null" >
+				and privilege_code = #{privilegeCode,jdbcType=VARCHAR}
+			</if>
+			<if test="serverId != null" >
+				and server_id = #{serverId}
+			</if>
+			<if test="linkMan != null" >
+				and link_man = #{linkMan,jdbcType=VARCHAR}
+			</if>
+			<if test="phone != null" >
+				and phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="payOrderId != null" >
+				and pay_order_id = #{payOrderId,jdbcType=VARCHAR}
+			</if>
+			<if test="payUrl != null" >
+				and pay_url = #{payUrl,jdbcType=VARCHAR}
+			</if>
+			<if test="createPayUrlDtm != null" >
+				and create_pay_url_dtm = #{createPayUrlDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="ebankPayOrderId != null" >
+				and ebank_pay_order_id = #{ebankPayOrderId,jdbcType=VARCHAR}
+			</if>
+			<if test="ebankPayUrl != null" >
+				and ebank_pay_url = #{ebankPayUrl,jdbcType=VARCHAR}
+			</if>
+			<if test="createEbankPayUrlDtm != null" >
+				and create_ebank_pay_url_dtm = #{createEbankPayUrlDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="deviceA != null" >
+				and device_a = #{deviceA,jdbcType=VARCHAR}
+			</if>
+			<if test="deviceB != null" >
+				and device_b = #{deviceB,jdbcType=VARCHAR}
+			</if>
+			<if test="deviceC != null" >
+				and device_c = #{deviceC,jdbcType=VARCHAR}
+			</if>
+			<if test="deviceD != null" >
+				and device_d = #{deviceD,jdbcType=VARCHAR}
+			</if>
+			<if test="deviceE != null" >
+				and device_e = #{deviceE,jdbcType=VARCHAR}
+			</if>
+			<if test="del != null" >
+				and del = #{del}
+			</if>
+			<if test="del_dtm != null" >
+				and del_dtm = #{del_dtm}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />,
+		<include refid="Server_Column_List" />
+		from t_order
+		left join t_server
+		on t_order.server_id = t_server.id
+		where 1=1
+		and t_order.del = 0	
+		<if test="orderCode != null" >
+			and t_order.order_code = #{orderCode,jdbcType=VARCHAR}
+		</if>
+		<if test="userId != null" >
+			and t_order.user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		<if test="capacity != null" >
+			and t_order.capacity = #{capacity,jdbcType=DOUBLE}
+		</if>
+		<if test="gross != null" >
+			and t_order.gross = #{gross}
+		</if>
+		<if test="plan != null" >
+			and t_order.plan = #{plan,jdbcType=INTEGER}
+		</if>
+		<if test="state != null" >
+			and t_order.state = #{state,jdbcType=INTEGER}
+		</if>
+		<if test="addressId != null" >
+			and t_order.address_id = #{addressId}
+		</if>
+		<if test="addressText != null" >
+			and t_order.address_text = #{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="payWay != null" >
+			and t_order.pay_way = #{payWay,jdbcType=INTEGER}
+		</if>
+		<if test="stepA != null" >
+			and t_order.step_a = #{stepA,jdbcType=INTEGER}
+		</if>
+		<if test="stepB != null" >
+			and t_order.step_b = #{stepB,jdbcType=INTEGER}
+		</if>
+		<if test="stepC != null" >
+			and t_order.step_c = #{stepC,jdbcType=INTEGER}
+		</if>
+		<if test="stepD != null" >
+			and t_order.step_d = #{stepD,jdbcType=INTEGER}
+		</if>
+		<if test="stepE != null" >
+			and t_order.step_e = #{stepE,jdbcType=INTEGER}
+		</if>
+		<if test="entrustMoney != null" >
+			and t_order.entrust_money = #{entrustMoney,jdbcType=DECIMAL}
+		</if>
+		<if test="paidMoney != null" >
+			and t_order.paid_money = #{paidMoney,jdbcType=DECIMAL}
+		</if>
+		<if test="privilegeCode != null" >
+			and t_order.privilege_code = #{privilegeCode,jdbcType=VARCHAR}
+		</if>
+		<if test="serverId != null" >
+			and t_order.server_id = #{serverId}
+		</if>
+		<if test="linkMan != null" >
+			and t_order.link_man = #{linkMan,jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null" >
+			and t_order.phone = #{phone,jdbcType=VARCHAR}
+		</if>
+		<if test="type != null" >
+			and t_order.type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="status != null" >
+			and t_order.status = #{status,jdbcType=INTEGER}
+		</if>
+		<if test="deviceA != null" >
+			and t_order.device_a = #{deviceA,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceB != null" >
+			and t_order.device_b = #{deviceB,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceC != null" >
+			and t_order.device_c = #{deviceC,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceD != null" >
+			and t_order.device_d = #{deviceD,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceE != null" >
+			and t_order.device_e = #{deviceE,jdbcType=VARCHAR}
+		</if>
+		<if test="del != null" >
+			and t_order.del = #{del}
+		</if>
+		<if test="del_dtm != null" >
+			and t_order.del_dtm = #{del_dtm}
+		</if>
+		<if test="createDtm != null" >
+			and t_order.create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="query != null">
+			and (t_order.order_code like '%${query}%' OR t_order.link_man like '%${query}%' OR t_order.phone like '%${query}%' OR t_order.address_text like '%${query}%' OR t_server.server_name like '%${query}%' )
+		</if>
+		<if test="#{sort} != null">
+			<if test="sort != null">			
+				order by ${sort} ${sortUp}
+			</if>
+		</if>	
+		limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_order
+		left join t_server
+		on t_order.server_id = t_server.id
+		where 1=1
+		and t_order.del = 0	
+		<if test="orderCode != null" >
+			and t_order.order_code = #{orderCode,jdbcType=VARCHAR}
+		</if>
+		<if test="userId != null" >
+			and t_order.user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		<if test="capacity != null" >
+			and t_order.capacity = #{capacity,jdbcType=DOUBLE}
+		</if>
+		<if test="gross != null" >
+			and t_order.gross = #{gross}
+		</if>
+		<if test="plan != null" >
+			and t_order.plan = #{plan,jdbcType=INTEGER}
+		</if>
+		<if test="state != null" >
+			and t_order.state = #{state,jdbcType=INTEGER}
+		</if>
+		<if test="addressId != null" >
+			and t_order.address_id = #{addressId}
+		</if>
+		<if test="addressText != null" >
+			and t_order.address_text = #{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="payWay != null" >
+			and t_order.pay_way = #{payWay,jdbcType=INTEGER}
+		</if>
+		<if test="stepA != null" >
+			and t_order.step_a = #{stepA,jdbcType=INTEGER}
+		</if>
+		<if test="stepB != null" >
+			and t_order.step_b = #{stepB,jdbcType=INTEGER}
+		</if>
+		<if test="stepC != null" >
+			and t_order.step_c = #{stepC,jdbcType=INTEGER}
+		</if>
+		<if test="stepD != null" >
+			and t_order.step_d = #{stepD,jdbcType=INTEGER}
+		</if>
+		<if test="stepE != null" >
+			and t_order.step_e = #{stepE,jdbcType=INTEGER}
+		</if>
+		<if test="entrustMoney != null" >
+			and t_order.entrust_money = #{entrustMoney,jdbcType=DECIMAL}
+		</if>
+		<if test="paidMoney != null" >
+			and t_order.paid_money = #{paidMoney,jdbcType=DECIMAL}
+		</if>
+		<if test="privilegeCode != null" >
+			and t_order.privilege_code = #{privilegeCode,jdbcType=VARCHAR}
+		</if>
+		<if test="serverId != null" >
+			and t_order.server_id = #{serverId}
+		</if>
+		<if test="linkMan != null" >
+			and t_order.link_man = #{linkMan,jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null" >
+			and t_order.phone = #{phone,jdbcType=VARCHAR}
+		</if>
+		<if test="type != null" >
+			and t_order.type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="status != null" >
+			and t_order.status = #{status,jdbcType=INTEGER}
+		</if>
+		<if test="deviceA != null" >
+			and t_order.device_a = #{deviceA,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceB != null" >
+			and t_order.device_b = #{deviceB,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceC != null" >
+			and t_order.device_c = #{deviceC,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceD != null" >
+			and t_order.device_d = #{deviceD,jdbcType=VARCHAR}
+		</if>
+		<if test="deviceE != null" >
+			and t_order.device_e = #{deviceE,jdbcType=VARCHAR}
+		</if>
+		<if test="del != null" >
+			and t_order.del = #{del}
+		</if>
+		<if test="del_dtm != null" >
+			and t_order.del_dtm = #{del_dtm}
+		</if>
+		<if test="createDtm != null" >
+			and t_order.create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="query != null">
+			and (t_order.order_code like '%${query}%' OR t_order.link_man like '%${query}%' OR t_order.phone like '%${query}%' OR t_order.address_text like '%${query}%' OR t_server.server_name like '%${query}%' )
+		</if>
+	</select>
+	
+	
+	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+		SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_order
+		(order_code,user_id,capacity,gross,plan,state,address_id,address_text,pay_way,step_a,step_b,step_c,step_d,step_e,entrust_money,paid_money,privilege_code,server_id,link_man,phone)values<foreach collection="list" item="item" index="index" separator=",">(#{item.orderCode},#{item.userId},#{item.capacity},#{item.gross},#{item.plan},#{item.state},#{item.addressId},#{item.addressText},#{item.payWay},#{item.stepA},#{item.stepB},#{item.stepC},#{item.stepD},#{item.stepE},#{item.entrustMoney},#{item.paidMoney},#{item.privilegeCode},#{item.serverId},#{item.linkMan},#{item.phone})	</foreach>
+	</insert>
+	<delete id="deleteBatch" parameterType="java.util.List">delete from t_order where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+
+
+	<select id="findMonthCapacity" parameterType="java.util.HashMap" resultType="java.lang.String">
+		SELECT SUM(capacity) AS capacity 
+		FROM t_order WHERE 1=1
+		AND create_dtm LIKE CONCAT('%',#{timeStr},'%') 
+		and del = 0	
+		<if test="serverId != null" >
+			AND server_id = #{serverId}
+		</if>
+		<if test="state != null" >
+			AND state = #{state}
+		</if>
+	</select>
+
+	<select id="find" resultMap="ResultMapWithUser" >
+		SELECT
+			t1.id,
+			t1.order_code,
+			t1.capacity,
+			t1.state,
+			t1.pay_url,
+			t2.username,
+			t3.server_name,
+			t4.id as station_id,
+			t4.station_name
+		FROM t_order t1
+		LEFT JOIN t_user t2 ON t1.user_id = t2.id
+		LEFT JOIN t_server t3 ON t1.server_id = t3.id
+		LEFT JOIN t_station t4 ON t1.id = t4.order_id
+		WHERE 1=1 
+			and t1.del = 0	
+			<if test="orderCode != null" >
+				and t1.order_code = #{orderCode,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null" >
+				and t1.user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="capacity != null" >
+				and t1.capacity = #{capacity,jdbcType=DOUBLE}
+			</if>
+			<if test="gross != null" >
+				and t1.gross = #{gross}
+			</if>
+			<if test="plan != null" >
+				and t1.plan = #{plan,jdbcType=INTEGER}
+			</if>
+			<if test="state != null" >
+				and t1.state = #{state,jdbcType=INTEGER}
+			</if>
+			<if test="addressId != null" >
+				and t1.address_id = #{addressId}
+			</if>
+			<if test="addressText != null" >
+				and t1.address_text = #{addressText,jdbcType=VARCHAR}
+			</if>
+			<if test="payWay != null" >
+				and t1.pay_way = #{payWay,jdbcType=INTEGER}
+			</if>
+			<if test="stepA != null" >
+				and t1.step_a = #{stepA,jdbcType=INTEGER}
+			</if>
+			<if test="stepB != null" >
+				and t1.step_b = #{stepB,jdbcType=INTEGER}
+			</if>
+			<if test="stepC != null" >
+				and t1.step_c = #{stepC,jdbcType=INTEGER}
+			</if>
+			<if test="stepD != null" >
+				and t1.step_d = #{stepD,jdbcType=INTEGER}
+			</if>
+			<if test="stepE != null" >
+				and t1.step_e = #{stepE,jdbcType=INTEGER}
+			</if>
+			<if test="entrustMoney != null" >
+				and t1.entrust_money = #{entrustMoney,jdbcType=DECIMAL}
+			</if>
+			<if test="paidMoney != null" >
+				and t1.paid_money = #{paidMoney,jdbcType=DECIMAL}
+			</if>
+			<if test="privilegeCode != null" >
+				and t1.privilege_code = #{privilegeCode,jdbcType=VARCHAR}
+			</if>
+			<if test="serverId != null" >
+				and t1.server_id = #{serverId}
+			</if>
+			<if test="linkMan != null" >
+				and t1.link_man = #{linkMan,jdbcType=VARCHAR}
+			</if>
+			<if test="phone != null" >
+				and t1.phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null" >
+				and t1.type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="createDtm != null" >
+				and t1.create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			order by t1.create_dtm desc
+	</select>
+	
+	<select id="selectByPayOrderId" resultMap="BaseResultMap">
+		select * from t_order where pay_order_id=#{payOrderId, jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByEbankPayOrderId" resultMap="BaseResultMap">
+		select * from t_order where ebank_pay_order_id=#{ebankPayOrderId, jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 服务商财务管理》营业明细》筛选功能 -->
+	<select id="businessFind" parameterType="Map" resultMap="ResultMapWithUser" >
+		SELECT
+		t1.id,
+		t1.order_code,
+		t1.user_id,
+		t1.capacity,
+		t1.gross,
+		t1.plan,
+		t1.state,
+		t1.address_id,
+		t1.address_text,
+		t1.pay_way,
+		t1.step_a,
+		t1.step_b,
+		t1.step_c,
+		t1.step_d,
+		t1.step_e,
+		t1.entrust_money,
+		t1.paid_money,
+		t1.privilege_code,
+		t1.server_id,
+		t1.link_man,
+		t1.phone,
+		t1.vas_id,
+		t1.vas_text,
+		t1.vas_money,
+		t1.total_money,
+		t1.refund_money,
+		t1.pay_order_id,
+		t1.pay_url,
+		t1.create_pay_url_dtm,
+		t1.ebank_pay_order_id,
+		t1.ebank_pay_url,
+		t1.create_ebank_pay_url_dtm,
+		t1.status,
+		t1.device_a,
+		t1.device_b,
+		t1.device_c,
+		t1.device_d,
+		t1.device_e,
+		t1.create_dtm,
+		t3.server_name,
+		t3.id as server_id,
+		t3.factorage
+		FROM t_order t1 LEFT JOIN t_server t3 ON t1.server_id = t3.id 
+		where 1=1
+		and t1.del = 0
+		<if test="serverId != null" >
+			and t1.server_id = #{serverId}
+		</if>
+		<if test="cityName != null and cityName !='' ">
+			and t1.address_text LIKE CONCAT ('%',#{cityName},'%')
+		</if>
+		<if test="addressId != null" >
+			and t1.address_id = #{addressId}
+		</if>
+		<if test="timeFrom != null" >
+			and t1.create_dtm <![CDATA[>=]]> #{timeFrom}
+		</if>
+		<if test="timeTo != null" >
+			and t1.create_dtm <![CDATA[<]]> DATE_ADD(#{timeTo}, INTERVAL 1 DAY)
+		</if>
+		<if test="orderCode != null and orderCode !='' ">
+			and t1.order_code = #{orderCode}
+		</if>
+		<if test="linkMan != null and linkMan !='' ">
+			and t1.link_man LIKE CONCAT ('%',#{linkMan},'%')
+		</if>
+		<if test="state != null">
+			and t1.state = #{state}
+		</if>
+		<if test="stepA != null">
+			and t1.step_a = #{stepA}
+		</if>
+		<if test="status != null">
+			and t1.status = #{status}
+		</if>
+		<if test="query != null">
+			and (t1.link_man like '%${query}%' OR t1.order_code like '%${query}%' OR t3.server_name like '%${query}%')
+		</if>
+		ORDER BY t1.create_dtm DESC			
+		limit #{start},#{limit}
+	</select>
+	<select id="businessFindCount" parameterType="Map" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_order
+		where 1=1
+		and del = 0
+		<if test="serverId != null" >
+			and server_id = #{serverId}
+		</if>
+		<if test="cityName != null and cityName !='' ">
+			and address_text LIKE CONCAT ('%',#{cityName},'%')
+		</if>
+		<if test="addressId != null" >
+			and address_id = #{addressId}
+		</if>
+		<if test="timeFrom != null" >
+			and create_dtm <![CDATA[>=]]> #{timeFrom}
+		</if>
+		<if test="timeTo != null" >
+			and create_dtm <![CDATA[<]]> DATE_ADD(#{timeTo}, INTERVAL 1 DAY)
+		</if>
+		<if test="orderCode != null and orderCode !='' ">
+			and order_code = #{orderCode}
+		</if>
+		<if test="linkMan != null and linkMan !='' ">
+			and link_man LIKE CONCAT ('%',#{linkMan},'%')
+		</if>
+		<if test="state != null">
+			and state = #{state}
+		</if>
+		<if test="stepA != null">
+			and step_a = #{stepA}
+		</if>
+		<if test="query != null">
+			and (link_man like '%${query}%' or order_code like '%${query}%')
+		</if>
+	</select>
+
+</mapper>

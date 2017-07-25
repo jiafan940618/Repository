@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.YeepayMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Yeepay" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="merchantaccount" property="merchantaccount" jdbcType="VARCHAR" />
+		<result column="yborderid" property="yborderid" jdbcType="VARCHAR" />
+		<result column="orderid" property="orderid" jdbcType="VARCHAR" />
+		<result column="bankcode" property="bankcode" jdbcType="VARCHAR" />
+		<result column="bank" property="bank" jdbcType="VARCHAR" />
+		<result column="lastno" property="lastno" jdbcType="VARCHAR" />
+		<result column="cardtype" property="cardtype" jdbcType="INTEGER" />
+		<result column="amount" property="amount" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="sign" property="sign" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,merchantaccount,yborderid,orderid,bankcode,bank,lastno,cardtype,amount,status,sign
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_yeepay
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_yeepay
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Yeepay" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_yeepay
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="merchantaccount != null" >
+				merchantaccount,
+			</if>
+			<if test="yborderid != null" >
+				yborderid,
+			</if>
+			<if test="orderid != null" >
+				orderid,
+			</if>
+			<if test="bankcode != null" >
+				bankcode,
+			</if>
+			<if test="bank != null" >
+				bank,
+			</if>
+			<if test="lastno != null" >
+				lastno,
+			</if>
+			<if test="cardtype != null" >
+				cardtype,
+			</if>
+			<if test="amount != null" >
+				amount,
+			</if>
+			<if test="status != null" >
+				status,
+			</if>
+			<if test="sign != null" >
+				sign,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="merchantaccount != null" >
+				#{merchantaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="yborderid != null" >
+				#{yborderid,jdbcType=VARCHAR},
+			</if>
+			<if test="orderid != null" >
+				#{orderid,jdbcType=INTEGER},
+			</if>
+			<if test="bankcode != null" >
+				#{bankcode,jdbcType=VARCHAR},
+			</if>
+			<if test="bank != null" >
+				#{bank,jdbcType=VARCHAR},
+			</if>
+			<if test="lastno != null" >
+				#{lastno,jdbcType=VARCHAR},
+			</if>
+			<if test="cardtype != null" >
+				#{cardtype,jdbcType=INTEGER},
+			</if>
+			<if test="amount != null" >
+				#{amount,jdbcType=INTEGER},
+			</if>
+			<if test="status != null" >
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="sign != null" >
+				#{sign,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Yeepay" >
+		update t_yeepay
+		<set >
+			<if test="merchantaccount != null" >
+				merchantaccount = #{merchantaccount,jdbcType=VARCHAR},
+			</if>
+			<if test="yborderid != null" >
+				yborderid = #{yborderid,jdbcType=VARCHAR},
+			</if>
+			<if test="orderid != null" >
+				orderid = #{orderid,jdbcType=VARCHAR},
+			</if>
+			<if test="bankcode != null" >
+				bankcode = #{bankcode,jdbcType=VARCHAR},
+			</if>
+			<if test="bank != null" >
+				bank = #{bank,jdbcType=VARCHAR},
+			</if>
+			<if test="lastno != null" >
+				lastno = #{lastno,jdbcType=VARCHAR},
+			</if>
+			<if test="cardtype != null" >
+				cardtype = #{cardtype,jdbcType=INTEGER},
+			</if>
+			<if test="amount != null" >
+				amount = #{amount,jdbcType=INTEGER},
+			</if>
+			<if test="status != null" >
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="sign != null" >
+				sign = #{sign,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_yeepay
+		where 1=1
+			<if test="merchantaccount != null" >
+				and merchantaccount = #{merchantaccount,jdbcType=VARCHAR}
+			</if>
+			<if test="yborderid != null" >
+				and yborderid = #{yborderid,jdbcType=VARCHAR}
+			</if>
+			<if test="orderid != null" >
+				and orderid = #{orderid,jdbcType=VARCHAR}
+			</if>
+			<if test="bankcode != null" >
+				and bankcode = #{bankcode,jdbcType=VARCHAR}
+			</if>
+			<if test="bank != null" >
+				and bank = #{bank,jdbcType=VARCHAR}
+			</if>
+			<if test="lastno != null" >
+				and lastno = #{lastno,jdbcType=VARCHAR}
+			</if>
+			<if test="cardtype != null" >
+				and cardtype = #{cardtype,jdbcType=INTEGER}
+			</if>
+			<if test="amount != null" >
+				and amount = #{amount,jdbcType=INTEGER}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="sign != null" >
+				and sign = #{sign,jdbcType=VARCHAR}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_yeepay
+		where 1=1
+			<if test="merchantaccount != null" >
+				and merchantaccount = #{merchantaccount,jdbcType=VARCHAR}
+			</if>
+			<if test="yborderid != null" >
+				and yborderid = #{yborderid,jdbcType=VARCHAR}
+			</if>
+			<if test="orderid != null" >
+				and orderid = #{orderid,jdbcType=VARCHAR}
+			</if>
+			<if test="bankcode != null" >
+				and bankcode = #{bankcode,jdbcType=VARCHAR}
+			</if>
+			<if test="bank != null" >
+				and bank = #{bank,jdbcType=VARCHAR}
+			</if>
+			<if test="lastno != null" >
+				and lastno = #{lastno,jdbcType=VARCHAR}
+			</if>
+			<if test="cardtype != null" >
+				and cardtype = #{cardtype,jdbcType=INTEGER}
+			</if>
+			<if test="amount != null" >
+				and amount = #{amount,jdbcType=INTEGER}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="sign != null" >
+				and sign = #{sign,jdbcType=VARCHAR}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_yeepay
+		where 1=1
+		<if test="merchantaccount != null" >
+			and merchantaccount = #{merchantaccount,jdbcType=VARCHAR}
+		</if>
+		<if test="yborderid != null" >
+			and yborderid = #{yborderid,jdbcType=VARCHAR}
+		</if>
+		<if test="orderid != null" >
+			and orderid = #{orderid,jdbcType=VARCHAR}
+		</if>
+		<if test="bankcode != null" >
+			and bankcode = #{bankcode,jdbcType=VARCHAR}
+		</if>
+		<if test="bank != null" >
+			and bank = #{bank,jdbcType=VARCHAR}
+		</if>
+		<if test="lastno != null" >
+			and lastno = #{lastno,jdbcType=VARCHAR}
+		</if>
+		<if test="cardtype != null" >
+			and cardtype = #{cardtype,jdbcType=INTEGER}
+		</if>
+		<if test="amount != null" >
+			and amount = #{amount,jdbcType=INTEGER}
+		</if>
+		<if test="status != null" >
+			and status = #{status,jdbcType=INTEGER}
+		</if>
+		<if test="sign != null" >
+			and sign = #{sign,jdbcType=VARCHAR}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_yeepay
+(merchantaccount,yborderid,orderid,bankcode,bank,lastno,cardtype,amount,status,sign)values<foreach collection="list" item="item" index="index" separator=",">(#{item.merchantaccount},#{item.yborderid},#{item.orderid},#{item.bankcode},#{item.bank},#{item.lastno},#{item.cardtype},#{item.amount},#{item.status})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_yeepay where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+</mapper>

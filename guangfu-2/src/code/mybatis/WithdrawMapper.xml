@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.WithdrawMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Withdraw" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="server_id" property="serverId" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="money" property="money" jdbcType="DECIMAL" />
+		<result column="card_id" property="cardId" jdbcType="INTEGER" />
+		<result column="card_num" property="cardNum" jdbcType="VARCHAR" />
+		<result column="card_user_name" property="cardUserName" jdbcType="VARCHAR" />
+		<result column="card_address" property="cardAddress" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="handle_text" property="handleText" jdbcType="VARCHAR" />
+		<result column="handle_dtm" property="handleDtm" jdbcType="TIMESTAMP" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap type="com.hy.gf.model.User" id="User">
+		<id column="user_id" property="id" jdbcType="INTEGER" />
+		<result column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="address_text" property="addressText" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="INTEGER" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="privilege_code" property="privilegeCode" jdbcType="VARCHAR" />
+		<result column="privilege_code_init" property="privilegeCodeInit" jdbcType="VARCHAR" />
+		<result column="open_ida" property="openIda" jdbcType="VARCHAR" />
+		<result column="open_idb" property="openIdb" jdbcType="VARCHAR" />
+		<result column="open_idc" property="openIdc" jdbcType="VARCHAR" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithUser" type="com.hy.gf.vo.WithdrawVO" extends="BaseResultMap">
+		<association property="user" column="user_id" javaType="com.hy.gf.model.User" resultMap="User" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,user_id,server_id,type,money,card_id,card_num,card_user_name,card_address,status,handle_text,handle_dtm,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_withdraw
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_withdraw
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Withdraw" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_withdraw
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="userId != null" >
+				user_id,
+			</if>
+			<if test="serverId != null" >
+				server_id,
+			</if>
+			<if test="type != null" >
+				type,
+			</if>
+			<if test="money != null" >
+				money,
+			</if>
+			<if test="cardId != null" >
+				card_id,
+			</if>
+			<if test="cardNum != null" >
+				card_num,
+			</if>
+			<if test="cardUserName != null" >
+				card_user_name,
+			</if>
+			<if test="cardAddress != null" >
+				card_address,
+			</if>
+			<if test="status != null" >
+				status,
+			</if>
+			<if test="handleText != null" >
+				handle_text,
+			</if>
+			<if test="handleDtm != null" >
+				handle_dtm,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null" >
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="serverId != null" >
+				#{serverId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null" >
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="money != null" >
+				#{money,jdbcType=DECIMAL},
+			</if>
+			<if test="cardId != null" >
+				#{cardId,jdbcType=INTEGER},
+			</if>
+			<if test="cardNum != null" >
+				#{cardNum,jdbcType=VARCHAR},
+			</if>
+			<if test="cardUserName != null" >
+				#{cardUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="cardAddress != null" >
+				#{cardAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null" >
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="handleText != null" >
+				#{handleText,jdbcType=VARCHAR},
+			</if>
+			<if test="handleDtm != null" >
+				#{handleDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Withdraw" >
+		update t_withdraw
+		<set >
+			<if test="userId != null" >
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="serverId != null" >
+				server_id = #{serverId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null" >
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="money != null" >
+				money = #{money,jdbcType=DECIMAL},
+			</if>
+			<if test="cardId != null" >
+				card_id = #{cardId,jdbcType=INTEGER},
+			</if>
+			<if test="cardNum != null" >
+				card_num = #{cardNum,jdbcType=VARCHAR},
+			</if>
+			<if test="cardUserName != null" >
+				card_user_name = #{cardUserName,jdbcType=VARCHAR},
+			</if>
+			<if test="cardAddress != null" >
+				card_address = #{cardAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null" >
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="handleText != null" >
+				handle_text = #{handleText,jdbcType=VARCHAR},
+			</if>
+			<if test="handleDtm != null" >
+				handle_dtm = #{handleDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_withdraw
+		where 1=1
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="serverId != null" >
+				and server_id = #{serverId,jdbcType=INTEGER}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="money != null" >
+				and money = #{money,jdbcType=DECIMAL}
+			</if>
+			<if test="cardId != null" >
+				and card_id = #{cardId,jdbcType=INTEGER}
+			</if>
+			<if test="cardNum != null" >
+				and card_num = #{cardNum,jdbcType=VARCHAR}
+			</if>
+			<if test="cardUserName != null" >
+				and card_user_name = #{cardUserName,jdbcType=VARCHAR}
+			</if>
+			<if test="cardAddress != null" >
+				and card_address = #{cardAddress,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="handleText != null" >
+				and handle_text = #{handleText,jdbcType=VARCHAR}
+			</if>
+			<if test="handleDtm != null" >
+				and handle_dtm = #{handleDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="ResultMapWithUser" >
+		SELECT
+		t1.id,
+		t1.user_id,
+		t1.server_id,
+		t1.type,
+		t1.money,
+		t1.card_id,
+		t1.card_num,
+		t1.card_address,
+		t1.card_user_name,
+		t1.`status`,
+		t1.handle_text,
+		t1.handle_dtm,
+		t1.create_dtm,
+		t2.username,
+		t2.phone,
+		t2.id AS userId
+		from t_withdraw t1 LEFT JOIN t_user t2 ON t1.user_id = t2.id
+		where 1=1
+			<if test="userId != null" >
+				and t1.user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="serverId != null" >
+				and server_id = #{serverId,jdbcType=INTEGER}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="money != null" >
+				and t1.money = #{money,jdbcType=DECIMAL}
+			</if>
+			<if test="cardId != null" >
+				and t1.card_id = #{cardId,jdbcType=INTEGER}
+			</if>
+			<if test="cardNum != null" >
+				and t1.card_num = #{cardNum,jdbcType=VARCHAR}
+			</if>
+			<if test="cardUserName != null" >
+				and t1.card_user_name = #{cardUserName,jdbcType=VARCHAR}
+			</if>
+			<if test="cardAddress != null" >
+				and t1.card_address = #{cardAddress,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null" >
+				and t1.status = #{status,jdbcType=INTEGER}
+			</if>
+			<if test="handleText != null" >
+				and t1.handle_text = #{handleText,jdbcType=VARCHAR}
+			</if>
+			<if test="handleDtm != null" >
+				and t1.handle_dtm = #{handleDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="createDtm != null" >
+				and t1.create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="query != null">
+				and (t1.card_num like '%${query}%' or t1.handle_text like '%${query}%')
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_withdraw
+		where 1=1
+		<if test="userId != null" >
+			and user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		<if test="serverId != null" >
+			and server_id = #{serverId,jdbcType=INTEGER}
+		</if>
+		<if test="type != null" >
+			and type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="money != null" >
+			and money = #{money,jdbcType=DECIMAL}
+		</if>
+		<if test="cardId != null" >
+			and card_id = #{cardId,jdbcType=INTEGER}
+		</if>
+		<if test="cardNum != null" >
+			and card_num = #{cardNum,jdbcType=VARCHAR}
+		</if>
+		<if test="cardUserName != null" >
+			and card_user_name = #{cardUserName,jdbcType=VARCHAR}
+		</if>
+		<if test="cardAddress != null" >
+			and card_address = #{cardAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="status != null" >
+			and status = #{status,jdbcType=INTEGER}
+		</if>
+		<if test="handleText != null" >
+			and handle_text = #{handleText,jdbcType=VARCHAR}
+		</if>
+		<if test="handleDtm != null" >
+			and handle_dtm = #{handleDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="query != null">
+				and (card_num like '%${query}%' or handle_text like '%${query}%')
+			</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_withdraw
+(user_id,server_id,type,money,card_id,card_num,card_user_name,card_address,status,handle_text,handle_dtm)values<foreach collection="list" item="item" index="index" separator=",">(#{item.userId},#{item.serverId},#{item.type},#{item.money},#{item.cardId},#{item.cardNum},#{item.cardUserName},#{item.cardAddress},#{item.status},#{item.handleText},#{item.handleDtm})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_withdraw where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+
+	<select id="dixianFilter" parameterType="Map" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_withdraw
+		where 1=1
+			<if test="serverId != null" >
+				and server_id = #{serverId}
+			</if>
+			<if test="status != null" >
+				and status = #{status}
+			</if>
+			<if test="timeFrom != null" >
+				and create_dtm <![CDATA[>=]]> #{timeFrom}
+			</if>
+			<if test="timeTo != null" >
+				and create_dtm <![CDATA[<]]> DATE_ADD(#{timeTo}, INTERVAL 1 DAY)
+			</if>
+			<if test="query != null and query != '' " >
+				and (card_num like '%${query}%' or id like '%${query}%' or card_user_name like '%${query}%' or handle_text like '%${query}%')
+			</if>
+			ORDER BY create_dtm DESC			
+			limit #{start},#{limit}
+	</select>
+	<select id="dixianFilterCount" parameterType="Map" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_withdraw
+		where 1=1
+		<if test="serverId != null" >
+			and server_id = #{serverId}
+		</if>
+		<if test="status != null" >
+			and status = #{status}
+		</if>
+		<if test="timeFrom != null" >
+			and create_dtm <![CDATA[>=]]> #{timeFrom}
+		</if>
+		<if test="timeTo != null" >
+			and create_dtm <![CDATA[<]]> DATE_ADD(#{timeTo}, INTERVAL 1 DAY)
+		</if>
+		<if test="query != null and query != '' " >
+			and (card_num like '%${query}%' or id like '%${query}%' or card_user_name like '%${query}%' or handle_text like '%${query}%')
+		</if>
+	</select>
+
+
+</mapper>

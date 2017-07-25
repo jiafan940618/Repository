@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.DevConfMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.DevConf" >
+		<id column="row_id" property="rowId" jdbcType="INTEGER" />
+		<result column="c_addr" property="cAddr" jdbcType="INTEGER" />
+		<result column="i_addr" property="iAddr" jdbcType="INTEGER" />
+		<result column="d_addr" property="dAddr" jdbcType="BIGINT" />
+		<result column="d_type" property="dType" jdbcType="INTEGER" />
+		<result column="d_name" property="dName" jdbcType="VARCHAR" />
+		<result column="d_opt" property="dOpt" jdbcType="VARCHAR" />
+		<result column="w_mask" property="wMask" jdbcType="VARCHAR" />
+		<result column="w_conf" property="wConf" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		row_id,c_addr,i_addr,d_addr,d_type,d_name,d_opt,w_mask,w_conf
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from dev_conf
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from dev_conf
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.DevConf" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into dev_conf
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="rowId != null" >
+				row_id,
+			</if>
+			<if test="cAddr != null" >
+				c_addr,
+			</if>
+			<if test="iAddr != null" >
+				i_addr,
+			</if>
+			<if test="dAddr != null" >
+				d_addr,
+			</if>
+			<if test="dType != null" >
+				d_type,
+			</if>
+			<if test="dName != null" >
+				d_name,
+			</if>
+			<if test="dOpt != null" >
+				d_opt,
+			</if>
+			<if test="wMask != null" >
+				w_mask,
+			</if>
+			<if test="wConf != null" >
+				w_conf,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="rowId != null" >
+				#{rowId,jdbcType=INTEGER},
+			</if>
+			<if test="cAddr != null" >
+				#{cAddr,jdbcType=INTEGER},
+			</if>
+			<if test="iAddr != null" >
+				#{iAddr,jdbcType=INTEGER},
+			</if>
+			<if test="dAddr != null" >
+				#{dAddr,jdbcType=BIGINT},
+			</if>
+			<if test="dType != null" >
+				#{dType,jdbcType=INTEGER},
+			</if>
+			<if test="dName != null" >
+				#{dName,jdbcType=VARCHAR},
+			</if>
+			<if test="dOpt != null" >
+				#{dOpt,jdbcType=VARCHAR},
+			</if>
+			<if test="wMask != null" >
+				#{wMask,jdbcType=VARCHAR},
+			</if>
+			<if test="wConf != null" >
+				#{wConf,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.DevConf" >
+		update dev_conf
+		<set >
+			<if test="cAddr != null" >
+				c_addr = #{cAddr,jdbcType=INTEGER},
+			</if>
+			<if test="iAddr != null" >
+				i_addr = #{iAddr,jdbcType=INTEGER},
+			</if>
+			<if test="dAddr != null" >
+				d_addr = #{dAddr,jdbcType=BIGINT},
+			</if>
+			<if test="dType != null" >
+				d_type = #{dType,jdbcType=INTEGER},
+			</if>
+			<if test="dName != null" >
+				d_name = #{dName,jdbcType=VARCHAR},
+			</if>
+			<if test="dOpt != null" >
+				d_opt = #{dOpt,jdbcType=VARCHAR},
+			</if>
+			<if test="wMask != null" >
+				w_mask = #{wMask,jdbcType=VARCHAR},
+			</if>
+			<if test="wConf != null" >
+				w_conf = #{wConf,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from dev_conf
+		where 1=1
+			<if test="cAddr != null" >
+				and c_addr = #{cAddr,jdbcType=INTEGER}
+			</if>
+			<if test="iAddr != null" >
+				and i_addr = #{iAddr,jdbcType=INTEGER}
+			</if>
+			<if test="dAddr != null" >
+				and d_addr = #{dAddr,jdbcType=BIGINT}
+			</if>
+			<if test="dType != null" >
+				and d_type = #{dType,jdbcType=INTEGER}
+			</if>
+			<if test="dName != null" >
+				and d_name = #{dName,jdbcType=VARCHAR}
+			</if>
+			<if test="dOpt != null" >
+				and d_opt = #{dOpt,jdbcType=VARCHAR}
+			</if>
+			<if test="wMask != null" >
+				and w_mask = #{wMask,jdbcType=VARCHAR}
+			</if>
+			<if test="wConf != null" >
+				and w_conf = #{wConf,jdbcType=VARCHAR}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from dev_conf
+		where 1=1
+			<if test="cAddr != null" >
+				and c_addr = #{cAddr,jdbcType=INTEGER}
+			</if>
+			<if test="iAddr != null" >
+				and i_addr = #{iAddr,jdbcType=INTEGER}
+			</if>
+			<if test="dAddr != null" >
+				and d_addr = #{dAddr,jdbcType=BIGINT}
+			</if>
+			<if test="dType != null" >
+				and d_type = #{dType,jdbcType=INTEGER}
+			</if>
+			<if test="dName != null" >
+				and d_name = #{dName,jdbcType=VARCHAR}
+			</if>
+			<if test="dOpt != null" >
+				and d_opt = #{dOpt,jdbcType=VARCHAR}
+			</if>
+			<if test="wMask != null" >
+				and w_mask = #{wMask,jdbcType=VARCHAR}
+			</if>
+			<if test="wConf != null" >
+				and w_conf = #{wConf,jdbcType=VARCHAR}
+			</if>
+			<if test="query != null">
+				and (d_name like '%${query}%' or c_addr like '%${query}%')
+			</if>
+			<if test="#{sort} != null">
+				<if test="sort != null">			
+					order by row_id ${sortUp}
+				</if>
+			</if>
+			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from dev_conf
+		where 1=1
+		<if test="cAddr != null" >
+			and c_addr = #{cAddr,jdbcType=INTEGER}
+		</if>
+		<if test="iAddr != null" >
+			and i_addr = #{iAddr,jdbcType=INTEGER}
+		</if>
+		<if test="dAddr != null" >
+			and d_addr = #{dAddr,jdbcType=BIGINT}
+		</if>
+		<if test="dType != null" >
+			and d_type = #{dType,jdbcType=INTEGER}
+		</if>
+		<if test="dName != null" >
+			and d_name = #{dName,jdbcType=VARCHAR}
+		</if>
+		<if test="dOpt != null" >
+			and d_opt = #{dOpt,jdbcType=VARCHAR}
+		</if>
+		<if test="wMask != null" >
+			and w_mask = #{wMask,jdbcType=VARCHAR}
+		</if>
+		<if test="wConf != null" >
+			and w_conf = #{wConf,jdbcType=VARCHAR}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into dev_conf
+(row_id,c_addr,i_addr,d_addr,d_type,d_name,d_opt,w_mask,w_conf)values<foreach collection="list" item="item" index="index" separator=",">(#{item.rowId},#{item.cAddr},#{item.iAddr},#{item.dAddr},#{item.dType},#{item.dName},#{item.dOpt},#{item.wMask})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from dev_conf where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+</mapper>

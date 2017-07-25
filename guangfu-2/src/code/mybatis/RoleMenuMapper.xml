@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.RoleMenuMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.RoleMenu" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="menu_id" property="menuId" jdbcType="INTEGER" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,role_id,menu_id,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from j_role_menu
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from j_role_menu
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.RoleMenu" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into j_role_menu
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="roleId != null" >
+				role_id,
+			</if>
+			<if test="menuId != null" >
+				menu_id,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="roleId != null" >
+				#{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="menuId != null" >
+				#{menuId,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.RoleMenu" >
+		update j_role_menu
+		<set >
+			<if test="roleId != null" >
+				role_id = #{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="menuId != null" >
+				menu_id = #{menuId,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from j_role_menu
+		where 1=1
+			<if test="roleId != null" >
+				and role_id = #{roleId,jdbcType=INTEGER}
+			</if>
+			<if test="menuId != null" >
+				and menu_id = #{menuId,jdbcType=INTEGER}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+			SELECT
+			j1.id,
+			j1.role_id,
+			j1.menu_id,
+			t1.`level`,
+			t1.`name`,
+			j1.create_dtm
+			from j_role_menu j1 LEFT JOIN t_menu t1 ON j1.menu_id = t1.id
+			where t1.`level` = 2 
+			<if test="roleId != null" >
+				and j1.role_id = #{roleId,jdbcType=INTEGER}
+			</if>
+			<if test="menuId != null" >
+				and j1.menu_id = #{menuId,jdbcType=INTEGER}
+			</if>
+			
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from j_role_menu
+		where 1=1
+		<if test="roleId != null" >
+			and role_id = #{roleId,jdbcType=INTEGER}
+		</if>
+		<if test="menuId != null" >
+			and menu_id = #{menuId,jdbcType=INTEGER}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into j_role_menu
+(role_id,menu_id)values<foreach collection="list" item="item" index="index" separator=",">(#{item.roleId},#{item.menuId})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from j_role_menu where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+<delete id="delMenuByRoleId" parameterType="java.util.List">DELETE from j_role_menu where role_id = #{roleId,jdbcType=INTEGER}</delete>
+</mapper>

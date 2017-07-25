@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.ProvinceMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Province" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,province_name,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from s_province
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from s_province
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Province" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into s_province
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="provinceName != null" >
+				province_name,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="provinceName != null" >
+				#{provinceName,jdbcType=VARCHAR},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Province" >
+		update s_province
+		<set >
+			<if test="provinceName != null" >
+				province_name = #{provinceName,jdbcType=VARCHAR},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from s_province
+		where 1=1
+			<if test="provinceName != null" >
+				and province_name = #{provinceName,jdbcType=VARCHAR}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from s_province
+		where 1=1
+			<if test="provinceName != null" >
+				and province_name = #{provinceName,jdbcType=VARCHAR}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from s_province
+		where 1=1
+		<if test="provinceName != null" >
+			and province_name = #{provinceName,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into s_province
+(province_name)values<foreach collection="list" item="item" index="index" separator=",">(#{item.provinceName})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from s_province where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+	<select id="findProvinceList" resultMap="BaseResultMap">
+		SELECT * FROM s_province 
+		WHERE id IN (SELECT DISTINCT province_id FROM s_city WHERE id IN (SELECT DISTINCT city_id FROM t_subsidy))
+	</select>
+	
+	<select id="selectName" resultType="java.lang.String">
+		select province_name
+		from s_province
+		where id = #{id}
+	</select>
+
+</mapper>

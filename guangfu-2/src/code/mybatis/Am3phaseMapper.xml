@@ -1,0 +1,1000 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.Am3phaseMapper">
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Am3phase">
+		<id column="row_id" property="rowId" jdbcType="INTEGER" />
+		<result column="c_addr" property="cAddr" jdbcType="INTEGER" />
+		<result column="i_addr" property="iAddr" jdbcType="INTEGER" />
+		<result column="d_addr" property="dAddr" jdbcType="BIGINT" />
+		<result column="d_type" property="dType" jdbcType="INTEGER" />
+		<result column="w_addr" property="wAddr" jdbcType="INTEGER" />
+		<result column="meter_time" property="meterTime" jdbcType="BIGINT" />
+		<result column="meter_state" property="meterState" jdbcType="VARCHAR" />
+		<result column="volt_change" property="voltChange" jdbcType="INTEGER" />
+		<result column="current_change" property="currentChange" jdbcType="INTEGER" />
+		<result column="frequency" property="frequency" jdbcType="DECIMAL" />
+		<result column="a_volt" property="aVolt" jdbcType="DECIMAL" />
+		<result column="b_volt" property="bVolt" jdbcType="DECIMAL" />
+		<result column="c_volt" property="cVolt" jdbcType="DECIMAL" />
+		<result column="ab_volt" property="abVolt" jdbcType="DECIMAL" />
+		<result column="bc_volt" property="bcVolt" jdbcType="DECIMAL" />
+		<result column="ca_volt" property="caVolt" jdbcType="DECIMAL" />
+		<result column="a_current" property="aCurrent" jdbcType="DECIMAL" />
+		<result column="b_current" property="bCurrent" jdbcType="DECIMAL" />
+		<result column="c_current" property="cCurrent" jdbcType="DECIMAL" />
+		<result column="kw" property="kw" jdbcType="DECIMAL" />
+		<result column="a_kw" property="aKw" jdbcType="DECIMAL" />
+		<result column="b_kw" property="bKw" jdbcType="DECIMAL" />
+		<result column="c_kw" property="cKw" jdbcType="DECIMAL" />
+		<result column="kvar" property="kvar" jdbcType="DECIMAL" />
+		<result column="a_kvar" property="aKvar" jdbcType="DECIMAL" />
+		<result column="b_kvar" property="bKvar" jdbcType="DECIMAL" />
+		<result column="c_kvar" property="cKvar" jdbcType="DECIMAL" />
+		<result column="kva" property="kva" jdbcType="DECIMAL" />
+		<result column="a_kva" property="aKva" jdbcType="DECIMAL" />
+		<result column="b_kva" property="bKva" jdbcType="DECIMAL" />
+		<result column="c_kva" property="cKva" jdbcType="DECIMAL" />
+		<result column="power_factor" property="powerFactor" jdbcType="DECIMAL" />
+		<result column="a_power_factor" property="aPowerFactor" jdbcType="DECIMAL" />
+		<result column="b_power_factor" property="bPowerFactor" jdbcType="DECIMAL" />
+		<result column="c_power_factor" property="cPowerFactor" jdbcType="DECIMAL" />
+		<result column="current_zero" property="currentZero" jdbcType="DECIMAL" />
+		<result column="kwh_total" property="kwhTotal" jdbcType="DECIMAL" />
+		<result column="kwh" property="kwh" jdbcType="DECIMAL" />
+		<result column="kwh_rev" property="kwhRev" jdbcType="DECIMAL" />
+		<result column="kvarh1" property="kvarh1" jdbcType="DECIMAL" />
+		<result column="kvarh2" property="kvarh2" jdbcType="DECIMAL" />
+		<result column="a_kwh_total" property="aKwhTotal" jdbcType="DECIMAL" />
+		<result column="b_kwh_total" property="bKwhTotal" jdbcType="DECIMAL" />
+		<result column="c_kwh_total" property="cKwhTotal" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		row_id,c_addr,i_addr,d_addr,d_type,w_addr,meter_time,meter_state,volt_change,current_change,frequency,a_volt,b_volt,c_volt,ab_volt,bc_volt,ca_volt,a_current,b_current,c_current,kw,a_kw,b_kw,c_kw,kvar,a_kvar,b_kvar,c_kvar,kva,a_kva,b_kva,c_kva,power_factor,a_power_factor,b_power_factor,c_power_factor,current_zero,kwh_total,kwh,kwh_rev,kvarh1,kvarh2,a_kwh_total,b_kwh_total,c_kwh_total
+	</sql>
+	<delete id="delete" parameterType="java.lang.Long"> delete from
+		am_3phase_2016_06_24 where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from am_3phase_2016_06_24
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Am3phase">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into am_3phase_2016_06_24
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="rowId != null">
+				row_id,
+			</if>
+			<if test="cAddr != null">
+				c_addr,
+			</if>
+			<if test="iAddr != null">
+				i_addr,
+			</if>
+			<if test="dAddr != null">
+				d_addr,
+			</if>
+			<if test="dType != null">
+				d_type,
+			</if>
+			<if test="wAddr != null">
+				w_addr,
+			</if>
+			<if test="meterTime != null">
+				meter_time,
+			</if>
+			<if test="meterState != null">
+				meter_state,
+			</if>
+			<if test="voltChange != null">
+				volt_change,
+			</if>
+			<if test="currentChange != null">
+				current_change,
+			</if>
+			<if test="frequency != null">
+				frequency,
+			</if>
+			<if test="aVolt != null">
+				a_volt,
+			</if>
+			<if test="bVolt != null">
+				b_volt,
+			</if>
+			<if test="cVolt != null">
+				c_volt,
+			</if>
+			<if test="abVolt != null">
+				ab_volt,
+			</if>
+			<if test="bcVolt != null">
+				bc_volt,
+			</if>
+			<if test="caVolt != null">
+				ca_volt,
+			</if>
+			<if test="aCurrent != null">
+				a_current,
+			</if>
+			<if test="bCurrent != null">
+				b_current,
+			</if>
+			<if test="cCurrent != null">
+				c_current,
+			</if>
+			<if test="kw != null">
+				kw,
+			</if>
+			<if test="aKw != null">
+				a_kw,
+			</if>
+			<if test="bKw != null">
+				b_kw,
+			</if>
+			<if test="cKw != null">
+				c_kw,
+			</if>
+			<if test="kvar != null">
+				kvar,
+			</if>
+			<if test="aKvar != null">
+				a_kvar,
+			</if>
+			<if test="bKvar != null">
+				b_kvar,
+			</if>
+			<if test="cKvar != null">
+				c_kvar,
+			</if>
+			<if test="kva != null">
+				kva,
+			</if>
+			<if test="aKva != null">
+				a_kva,
+			</if>
+			<if test="bKva != null">
+				b_kva,
+			</if>
+			<if test="cKva != null">
+				c_kva,
+			</if>
+			<if test="powerFactor != null">
+				power_factor,
+			</if>
+			<if test="aPowerFactor != null">
+				a_power_factor,
+			</if>
+			<if test="bPowerFactor != null">
+				b_power_factor,
+			</if>
+			<if test="cPowerFactor != null">
+				c_power_factor,
+			</if>
+			<if test="currentZero != null">
+				current_zero,
+			</if>
+			<if test="kwhTotal != null">
+				kwh_total,
+			</if>
+			<if test="kwh != null">
+				kwh,
+			</if>
+			<if test="kwhRev != null">
+				kwh_rev,
+			</if>
+			<if test="kvarh1 != null">
+				kvarh1,
+			</if>
+			<if test="kvarh2 != null">
+				kvarh2,
+			</if>
+			<if test="aKwhTotal != null">
+				a_kwh_total,
+			</if>
+			<if test="bKwhTotal != null">
+				b_kwh_total,
+			</if>
+			<if test="cKwhTotal != null">
+				c_kwh_total,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="rowId != null">
+				#{rowId,jdbcType=INTEGER},
+			</if>
+			<if test="cAddr != null">
+				#{cAddr,jdbcType=INTEGER},
+			</if>
+			<if test="iAddr != null">
+				#{iAddr,jdbcType=INTEGER},
+			</if>
+			<if test="dAddr != null">
+				#{dAddr,jdbcType=BIGINT},
+			</if>
+			<if test="dType != null">
+				#{dType,jdbcType=INTEGER},
+			</if>
+			<if test="wAddr != null">
+				#{wAddr,jdbcType=INTEGER},
+			</if>
+			<if test="meterTime != null">
+				#{meterTime,jdbcType=BIGINT},
+			</if>
+			<if test="meterState != null">
+				#{meterState,jdbcType=VARCHAR},
+			</if>
+			<if test="voltChange != null">
+				#{voltChange,jdbcType=INTEGER},
+			</if>
+			<if test="currentChange != null">
+				#{currentChange,jdbcType=INTEGER},
+			</if>
+			<if test="frequency != null">
+				#{frequency,jdbcType=DECIMAL},
+			</if>
+			<if test="aVolt != null">
+				#{aVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="bVolt != null">
+				#{bVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="cVolt != null">
+				#{cVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="abVolt != null">
+				#{abVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="bcVolt != null">
+				#{bcVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="caVolt != null">
+				#{caVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="aCurrent != null">
+				#{aCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="bCurrent != null">
+				#{bCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="cCurrent != null">
+				#{cCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="kw != null">
+				#{kw,jdbcType=DECIMAL},
+			</if>
+			<if test="aKw != null">
+				#{aKw,jdbcType=DECIMAL},
+			</if>
+			<if test="bKw != null">
+				#{bKw,jdbcType=DECIMAL},
+			</if>
+			<if test="cKw != null">
+				#{cKw,jdbcType=DECIMAL},
+			</if>
+			<if test="kvar != null">
+				#{kvar,jdbcType=DECIMAL},
+			</if>
+			<if test="aKvar != null">
+				#{aKvar,jdbcType=DECIMAL},
+			</if>
+			<if test="bKvar != null">
+				#{bKvar,jdbcType=DECIMAL},
+			</if>
+			<if test="cKvar != null">
+				#{cKvar,jdbcType=DECIMAL},
+			</if>
+			<if test="kva != null">
+				#{kva,jdbcType=DECIMAL},
+			</if>
+			<if test="aKva != null">
+				#{aKva,jdbcType=DECIMAL},
+			</if>
+			<if test="bKva != null">
+				#{bKva,jdbcType=DECIMAL},
+			</if>
+			<if test="cKva != null">
+				#{cKva,jdbcType=DECIMAL},
+			</if>
+			<if test="powerFactor != null">
+				#{powerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="aPowerFactor != null">
+				#{aPowerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="bPowerFactor != null">
+				#{bPowerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="cPowerFactor != null">
+				#{cPowerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="currentZero != null">
+				#{currentZero,jdbcType=DECIMAL},
+			</if>
+			<if test="kwhTotal != null">
+				#{kwhTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="kwh != null">
+				#{kwh,jdbcType=DECIMAL},
+			</if>
+			<if test="kwhRev != null">
+				#{kwhRev,jdbcType=DECIMAL},
+			</if>
+			<if test="kvarh1 != null">
+				#{kvarh1,jdbcType=DECIMAL},
+			</if>
+			<if test="kvarh2 != null">
+				#{kvarh2,jdbcType=DECIMAL},
+			</if>
+			<if test="aKwhTotal != null">
+				#{aKwhTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="bKwhTotal != null">
+				#{bKwhTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="cKwhTotal != null">
+				#{cKwhTotal,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Am3phase">
+		update am_3phase_2016_06_24
+		<set>
+			<if test="cAddr != null">
+				c_addr = #{cAddr,jdbcType=INTEGER},
+			</if>
+			<if test="iAddr != null">
+				i_addr = #{iAddr,jdbcType=INTEGER},
+			</if>
+			<if test="dAddr != null">
+				d_addr = #{dAddr,jdbcType=BIGINT},
+			</if>
+			<if test="dType != null">
+				d_type = #{dType,jdbcType=INTEGER},
+			</if>
+			<if test="wAddr != null">
+				w_addr = #{wAddr,jdbcType=INTEGER},
+			</if>
+			<if test="meterTime != null">
+				meter_time =
+				#{meterTime,jdbcType=BIGINT},
+			</if>
+			<if test="meterState != null">
+				meter_state =
+				#{meterState,jdbcType=VARCHAR},
+			</if>
+			<if test="voltChange != null">
+				volt_change =
+				#{voltChange,jdbcType=INTEGER},
+			</if>
+			<if test="currentChange != null">
+				current_change =
+				#{currentChange,jdbcType=INTEGER},
+			</if>
+			<if test="frequency != null">
+				frequency =
+				#{frequency,jdbcType=DECIMAL},
+			</if>
+			<if test="aVolt != null">
+				a_volt = #{aVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="bVolt != null">
+				b_volt = #{bVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="cVolt != null">
+				c_volt = #{cVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="abVolt != null">
+				ab_volt = #{abVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="bcVolt != null">
+				bc_volt = #{bcVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="caVolt != null">
+				ca_volt = #{caVolt,jdbcType=DECIMAL},
+			</if>
+			<if test="aCurrent != null">
+				a_current =
+				#{aCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="bCurrent != null">
+				b_current =
+				#{bCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="cCurrent != null">
+				c_current =
+				#{cCurrent,jdbcType=DECIMAL},
+			</if>
+			<if test="kw != null">
+				kw = #{kw,jdbcType=DECIMAL},
+			</if>
+			<if test="aKw != null">
+				a_kw = #{aKw,jdbcType=DECIMAL},
+			</if>
+			<if test="bKw != null">
+				b_kw = #{bKw,jdbcType=DECIMAL},
+			</if>
+			<if test="cKw != null">
+				c_kw = #{cKw,jdbcType=DECIMAL},
+			</if>
+			<if test="kvar != null">
+				kvar = #{kvar,jdbcType=DECIMAL},
+			</if>
+			<if test="aKvar != null">
+				a_kvar = #{aKvar,jdbcType=DECIMAL},
+			</if>
+			<if test="bKvar != null">
+				b_kvar = #{bKvar,jdbcType=DECIMAL},
+			</if>
+			<if test="cKvar != null">
+				c_kvar = #{cKvar,jdbcType=DECIMAL},
+			</if>
+			<if test="kva != null">
+				kva = #{kva,jdbcType=DECIMAL},
+			</if>
+			<if test="aKva != null">
+				a_kva = #{aKva,jdbcType=DECIMAL},
+			</if>
+			<if test="bKva != null">
+				b_kva = #{bKva,jdbcType=DECIMAL},
+			</if>
+			<if test="cKva != null">
+				c_kva = #{cKva,jdbcType=DECIMAL},
+			</if>
+			<if test="powerFactor != null">
+				power_factor =
+				#{powerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="aPowerFactor != null">
+				a_power_factor =
+				#{aPowerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="bPowerFactor != null">
+				b_power_factor =
+				#{bPowerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="cPowerFactor != null">
+				c_power_factor =
+				#{cPowerFactor,jdbcType=DECIMAL},
+			</if>
+			<if test="currentZero != null">
+				current_zero =
+				#{currentZero,jdbcType=DECIMAL},
+			</if>
+			<if test="kwhTotal != null">
+				kwh_total =
+				#{kwhTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="kwh != null">
+				kwh = #{kwh,jdbcType=DECIMAL},
+			</if>
+			<if test="kwhRev != null">
+				kwh_rev = #{kwhRev,jdbcType=DECIMAL},
+			</if>
+			<if test="kvarh1 != null">
+				kvarh1 = #{kvarh1,jdbcType=DECIMAL},
+			</if>
+			<if test="kvarh2 != null">
+				kvarh2 = #{kvarh2,jdbcType=DECIMAL},
+			</if>
+			<if test="aKwhTotal != null">
+				a_kwh_total =
+				#{aKwhTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="bKwhTotal != null">
+				b_kwh_total =
+				#{bKwhTotal,jdbcType=DECIMAL},
+			</if>
+			<if test="cKwhTotal != null">
+				c_kwh_total =
+				#{cKwhTotal,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where row_id = #{rowId,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from am_3phase_2016_06_24
+		where 1=1
+		<if test="cAddr != null">
+			and c_addr = #{cAddr,jdbcType=INTEGER}
+		</if>
+		<if test="iAddr != null">
+			and i_addr = #{iAddr,jdbcType=INTEGER}
+		</if>
+		<if test="dAddr != null">
+			and d_addr = #{dAddr,jdbcType=BIGINT}
+		</if>
+		<if test="dType != null">
+			and d_type = #{dType,jdbcType=INTEGER}
+		</if>
+		<if test="wAddr != null">
+			and w_addr = #{wAddr,jdbcType=INTEGER}
+		</if>
+		<if test="meterTime != null">
+			and meter_time = #{meterTime,jdbcType=BIGINT}
+		</if>
+		<if test="meterState != null">
+			and meter_state = #{meterState,jdbcType=VARCHAR}
+		</if>
+		<if test="voltChange != null">
+			and volt_change = #{voltChange,jdbcType=INTEGER}
+		</if>
+		<if test="currentChange != null">
+			and current_change = #{currentChange,jdbcType=INTEGER}
+		</if>
+		<if test="frequency != null">
+			and frequency = #{frequency,jdbcType=DECIMAL}
+		</if>
+		<if test="aVolt != null">
+			and a_volt = #{aVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="bVolt != null">
+			and b_volt = #{bVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="cVolt != null">
+			and c_volt = #{cVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="abVolt != null">
+			and ab_volt = #{abVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="bcVolt != null">
+			and bc_volt = #{bcVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="caVolt != null">
+			and ca_volt = #{caVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="aCurrent != null">
+			and a_current = #{aCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="bCurrent != null">
+			and b_current = #{bCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="cCurrent != null">
+			and c_current = #{cCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="kw != null">
+			and kw = #{kw,jdbcType=DECIMAL}
+		</if>
+		<if test="aKw != null">
+			and a_kw = #{aKw,jdbcType=DECIMAL}
+		</if>
+		<if test="bKw != null">
+			and b_kw = #{bKw,jdbcType=DECIMAL}
+		</if>
+		<if test="cKw != null">
+			and c_kw = #{cKw,jdbcType=DECIMAL}
+		</if>
+		<if test="kvar != null">
+			and kvar = #{kvar,jdbcType=DECIMAL}
+		</if>
+		<if test="aKvar != null">
+			and a_kvar = #{aKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="bKvar != null">
+			and b_kvar = #{bKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="cKvar != null">
+			and c_kvar = #{cKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="kva != null">
+			and kva = #{kva,jdbcType=DECIMAL}
+		</if>
+		<if test="aKva != null">
+			and a_kva = #{aKva,jdbcType=DECIMAL}
+		</if>
+		<if test="bKva != null">
+			and b_kva = #{bKva,jdbcType=DECIMAL}
+		</if>
+		<if test="cKva != null">
+			and c_kva = #{cKva,jdbcType=DECIMAL}
+		</if>
+		<if test="powerFactor != null">
+			and power_factor = #{powerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="aPowerFactor != null">
+			and a_power_factor = #{aPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="bPowerFactor != null">
+			and b_power_factor = #{bPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="cPowerFactor != null">
+			and c_power_factor = #{cPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="currentZero != null">
+			and current_zero = #{currentZero,jdbcType=DECIMAL}
+		</if>
+		<if test="kwhTotal != null">
+			and kwh_total = #{kwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="kwh != null">
+			and kwh = #{kwh,jdbcType=DECIMAL}
+		</if>
+		<if test="kwhRev != null">
+			and kwh_rev = #{kwhRev,jdbcType=DECIMAL}
+		</if>
+		<if test="kvarh1 != null">
+			and kvarh1 = #{kvarh1,jdbcType=DECIMAL}
+		</if>
+		<if test="kvarh2 != null">
+			and kvarh2 = #{kvarh2,jdbcType=DECIMAL}
+		</if>
+		<if test="aKwhTotal != null">
+			and a_kwh_total = #{aKwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="bKwhTotal != null">
+			and b_kwh_total = #{bKwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="cKwhTotal != null">
+			and c_kwh_total = #{cKwhTotal,jdbcType=DECIMAL}
+		</if>
+		limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from am_3phase_2016_06_24
+		where 1=1
+		<if test="cAddr != null">
+			and c_addr = #{cAddr,jdbcType=INTEGER}
+		</if>
+		<if test="iAddr != null">
+			and i_addr = #{iAddr,jdbcType=INTEGER}
+		</if>
+		<if test="dAddr != null">
+			and d_addr = #{dAddr,jdbcType=BIGINT}
+		</if>
+		<if test="dType != null">
+			and d_type = #{dType,jdbcType=INTEGER}
+		</if>
+		<if test="wAddr != null">
+			and w_addr = #{wAddr,jdbcType=INTEGER}
+		</if>
+		<if test="meterTime != null">
+			and meter_time = #{meterTime,jdbcType=BIGINT}
+		</if>
+		<if test="meterState != null">
+			and meter_state = #{meterState,jdbcType=VARCHAR}
+		</if>
+		<if test="voltChange != null">
+			and volt_change = #{voltChange,jdbcType=INTEGER}
+		</if>
+		<if test="currentChange != null">
+			and current_change = #{currentChange,jdbcType=INTEGER}
+		</if>
+		<if test="frequency != null">
+			and frequency = #{frequency,jdbcType=DECIMAL}
+		</if>
+		<if test="aVolt != null">
+			and a_volt = #{aVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="bVolt != null">
+			and b_volt = #{bVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="cVolt != null">
+			and c_volt = #{cVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="abVolt != null">
+			and ab_volt = #{abVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="bcVolt != null">
+			and bc_volt = #{bcVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="caVolt != null">
+			and ca_volt = #{caVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="aCurrent != null">
+			and a_current = #{aCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="bCurrent != null">
+			and b_current = #{bCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="cCurrent != null">
+			and c_current = #{cCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="kw != null">
+			and kw = #{kw,jdbcType=DECIMAL}
+		</if>
+		<if test="aKw != null">
+			and a_kw = #{aKw,jdbcType=DECIMAL}
+		</if>
+		<if test="bKw != null">
+			and b_kw = #{bKw,jdbcType=DECIMAL}
+		</if>
+		<if test="cKw != null">
+			and c_kw = #{cKw,jdbcType=DECIMAL}
+		</if>
+		<if test="kvar != null">
+			and kvar = #{kvar,jdbcType=DECIMAL}
+		</if>
+		<if test="aKvar != null">
+			and a_kvar = #{aKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="bKvar != null">
+			and b_kvar = #{bKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="cKvar != null">
+			and c_kvar = #{cKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="kva != null">
+			and kva = #{kva,jdbcType=DECIMAL}
+		</if>
+		<if test="aKva != null">
+			and a_kva = #{aKva,jdbcType=DECIMAL}
+		</if>
+		<if test="bKva != null">
+			and b_kva = #{bKva,jdbcType=DECIMAL}
+		</if>
+		<if test="cKva != null">
+			and c_kva = #{cKva,jdbcType=DECIMAL}
+		</if>
+		<if test="powerFactor != null">
+			and power_factor = #{powerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="aPowerFactor != null">
+			and a_power_factor = #{aPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="bPowerFactor != null">
+			and b_power_factor = #{bPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="cPowerFactor != null">
+			and c_power_factor = #{cPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="currentZero != null">
+			and current_zero = #{currentZero,jdbcType=DECIMAL}
+		</if>
+		<if test="kwhTotal != null">
+			and kwh_total = #{kwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="kwh != null">
+			and kwh = #{kwh,jdbcType=DECIMAL}
+		</if>
+		<if test="kwhRev != null">
+			and kwh_rev = #{kwhRev,jdbcType=DECIMAL}
+		</if>
+		<if test="kvarh1 != null">
+			and kvarh1 = #{kvarh1,jdbcType=DECIMAL}
+		</if>
+		<if test="kvarh2 != null">
+			and kvarh2 = #{kvarh2,jdbcType=DECIMAL}
+		</if>
+		<if test="aKwhTotal != null">
+			and a_kwh_total = #{aKwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="bKwhTotal != null">
+			and b_kwh_total = #{bKwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="cKwhTotal != null">
+			and c_kwh_total = #{cKwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="#{sort} != null">
+			<if test="sort != null"> order by ${sort} ${sortUp}
+			</if>
+		</if>
+		limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from am_3phase_2016_06_24
+		where 1=1
+		<if test="cAddr != null">
+			and c_addr = #{cAddr,jdbcType=INTEGER}
+		</if>
+		<if test="iAddr != null">
+			and i_addr = #{iAddr,jdbcType=INTEGER}
+		</if>
+		<if test="dAddr != null">
+			and d_addr = #{dAddr,jdbcType=BIGINT}
+		</if>
+		<if test="dType != null">
+			and d_type = #{dType,jdbcType=INTEGER}
+		</if>
+		<if test="wAddr != null">
+			and w_addr = #{wAddr,jdbcType=INTEGER}
+		</if>
+		<if test="meterTime != null">
+			and meter_time =
+			#{meterTime,jdbcType=BIGINT}
+		</if>
+		<if test="meterState != null">
+			and meter_state =
+			#{meterState,jdbcType=VARCHAR}
+		</if>
+		<if test="voltChange != null">
+			and volt_change =
+			#{voltChange,jdbcType=INTEGER}
+		</if>
+		<if test="currentChange != null">
+			and current_change =
+			#{currentChange,jdbcType=INTEGER}
+		</if>
+		<if test="frequency != null">
+			and frequency =
+			#{frequency,jdbcType=DECIMAL}
+		</if>
+		<if test="aVolt != null">
+			and a_volt = #{aVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="bVolt != null">
+			and b_volt = #{bVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="cVolt != null">
+			and c_volt = #{cVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="abVolt != null">
+			and ab_volt = #{abVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="bcVolt != null">
+			and bc_volt = #{bcVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="caVolt != null">
+			and ca_volt = #{caVolt,jdbcType=DECIMAL}
+		</if>
+		<if test="aCurrent != null">
+			and a_current =
+			#{aCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="bCurrent != null">
+			and b_current =
+			#{bCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="cCurrent != null">
+			and c_current =
+			#{cCurrent,jdbcType=DECIMAL}
+		</if>
+		<if test="kw != null">
+			and kw = #{kw,jdbcType=DECIMAL}
+		</if>
+		<if test="aKw != null">
+			and a_kw = #{aKw,jdbcType=DECIMAL}
+		</if>
+		<if test="bKw != null">
+			and b_kw = #{bKw,jdbcType=DECIMAL}
+		</if>
+		<if test="cKw != null">
+			and c_kw = #{cKw,jdbcType=DECIMAL}
+		</if>
+		<if test="kvar != null">
+			and kvar = #{kvar,jdbcType=DECIMAL}
+		</if>
+		<if test="aKvar != null">
+			and a_kvar = #{aKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="bKvar != null">
+			and b_kvar = #{bKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="cKvar != null">
+			and c_kvar = #{cKvar,jdbcType=DECIMAL}
+		</if>
+		<if test="kva != null">
+			and kva = #{kva,jdbcType=DECIMAL}
+		</if>
+		<if test="aKva != null">
+			and a_kva = #{aKva,jdbcType=DECIMAL}
+		</if>
+		<if test="bKva != null">
+			and b_kva = #{bKva,jdbcType=DECIMAL}
+		</if>
+		<if test="cKva != null">
+			and c_kva = #{cKva,jdbcType=DECIMAL}
+		</if>
+		<if test="powerFactor != null">
+			and power_factor =
+			#{powerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="aPowerFactor != null">
+			and a_power_factor =
+			#{aPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="bPowerFactor != null">
+			and b_power_factor =
+			#{bPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="cPowerFactor != null">
+			and c_power_factor =
+			#{cPowerFactor,jdbcType=DECIMAL}
+		</if>
+		<if test="currentZero != null">
+			and current_zero =
+			#{currentZero,jdbcType=DECIMAL}
+		</if>
+		<if test="kwhTotal != null">
+			and kwh_total =
+			#{kwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="kwh != null">
+			and kwh = #{kwh,jdbcType=DECIMAL}
+		</if>
+		<if test="kwhRev != null">
+			and kwh_rev = #{kwhRev,jdbcType=DECIMAL}
+		</if>
+		<if test="kvarh1 != null">
+			and kvarh1 = #{kvarh1,jdbcType=DECIMAL}
+		</if>
+		<if test="kvarh2 != null">
+			and kvarh2 = #{kvarh2,jdbcType=DECIMAL}
+		</if>
+		<if test="aKwhTotal != null">
+			and a_kwh_total =
+			#{aKwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="bKwhTotal != null">
+			and b_kwh_total =
+			#{bKwhTotal,jdbcType=DECIMAL}
+		</if>
+		<if test="cKwhTotal != null">
+			and c_kwh_total =
+			#{cKwhTotal,jdbcType=DECIMAL}
+		</if>
+	</select>
+	
+	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+		insert into am_3phase_2016_06_24
+		(row_id,c_addr,i_addr,d_addr,d_type,w_addr,meter_time,meter_state,volt_change,current_change,frequency,a_volt,b_volt,c_volt,ab_volt,bc_volt,ca_volt,a_current,b_current,c_current,kw,a_kw,b_kw,c_kw,kvar,a_kvar,b_kvar,c_kvar,kva,a_kva,b_kva,c_kva,power_factor,a_power_factor,b_power_factor,c_power_factor,current_zero,kwh_total,kwh,kwh_rev,kvarh1,kvarh2,a_kwh_total,b_kwh_total,c_kwh_total)values
+		<foreach collection="list" item="item" index="index"
+			separator=",">(#{item.rowId},#{item.cAddr},#{item.iAddr},#{item.dAddr},#{item.dType},#{item.wAddr},#{item.meterTime},#{item.meterState},#{item.voltChange},#{item.currentChange},#{item.frequency},#{item.aVolt},#{item.bVolt},#{item.cVolt},#{item.abVolt},#{item.bcVolt},#{item.caVolt},#{item.aCurrent},#{item.bCurrent},#{item.cCurrent},#{item.kw},#{item.aKw},#{item.bKw},#{item.cKw},#{item.kvar},#{item.aKvar},#{item.bKvar},#{item.cKvar},#{item.kva},#{item.aKva},#{item.bKva},#{item.cKva},#{item.powerFactor},#{item.aPowerFactor},#{item.bPowerFactor},#{item.cPowerFactor},#{item.currentZero},#{item.kwhTotal},#{item.kwh},#{item.kwhRev},#{item.kvarh1},#{item.kvarh2},#{item.aKwhTotal},#{item.bKwhTotal})
+		</foreach>
+	</insert>
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from am_3phase_2016_06_24 where id in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">#{item}</foreach>
+	</delete>
+	
+	
+	
+	
+	
+	<select id="selectByExampleKWH" resultMap="BaseResultMap">
+		select row_id, c_addr, d_addr, d_type, w_addr, kw, kwh_total
+		from ${table_name}
+		where meter_time >= #{meterTime} and #{meterTime2} > meter_time
+		and c_addr = #{cAddr}
+		and d_addr = #{dAddr}
+		and d_type = #{dType}
+		order by meter_time
+	</select>
+	
+	<select id="selectKw" resultMap="BaseResultMap">
+		select row_id, c_addr, d_addr, d_type, w_addr, kw, kwh_total
+		from ${table_name}
+		where meter_time LIKE CONCAT('%',#{meterTime},'%')
+		and c_addr = #{cAddr}
+		and d_addr = #{dAddr}
+		and d_type = #{dType}
+		order by meter_time desc
+	</select>
+	
+	<select id="selectByExampleKW" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ${table_name}
+		where meter_time >= #{meterTime} and #{meterTime2} > meter_time
+		and c_addr = #{cAddr}
+		and d_addr = #{dAddr}
+		and d_type = #{dType}
+		order by meter_time
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

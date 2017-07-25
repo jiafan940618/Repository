@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.DeviceTypeMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.DeviceType" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="typetext" property="typetext" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,typetext,parent_id,remark,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_device_type
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_device_type
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.DeviceType" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_device_type
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="typetext != null" >
+				typetext,
+			</if>
+			<if test="parentId != null" >
+				parent_id,
+			</if>
+			<if test="remark != null" >
+				remark,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="typetext != null" >
+				#{typetext,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null" >
+				#{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null" >
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.DeviceType" >
+		update t_device_type
+		<set >
+			<if test="typetext != null" >
+				typetext = #{typetext,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null" >
+				parent_id = #{parentId,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null" >
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_device_type
+		where 1=1
+			<if test="typetext != null" >
+				and typetext = #{typetext,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null" >
+				and parent_id = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null" >
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_device_type
+		where 1=1
+			<if test="typetext != null" >
+				and typetext = #{typetext,jdbcType=VARCHAR}
+			</if>
+			<if test="parentId != null" >
+				and parent_id = #{parentId,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null" >
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_device_type
+		where 1=1
+		<if test="typetext != null" >
+			and typetext = #{typetext,jdbcType=VARCHAR}
+		</if>
+		<if test="parentId != null" >
+			and parent_id = #{parentId,jdbcType=VARCHAR}
+		</if>
+		<if test="remark != null" >
+			and remark = #{remark,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_device_type
+(typetext,parent_id,remark)values<foreach collection="list" item="item" index="index" separator=",">(#{item.typetext},#{item.parentId},#{item.remark})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_device_type where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+</mapper>

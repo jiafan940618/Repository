@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration >
+<generatorConfiguration>
+	<!-- 数据库驱动 -->
+	<classPathEntry location="mysql-connector-java-5.1.25-bin.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://219.135.97.83:3309/youneng"
+			userId="root" password="Ce^z5HWOn1">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="test.pojo"
+			targetProject="src">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="test.mapping"
+			targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="test.IDao" targetProject="src">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名
+		<table tableName="j_bank_card" domainObjectName="BankCard"></table>
+		<table tableName="j_role_menu" domainObjectName="RoleMenu"></table>
+		<table tableName="j_user_role" domainObjectName="UserRole"></table>
+		<table tableName="s_city" domainObjectName="City"></table>
+		<table tableName="s_district" domainObjectName="District"></table>
+		<table tableName="s_province" domainObjectName="Province"></table>
+		<table tableName="t_address" domainObjectName="Address"></table>
+		<table tableName="t_device" domainObjectName="Device"></table>
+		<table tableName="t_device_type" domainObjectName="DeviceType"></table>
+		<table tableName="t_evaluate" domainObjectName="Evaluate"></table>
+		<table tableName="t_information" domainObjectName="Information"></table>
+		<table tableName="t_menu" domainObjectName="Menu"></table>
+		<table tableName="t_news" domainObjectName="News"></table>
+		<table tableName="t_order" domainObjectName="Order"></table>
+		<table tableName="t_role" domainObjectName="Role"></table>
+		<table tableName="t_system_config" domainObjectName="SystemConfig"></table>
+		<table tableName="t_user" domainObjectName="User"></table>
+		<table tableName="t_wallet" domainObjectName="Wallet"></table>
+		<table tableName="t_withdraw" domainObjectName="Withdraw"></table>
+		<table tableName="t_subsidy" domainObjectName="Subsidy"></table> 
+		<table tableName="col_conf" domainObjectName="ColConf"></table>
+		<table tableName="dev_conf" domainObjectName="DevConf"></table>
+		<table tableName="am_3phase_2016_06_24" domainObjectName="Am3phase"></table>
+		<table tableName="tem_station" domainObjectName="TemStation"></table>
+		<table tableName="tem_station_year" domainObjectName="TemStationYear"></table>
+		<table tableName="t_ammeter" domainObjectName="Ammeter"></table>
+		<table tableName="t_station" domainObjectName="Station"></table>
+		<table tableName="t_feedback" domainObjectName="Feedback"></table>
+		<table tableName="t_push" domainObjectName="Push"></table>-->
+		<table tableName="dev_conf" domainObjectName="DevConf"></table>
+	</context>
+</generatorConfiguration>  

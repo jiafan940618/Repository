@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.AmmeterMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Ammeter" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="code" property="code" jdbcType="VARCHAR" />
+		<result column="province_id" property="provinceId" />
+		<result column="province_text" property="provinceText" jdbcType="VARCHAR" />
+		<result column="city_id" property="cityId" />
+		<result column="city_text" property="cityText" jdbcType="VARCHAR" />
+		<result column="address_text" property="addressText" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" />
+		<result column="station_id" property="stationId" />
+		<result column="work_tota_tm" property="workTotaTm" jdbcType="INTEGER" />
+		<result column="work_tota_kwh" property="workTotaKwh"/>
+		<result column="now_kw" property="nowKw"/>
+		<result column="work_dtm" property="workDtm" jdbcType="TIMESTAMP" />
+		<result column="up_dtm" property="upDtm" jdbcType="TIMESTAMP" />
+		<result column="down_dtm" property="downDtm" jdbcType="TIMESTAMP" />
+		<result column="outfactory_dt" property="outfactoryDt" jdbcType="TIMESTAMP" />
+		<result column="update_dtm" property="updateDtm" jdbcType="TIMESTAMP" />
+		<result column="state" property="state" jdbcType="VARCHAR" />
+		<result column="sim" property="sim" jdbcType="VARCHAR" />
+		<result column="init_kwh" property="initKwh"/>
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="Station" type="com.hy.gf.model.Station">
+		<result column="station_name" property="stationName" jdbcType="VARCHAR" />
+		<result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+		<result column="stationAddressText" property="addressText" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithStation" type="com.hy.gf.vo.AmmeterVO" extends="BaseResultMap">
+		<association property="station" column="station_id" javaType="com.hy.gf.model.Station" resultMap="Station" />
+	</resultMap>
+	
+	<sql id="Base_Column_List" >id,code,province_id,province_text,city_id,city_text,address_text,user_id,station_id,work_tota_tm,work_tota_kwh,now_kw,work_dtm,up_dtm,down_dtm,outfactory_dt,update_dtm,state,sim,init_kwh,create_dtm</sql>
+	
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_ammeter
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="ResultMapWithStation" parameterType="java.lang.Long" >
+		SELECT
+		t1.id,
+		t1.`code`,
+		t1.province_id,
+		t1.province_text,
+		t1.city_id,
+		t1.city_text,
+		t1.address_text,
+		t1.user_id,
+		t1.station_id,
+		t1.work_tota_tm,
+		t1.work_tota_kwh,
+		t1.now_kw,
+		t1.work_dtm,
+		t1.up_dtm,
+		t1.down_dtm,
+		t1.outfactory_dt,
+		t1.update_dtm,
+		t1.state,
+		t1.sim,
+		t1.init_kwh,
+		t1.create_dtm,
+		t2.id as station_id,
+		t2.station_name,
+		t2.station_code,
+		t2.address_text as stationAddressText
+		from t_ammeter t1 LEFT JOIN t_station t2 on t1.station_id = t2.id
+		where t1.id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Ammeter" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_ammeter
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="code != null" >
+				code,
+			</if>
+			<if test="provinceId != null" >
+				province_id,
+			</if>
+			<if test="provinceText != null" >
+				province_text,
+			</if>
+			<if test="cityId != null" >
+				city_id,
+			</if>
+			<if test="cityText != null" >
+				city_text,
+			</if>
+			<if test="addressText != null" >
+				address_text,
+			</if>
+			<if test="userId != null" >
+				user_id,
+			</if>
+			<if test="stationId != null" >
+				station_id,
+			</if>
+			<if test="workTotaTm != null" >
+				work_tota_tm,
+			</if>
+			<if test="workTotaKwh != null" >
+				work_tota_kwh,
+			</if>
+			<if test="nowKw != null" >
+				now_kw,
+			</if>
+			<if test="workDtm != null" >
+				work_dtm,
+			</if>
+			<if test="upDtm != null" >
+				up_dtm,
+			</if>
+			<if test="downDtm != null" >
+				down_dtm,
+			</if>
+			<if test="outfactoryDt != null" >
+				outfactory_dt,
+			</if>
+			<if test="updateDtm != null" >
+				update_dtm,
+			</if>
+			<if test="state != null" >
+				state,
+			</if>
+			<if test="sim != null" >
+				sim,
+			</if>
+			<if test="initKwh != null" >
+				init_kwh,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="code != null" >
+				#{code,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceId != null" >
+				#{provinceId},
+			</if>
+			<if test="provinceText != null" >
+				#{provinceText,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null" >
+				#{cityId},
+			</if>
+			<if test="cityText != null" >
+				#{cityText,jdbcType=VARCHAR},
+			</if>
+			<if test="addressText != null" >
+				#{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				#{userId},
+			</if>
+			<if test="stationId != null" >
+				#{stationId},
+			</if>
+			<if test="workTotaTm != null" >
+				#{workTotaTm,jdbcType=INTEGER},
+			</if>
+			<if test="workTotaKwh != null" >
+				#{workTotaKwh},
+			</if>
+			<if test="nowKw != null" >
+				#{nowKw},
+			</if>
+			<if test="workDtm != null" >
+				#{workDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="upDtm != null" >
+				#{upDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="downDtm != null" >
+				#{downDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="outfactoryDt != null" >
+				#{outfactoryDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDtm != null" >
+				#{updateDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null" >
+				#{state,jdbcType=VARCHAR},
+			</if>
+			<if test="sim != null" >
+				#{sim,jdbcType=VARCHAR},
+			</if>
+			<if test="initKwh != null" >
+				#{initKwh},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Ammeter" >
+		update t_ammeter
+		<set >
+			<if test="code != null" >
+				code = #{code,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceId != null" >
+				province_id = #{provinceId},
+			</if>
+			<if test="provinceText != null" >
+				province_text = #{provinceText,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null" >
+				city_id = #{cityId},
+			</if>
+			<if test="cityText != null" >
+				city_text = #{cityText,jdbcType=VARCHAR},
+			</if>
+			<if test="addressText != null" >
+				address_text = #{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null" >
+				user_id = #{userId},
+			</if>
+			<if test="stationId != null" >
+				station_id = #{stationId},
+			</if>
+			<if test="workTotaTm != null" >
+				work_tota_tm = #{workTotaTm,jdbcType=INTEGER},
+			</if>
+			<if test="workTotaKwh != null" >
+				work_tota_kwh = #{workTotaKwh},
+			</if>
+			<if test="nowKw != null" >
+				now_kw = #{nowKw},
+			</if>
+			<if test="workDtm != null" >
+				work_dtm = #{workDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="upDtm != null" >
+				up_dtm = #{upDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="downDtm != null" >
+				down_dtm = #{downDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="outfactoryDt != null" >
+				outfactory_dt = #{outfactoryDt,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDtm != null" >
+				update_dtm = #{updateDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null" >
+				state = #{state,jdbcType=VARCHAR},
+			</if>
+			<if test="sim != null" >
+				sim = #{sim,jdbcType=VARCHAR},
+			</if>
+			<if test="initKwh != null" >
+				init_kwh = #{initKwh},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_ammeter
+		where 1=1
+			<if test="code != null" >
+				and code = #{code,jdbcType=VARCHAR}
+			</if>
+			<if test="provinceId != null" >
+				and province_id = #{provinceId}
+			</if>
+			<if test="provinceText != null" >
+				and province_text = #{provinceText,jdbcType=VARCHAR}
+			</if>
+			<if test="cityId != null" >
+				and city_id = #{cityId}
+			</if>
+			<if test="cityText != null" >
+				and city_text = #{cityText,jdbcType=VARCHAR}
+			</if>
+			<if test="addressText != null" >
+				and address_text = #{addressText,jdbcType=VARCHAR}
+			</if>
+			<if test="userId != null" >
+				and user_id = #{userId}
+			</if>
+			<if test="stationId != null" >
+				and station_id = #{stationId}
+			</if>
+			<if test="workTotaTm != null" >
+				and work_tota_tm = #{workTotaTm,jdbcType=INTEGER}
+			</if>
+			<if test="workTotaKwh != null" >
+				and work_tota_kwh = #{workTotaKwh}
+			</if>
+			<if test="nowKw != null" >
+				and now_kw = #{nowKw}
+			</if>
+			<if test="workDtm != null" >
+				and work_dtm = #{workDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="upDtm != null" >
+				and up_dtm = #{upDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="downDtm != null" >
+				and down_dtm = #{downDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="outfactoryDt != null" >
+				and outfactory_dt = #{outfactoryDt,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateDtm != null" >
+				and update_dtm = #{updateDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="state != null" >
+				and state = #{state,jdbcType=VARCHAR}
+			</if>
+			<if test="sim != null" >
+				and sim = #{sim,jdbcType=VARCHAR}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="ResultMapWithStation" >
+		select
+		t_ammeter.*,
+		t_station.station_name
+		from t_ammeter
+		LEFT JOIN t_station ON 
+		t_ammeter.station_id = t_station.id
+		where 1=1
+		<if test="code != null" >
+			and t_ammeter.code = #{code,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceId != null" >
+			and t_ammeter.province_id = #{provinceId}
+		</if>
+		<if test="provinceText != null" >
+			and t_ammeter.province_text = #{provinceText,jdbcType=VARCHAR}
+		</if>
+		<if test="cityId != null" >
+			and t_ammeter.city_id = #{cityId}
+		</if>
+		<if test="cityText != null" >
+			and t_ammeter.city_text = #{cityText,jdbcType=VARCHAR}
+		</if>
+		<if test="addressText != null" >
+			and t_ammeter.address_text = #{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="userId != null" >
+			and t_ammeter.user_id = #{userId}
+		</if>
+		<if test="stationId != null" >
+			and t_ammeter.station_id = #{stationId}
+		</if>
+		<if test="workTotaTm != null" >
+			and t_ammeter.work_tota_tm = #{workTotaTm,jdbcType=INTEGER}
+		</if>
+		<if test="workTotaKwh != null" >
+			and t_ammeter.work_tota_kwh = #{workTotaKwh}
+		</if>
+		<if test="nowKw != null" >
+			and t_ammeter.now_kw = #{nowKw}
+		</if>
+		<if test="workDtm != null" >
+			and t_ammeter.work_dtm = #{workDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="upDtm != null" >
+			and t_ammeter.up_dtm = #{upDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="downDtm != null" >
+			and t_ammeter.down_dtm = #{downDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="outfactoryDt != null" >
+			and t_ammeter.outfactory_dt = #{outfactoryDt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="updateDtm != null" >
+			and t_ammeter.update_dtm = #{updateDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="state != null" >
+			and t_ammeter.state = #{state,jdbcType=VARCHAR}
+		</if>
+		<if test="sim != null" >
+			and t_ammeter.sim = #{sim,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null" >
+			and t_ammeter.create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="#{sort} != null">
+			<if test="sort != null">			
+				order by ${sort} ${sortUp}
+			</if>
+		</if>			
+		limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_ammeter
+		where 1=1
+		<if test="code != null" >
+			and code = #{code,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceId != null" >
+			and province_id = #{provinceId}
+		</if>
+		<if test="provinceText != null" >
+			and province_text = #{provinceText,jdbcType=VARCHAR}
+		</if>
+		<if test="cityId != null" >
+			and city_id = #{cityId}
+		</if>
+		<if test="cityText != null" >
+			and city_text = #{cityText,jdbcType=VARCHAR}
+		</if>
+		<if test="addressText != null" >
+			and address_text = #{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="userId != null" >
+			and user_id = #{userId}
+		</if>
+		<if test="stationId != null" >
+			and station_id = #{stationId}
+		</if>
+		<if test="workTotaTm != null" >
+			and work_tota_tm = #{workTotaTm,jdbcType=INTEGER}
+		</if>
+		<if test="workTotaKwh != null" >
+			and work_tota_kwh = #{workTotaKwh}
+		</if>
+		<if test="nowKw != null" >
+			and now_kw = #{nowKw}
+		</if>
+		<if test="workDtm != null" >
+			and work_dtm = #{workDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="upDtm != null" >
+			and up_dtm = #{upDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="downDtm != null" >
+			and down_dtm = #{downDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="outfactoryDt != null" >
+			and outfactory_dt = #{outfactoryDt,jdbcType=TIMESTAMP}
+		</if>
+		<if test="updateDtm != null" >
+			and update_dtm = #{updateDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="state != null" >
+			and state = #{state,jdbcType=VARCHAR}
+		</if>
+		<if test="sim != null" >
+			and sim = #{sim,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_ammeter
+(code,province_id,province_text,city_id,city_text,address_text,user_id,station_id,work_tota_tm,work_tota_kwh,now_kw,work_dtm,up_dtm,down_dtm,outfactory_dt,update_dtm,state,sim)values<foreach collection="list" item="item" index="index" separator=",">(#{item.code},#{item.provinceId},#{item.provinceText},#{item.cityId},#{item.cityText},#{item.addressText},#{item.userId},#{item.stationId},#{item.workTotaTm},#{item.workTotaKwh},#{item.nowKw},#{item.workDtm},#{item.upDtm},#{item.downDtm},#{item.outfactoryDt},#{item.updateDtm},#{item.state},#{item.sim})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_ammeter where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+	<select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap" >
+		select <include refid="Base_Column_List" />
+		from t_ammeter
+		where 1=1
+		and t_ammeter.code = #{code}
+	</select>
+
+</mapper>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.TemStationYearMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.TemStationYear" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="station_code" property="stationCode" jdbcType="VARCHAR" />
+		<result column="ammeter_code" property="ammeterCode" jdbcType="VARCHAR" />
+		<result column="d_addr" property="d_addr" />
+		<result column="d_type" property="d_type" />
+		<result column="w_addr" property="w_addr" />
+		<result column="kwh" property="kwh" jdbcType="DOUBLE" />
+		<result column="kw" property="kw" jdbcType="DOUBLE" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,station_code,ammeter_code,d_addr,d_type,w_addr,kwh,kw,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from tem_station_year
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from tem_station_year
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.TemStationYear" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into tem_station_year
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="stationCode != null" >
+				station_code,
+			</if>
+			<if test="ammeterCode != null" >
+				ammeter_code,
+			</if>
+			<if test="d_addr != null" >
+				d_addr,
+			</if>
+			<if test="d_type != null" >
+				d_type,
+			</if>
+			<if test="w_addr != null" >
+				w_addr,
+			</if>
+			<if test="kwh != null" >
+				kwh,
+			</if>
+			<if test="kw != null" >
+				kw,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="stationCode != null" >
+				#{stationCode,jdbcType=VARCHAR},
+			</if>
+			<if test="ammeterCode != null" >
+				#{ammeterCode,jdbcType=VARCHAR},
+			</if>
+			<if test="d_addr != null" >
+				#{d_addr},
+			</if>
+			<if test="d_type != null" >
+				#{d_type},
+			</if>
+			<if test="w_addr != null" >
+				#{w_addr},
+			</if>
+			<if test="kwh != null" >
+				#{kwh,jdbcType=DOUBLE},
+			</if>
+			<if test="kw != null" >
+				#{kw,jdbcType=DOUBLE},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.TemStationYear" >
+		update tem_station_year
+		<set >
+			<if test="stationCode != null" >
+				station_code = #{stationCode,jdbcType=VARCHAR},
+			</if>
+			<if test="ammeterCode != null" >
+				ammeter_code = #{ammeterCode,jdbcType=VARCHAR},
+			</if>
+			<if test="d_addr != null" >
+				d_addr = #{d_addr},
+			</if>
+			<if test="d_type != null" >
+				d_type = #{d_type},
+			</if>
+			<if test="w_addr != null" >
+				w_addr = #{w_addr},
+			</if>
+			<if test="kwh != null" >
+				kwh = #{kwh,jdbcType=DOUBLE},
+			</if>
+			<if test="kw != null" >
+				kw = #{kw,jdbcType=DOUBLE},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from tem_station_year
+		where 1=1
+			<if test="stationCode != null" >
+				and station_code = #{stationCode,jdbcType=VARCHAR}
+			</if>
+			<if test="ammeterCode != null" >
+				and ammeter_code = #{ammeterCode,jdbcType=VARCHAR}
+			</if>
+			<if test="d_addr != null" >
+				and d_addr = #{d_addr}
+			</if>
+			<if test="d_type != null" >
+				and d_type = #{d_type}
+			</if>
+			<if test="w_addr != null" >
+				and w_addr = #{w_addr}
+			</if>
+			<if test="kwh != null" >
+				and kwh = #{kwh,jdbcType=DOUBLE}
+			</if>
+			<if test="kw != null" >
+				and kw = #{kw,jdbcType=DOUBLE}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from tem_station_year
+		where 1=1
+			<if test="stationCode != null" >
+				and station_code = #{stationCode,jdbcType=VARCHAR}
+			</if>
+			<if test="ammeterCode != null" >
+				and ammeter_code = #{ammeterCode,jdbcType=VARCHAR}
+			</if>
+			<if test="d_addr != null" >
+				and d_addr = #{d_addr}
+			</if>
+			<if test="d_type != null" >
+				and d_type = #{d_type}
+			</if>
+			<if test="w_addr != null" >
+				and w_addr = #{w_addr}
+			</if>
+			<if test="kwh != null" >
+				and kwh = #{kwh,jdbcType=DOUBLE}
+			</if>
+			<if test="kw != null" >
+				and kw = #{kw,jdbcType=DOUBLE}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from tem_station_year
+		where 1=1
+		<if test="stationCode != null" >
+			and station_code = #{stationCode,jdbcType=VARCHAR}
+		</if>
+		<if test="ammeterCode != null" >
+			and ammeter_code = #{ammeterCode,jdbcType=VARCHAR}
+		</if>
+		<if test="d_addr != null" >
+			and d_addr = #{d_addr}
+		</if>
+		<if test="d_type != null" >
+			and d_type = #{d_type}
+		</if>
+		<if test="w_addr != null" >
+			and w_addr = #{w_addr}
+		</if>
+		<if test="kwh != null" >
+			and kwh = #{kwh,jdbcType=DOUBLE}
+		</if>
+		<if test="kw != null" >
+			and kw = #{kw,jdbcType=DOUBLE}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into tem_station_year
+(station_code,ammeter_code,d_addr,d_type,w_addr,kwh,kw)values<foreach collection="list" item="item" index="index" separator=",">(#{item.stationCode},#{item.ammeterCode},#{item.d_addr},#{item.d_type},#{item.w_addr},#{item.kwh},#{item.kw})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from tem_station_year where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+
+
+	<select id="getThisMonthTotalPower" parameterType="java.lang.String" resultMap="BaseResultMap" >
+		SELECT * FROM tem_station_year WHERE 1=1 
+		AND create_dtm LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y-%m'),'%')
+		AND station_code = #{stationCode}
+	</select>
+	
+	<select id="findEveryMonth" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT id, station_code, ROUND(kwh,2) AS kwh, ROUND(kw,2) AS kw, create_dtm
+		FROM tem_station_year WHERE 1=1 
+		AND create_dtm LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%') 
+		AND station_code = #{stationCode}
+		ORDER BY create_dtm ASC
+	</select>
+	
+	<select id="findEachMonth" parameterType="Map" resultMap="BaseResultMap">
+		SELECT id,station_code, ROUND(SUM(kwh),2) AS kwh, ROUND(SUM(kw),2) AS kw
+		FROM tem_station_year 
+		WHERE 1=1 
+		<if test="stationCode != null" >
+			AND station_code = #{stationCode}
+		</if>
+		<if test="d_addr != null" >
+			and d_addr = #{d_addr}
+		</if>
+		<if test="d_type != null" >
+			and d_type = #{d_type}
+		</if>
+		<if test="w_addr != null" >
+			and w_addr = #{w_addr}
+		</if>
+		<if test="createDtm != null" >
+			AND create_dtm LIKE CONCAT('%',#{createDtm},'%')
+		</if>
+	</select>
+	
+	<!-- 用来计算优能补贴 -->
+	<select id="findYesterdayPower" resultMap="BaseResultMap">
+		SELECT * FROM tem_station_year 
+		WHERE 1=1 
+		AND create_dtm LIKE CONCAT('%',DATE_FORMAT(DATE_SUB(NOW(),INTERVAL 1 DAY),'%Y-%m-%d'),'%')
+	</select>
+	
+	<select id="findHuanbao" parameterType="Map" resultMap="BaseResultMap">
+		SELECT ROUND(SUM(kwh),3) AS kwh, ROUND(SUM(kw),3) AS kw FROM tem_station_year t1 LEFT JOIN t_station t2 ON t1.station_code = t2.station_code
+		INNER JOIN t_user t3 ON t2.user_id = t3.id
+		AND t2.user_id = #{userId}
+		AND t1.create_dtm LIKE CONCAT('%',#{createDtm},'%')
+		GROUP BY DATE_FORMAT(t1.create_dtm,'%Y-%m')
+	</select>
+	
+	<!-- 查找每天的发电量 -->
+	<select id="eachdayKWH" parameterType="Map" resultMap="BaseResultMap">
+		SELECT ROUND(SUM(kwh),2) AS kwh, ROUND(SUM(kw),2) AS kw, create_dtm
+		FROM tem_station_year
+		WHERE 1=1
+		<if test="station_code!=null and station_code!=''" >
+			AND station_code = #{station_code}
+		</if>
+		<if test="d_addr != null" >
+			and d_addr = #{d_addr}
+		</if>
+		<if test="d_type != null" >
+			and d_type = #{d_type}
+		</if>
+		<if test="w_addr != null" >
+			and w_addr = #{w_addr}
+		</if>
+		AND create_dtm LIKE CONCAT ('%',DATE_FORMAT(create_dtm,'%Y-%m-%d'),'%') 
+		GROUP BY DATE_FORMAT(create_dtm,'%Y-%m-%d')
+	</select>
+	
+	<select id="kwhByTime" parameterType="Map" resultMap="BaseResultMap">
+		SELECT ROUND(SUM(kwh),2) AS kwh, ROUND(SUM(kw),2) AS kw, create_dtm
+		FROM tem_station_year
+		WHERE 1=1
+		<if test="station_code!=null and station_code!=''" >
+			AND station_code = #{station_code}
+		</if>
+		<if test="d_addr != null" >
+			and d_addr = #{d_addr}
+		</if>
+		<if test="d_type != null" >
+			and d_type = #{d_type}
+		</if>
+		<if test="w_addr != null" >
+			and w_addr = #{w_addr}
+		</if>
+		<if test="year!=null and year!=''" >
+			AND create_dtm LIKE CONCAT ('%',#{year},'%')
+			GROUP BY DATE_FORMAT(create_dtm,'%Y')
+		</if>
+	</select>
+
+</mapper>

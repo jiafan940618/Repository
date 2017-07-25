@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.SubsidyMapper">
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Subsidy">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="selfuse" property="selfuse" jdbcType="DOUBLE" />
+		<result column="sell" property="sell" jdbcType="DOUBLE" />
+		<result column="sell_price" property="sellPrice" jdbcType="DOUBLE" />
+		<result column="subsidy" property="subsidy" jdbcType="DOUBLE" />
+		<result column="bsidy_year" property="bsidyYear" jdbcType="INTEGER" />
+		<result column="unlsubsidy" property="unlsubsidy" jdbcType="DOUBLE" />
+		<result column="unlsubsidy_year" property="unlsubsidyYear" jdbcType="INTEGER" />
+		<result column="province_id" property="provinceId" />
+		<result column="province_name" property="provinceName" jdbcType="VARCHAR" />
+		<result column="is_province" property="isProvince" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="initialsubsidy" property="initialsubsidy" jdbcType="DOUBLE" />
+		<result column="sun_count" property="sunCount" jdbcType="VARCHAR" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+		<result column="type" property="type" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,type,selfuse,sell_price,sell,subsidy,bsidy_year,unlsubsidy,unlsubsidy_year,province_id,province_name,is_province,city_id,city_name,initialsubsidy,sun_count,create_dtm
+	</sql>
+	<delete id="delete" parameterType="java.lang.Long"> delete from
+		t_subsidy where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_subsidy
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Subsidy">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_subsidy
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="selfuse != null">
+				selfuse,
+			</if>
+			<if test="sellPrice != null">
+				sell_price,
+			</if>
+			<if test="sell != null">
+				sell,
+			</if>
+			<if test="subsidy != null">
+				subsidy,
+			</if>
+			<if test="bsidyYear != null">
+				bsidy_year,
+			</if>
+			<if test="unlsubsidy != null">
+				unlsubsidy,
+			</if>
+			<if test="unlsubsidyYear != null">
+				unlsubsidy_year,
+			</if>
+			<if test="provinceId != null">
+				province_id,
+			</if>
+			<if test="provinceName != null">
+				province_name,
+			</if>
+			<if test="isProvince != null">
+				is_province,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="initialsubsidy != null">
+				initialsubsidy,
+			</if>
+			<if test="createDtm != null">
+				create_dtm,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="sunCount != null">
+				sun_count,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="selfuse != null">
+				#{selfuse,jdbcType=DOUBLE},
+			</if>
+			<if test="sellPrice != null">
+				#{sellPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="sell != null">
+				#{sell,jdbcType=DOUBLE},
+			</if>
+			<if test="subsidy != null">
+				#{subsidy,jdbcType=DOUBLE},
+			</if>
+			<if test="bsidyYear != null">
+				#{bsidyYear,jdbcType=INTEGER},
+			</if>
+			<if test="unlsubsidy != null">
+				#{unlsubsidy,jdbcType=DOUBLE},
+			</if>
+			<if test="unlsubsidyYear != null">
+				#{unlsubsidyYear,jdbcType=INTEGER},
+			</if>
+			<if test="provinceId != null">
+				#{provinceId},
+			</if>
+			<if test="provinceName != null">
+				#{provinceName,jdbcType=INTEGER},
+			</if>
+			<if test="isProvince != null">
+				#{isProvince,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				#{cityId},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="initialsubsidy != null">
+				#{initialsubsidy,jdbcType=DOUBLE},
+			</if>
+			<if test="createDtm != null">
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				#{type},
+			</if>
+			<if test="sunCount != null">
+				#{sunCount,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Subsidy">
+		update t_subsidy
+		<set>
+			<if test="selfuse != null">
+				selfuse = #{selfuse,jdbcType=DOUBLE},
+			</if>
+			<if test="sellPrice != null">
+				sell_price = #{sellPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="sell != null">
+				sell = #{sell,jdbcType=DOUBLE},
+			</if>
+			<if test="subsidy != null">
+				subsidy = #{subsidy,jdbcType=DOUBLE},
+			</if>
+			<if test="bsidyYear != null">
+				bsidy_year =
+				#{bsidyYear,jdbcType=INTEGER},
+			</if>
+			<if test="unlsubsidy != null">
+				unlsubsidy =
+				#{unlsubsidy,jdbcType=DOUBLE},
+			</if>
+			<if test="unlsubsidyYear != null">
+				unlsubsidy_year =
+				#{unlsubsidyYear,jdbcType=INTEGER},
+			</if>
+			<if test="provinceId != null">
+				province_id =
+				#{provinceId},
+			</if>
+			<if test="provinceName != null">
+				province_name =
+				#{provinceName,jdbcType=VARCHAR},
+			</if>
+			<if test="isProvince != null">
+				is_province =
+				#{isProvince,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				city_id = #{cityId},
+			</if>
+			<if test="cityName != null">
+				city_name =
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="initialsubsidy != null">
+				initialsubsidy =
+				#{initialsubsidy,jdbcType=DOUBLE},
+			</if>
+			<if test="createDtm != null">
+				create_dtm =
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				type =
+				#{type},
+			</if>
+			<if test="sunCount != null">
+				sun_count = #{sunCount,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_subsidy
+		where 1=1
+		<if test="selfuse != null">
+			and selfuse = #{selfuse,jdbcType=DOUBLE}
+		</if>
+		<if test="sellPrice != null">
+			and sell_price = #{sellPrice,jdbcType=DOUBLE}
+		</if>
+		<if test="sell != null">
+			and sell = #{sell,jdbcType=DOUBLE}
+		</if>
+		<if test="subsidy != null">
+			and subsidy = #{subsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="bsidyYear != null">
+			and bsidy_year = #{bsidyYear,jdbcType=INTEGER}
+		</if>
+		<if test="unlsubsidy != null">
+			and unlsubsidy = #{unlsubsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="unlsubsidyYear != null">
+			and unlsubsidy_year = #{unlsubsidyYear,jdbcType=INTEGER}
+		</if>
+		<if test="provinceId != null">
+			and province_id = #{provinceId}
+		</if>
+		<if test="provinceName != null">
+			and province_name = #{provinceName,jdbcType=VARCHAR}
+		</if>
+		<if test="isProvince != null">
+			and is_province = #{isProvince,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			and city_id = #{cityId}
+		</if>
+		<if test="cityName != null">
+			and city_name = #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="initialsubsidy != null">
+			and initialsubsidy = #{initialsubsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="createDtm != null">
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="type != null">
+			and type = #{type}
+		</if>
+		limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_subsidy
+		where 1=1
+		<if test="selfuse != null">
+			and selfuse = #{selfuse,jdbcType=DOUBLE}
+		</if>
+		<if test="sellPrice != null">
+			and sell_price = #{sellPrice,jdbcType=DOUBLE}
+		</if>
+		<if test="sell != null">
+			and sell = #{sell,jdbcType=DOUBLE}
+		</if>
+		<if test="subsidy != null">
+			and subsidy = #{subsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="bsidyYear != null">
+			and bsidy_year = #{bsidyYear,jdbcType=INTEGER}
+		</if>
+		<if test="unlsubsidy != null">
+			and unlsubsidy = #{unlsubsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="unlsubsidyYear != null">
+			and unlsubsidy_year = #{unlsubsidyYear,jdbcType=INTEGER}
+		</if>
+		<if test="provinceId != null">
+			and province_id = #{provinceId}
+		</if>
+		<if test="provinceName != null">
+			and province_name = #{provinceName,jdbcType=VARCHAR}
+		</if>
+		<if test="isProvince != null">
+			and is_province = #{isProvince,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			and city_id = #{cityId}
+		</if>
+		<if test="cityName != null">
+			and city_name = #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="initialsubsidy != null">
+			and initialsubsidy = #{initialsubsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="sunCount != null">
+			and sun_count = #{sunCount}
+		</if>
+		<if test="createDtm != null">
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="#{sort} != null">
+			<if test="sort != null"> order by ${sort} ${sortUp}
+			</if>
+		</if>
+		limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_subsidy
+		where 1=1
+		<if test="selfuse != null">
+			and selfuse = #{selfuse,jdbcType=DOUBLE}
+		</if>
+		<if test="sellPrice != null">
+			and sell_price = #{sellPrice,jdbcType=DOUBLE}
+		</if>
+		<if test="sell != null">
+			and sell = #{sell,jdbcType=DOUBLE}
+		</if>
+		<if test="subsidy != null">
+			and subsidy = #{subsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="bsidyYear != null">
+			and bsidy_year =
+			#{bsidyYear,jdbcType=INTEGER}
+		</if>
+		<if test="unlsubsidy != null">
+			and unlsubsidy =
+			#{unlsubsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="unlsubsidyYear != null">
+			and unlsubsidy_year =
+			#{unlsubsidyYear,jdbcType=INTEGER}
+		</if>
+		<if test="provinceId != null">
+			and province_id =
+			#{provinceId}
+		</if>
+		<if test="provinceName != null">
+			and province_name =
+			#{provinceName,jdbcType=VARCHAR}
+		</if>
+		<if test="isProvince != null">
+			and is_province =
+			#{isProvince,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			and city_id = #{cityId}
+		</if>
+		<if test="cityName != null">
+			and city_name =
+			#{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="initialsubsidy != null">
+			and initialsubsidy =
+			#{initialsubsidy,jdbcType=DOUBLE}
+		</if>
+		<if test="sunCount != null">
+			and sun_count = #{sunCount}
+		</if>
+		<if test="createDtm != null">
+			and create_dtm =
+			#{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+	
+	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_subsidy
+		(selfuse,sell,subsidy,bsidy_year,unlsubsidy,unlsubsidy_year,province_id,province_name,is_province,city_id,city_name,initialsubsidy)values
+		<foreach collection="list" item="item" index="index"
+			separator=",">(#{item.selfuse},#{item.sell},#{item.subsidy},#{item.bsidyYear},#{item.unlsubsidy},#{item.unlsubsidyYear},#{item.provinceId},#{item.provinceName},#{item.isProvince},#{item.cityId},#{item.cityName},#{item.initialsubsidy})
+		</foreach>
+	</insert>
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from t_subsidy where id in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">#{item}</foreach>
+	</delete>
+	
+	
+	
+	
+	
+	
+	
+	<select id="selectProvince" resultType="java.lang.Long">
+		SELECT DISTINCT province_id FROM t_subsidy
+		ORDER BY province_id ASC
+	</select>
+	<select id="selectCityByProvinceId" parameterType="java.lang.Long" resultType="java.lang.Long">
+		SELECT DISTINCT city_id FROM t_subsidy WHERE 1=1
+		AND province_id = #{province_id}
+		ORDER BY city_id ASC
+	</select>
+	
+	
+	
+</mapper>

@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.User">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="province_id" property="province_id" />
+		<result column="city_id" property="city_id" />
+		<result column="address_text" property="addressText" jdbcType="VARCHAR" />
+		<result column="full_address" property="full_address"/>
+		<result column="sex" property="sex" jdbcType="INTEGER" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="privilege_code" property="privilegeCode" jdbcType="VARCHAR" />
+		<result column="privilege_code_init" property="privilegeCodeInit" jdbcType="VARCHAR" />
+		<result column="open_ida" property="openIda" jdbcType="VARCHAR" />
+		<result column="open_idb" property="openIdb" jdbcType="VARCHAR" />
+		<result column="open_idc" property="openIdc" jdbcType="VARCHAR" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">id,role_id,img_url,username,phone,password,province_id,city_id,address_text,full_address,sex,email,real_name,privilege_code,privilege_code_init,open_ida,open_idb,open_idc,create_dtm</sql>
+	
+	<delete id="delete" parameterType="java.lang.Long"> delete from
+		t_user where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.User">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="province_id != null">
+				province_id,
+			</if>
+			<if test="city_id != null">
+				city_id,
+			</if>
+			<if test="addressText != null">
+				address_text,
+			</if>
+			<if test="full_address != null">
+				full_address,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="privilegeCode != null">
+				privilege_code,
+			</if>
+			<if test="privilegeCodeInit != null">
+				privilege_code_init,
+			</if>
+			<if test="openIda != null">
+				open_ida,
+			</if>
+			<if test="openIdb != null">
+				open_idb,
+			</if>
+			<if test="openIdc != null">
+				open_idc,
+			</if>
+			<if test="createDtm != null">
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="province_id != null">
+				#{province_id},
+			</if>
+			<if test="city_id != null">
+				#{city_id},
+			</if>
+			<if test="addressText != null">
+				#{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="full_address != null">
+				#{full_address},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="privilegeCode != null">
+				#{privilegeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="privilegeCodeInit != null">
+				#{privilegeCodeInit,jdbcType=VARCHAR},
+			</if>
+			<if test="openIda != null">
+				#{openIda,jdbcType=VARCHAR},
+			</if>
+			<if test="openIdb != null">
+				#{openIdb,jdbcType=VARCHAR},
+			</if>
+			<if test="openIdc != null">
+				#{openIdc,jdbcType=VARCHAR},
+			</if>
+			<if test="createDtm != null">
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.User">
+		update t_user
+		<set>
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="imgUrl != null">
+				img_url = #{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				username =
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password =
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="province_id != null">
+				province_id = #{province_id},
+			</if>
+			<if test="city_id != null">
+				city_id = #{city_id},
+			</if>
+			<if test="addressText != null">
+				address_text = #{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="full_address != null">
+				full_address = #{full_address},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				real_name =
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="privilegeCode != null">
+				privilege_code =
+				#{privilegeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="privilegeCodeInit != null">
+				privilege_code_init =
+				#{privilegeCodeInit,jdbcType=VARCHAR},
+			</if>
+			<if test="openIda != null">
+				open_ida = #{openIda,jdbcType=VARCHAR},
+			</if>
+			<if test="openIdb != null">
+				open_idb = #{openIdb,jdbcType=VARCHAR},
+			</if>
+			<if test="openIdc != null">
+				open_idc = #{openIdc,jdbcType=VARCHAR},
+			</if>
+			<if test="createDtm != null">
+				create_dtm =
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		where 1=1
+		<if test="roleId != null">
+			and role_id = #{roleId,jdbcType=INTEGER}
+		</if>
+		<if test="imgUrl != null">
+			and img_url = #{imgUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="username != null">
+			and username = #{username,jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone,jdbcType=VARCHAR}
+		</if>
+		<if test="password != null">
+			and password = #{password,jdbcType=VARCHAR}
+		</if>
+		<if test="province_id != null">
+			and province_id = #{province_id}
+		</if>
+		<if test="city_id != null">
+			and city_id = #{city_id}
+		</if>
+		<if test="addressText != null">
+			and address_text = #{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="full_address != null">
+			and full_address = #{full_address}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex,jdbcType=INTEGER}
+		</if>
+		<if test="email != null">
+			and email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="realName != null">
+			and real_name = #{realName,jdbcType=VARCHAR}
+		</if>
+		<if test="privilegeCode != null">
+			and privilege_code = #{privilegeCode,jdbcType=VARCHAR}
+		</if>
+		<if test="privilegeCodeInit != null">
+			and privilege_code_init = #{privilegeCodeInit,jdbcType=VARCHAR}
+		</if>
+		<if test="openIda != null">
+			and open_ida = #{openIda,jdbcType=VARCHAR}
+		</if>
+		<if test="openIdb != null">
+			and open_idb = #{openIdb,jdbcType=VARCHAR}
+		</if>
+		<if test="openIdc != null">
+			and open_idc = #{openIdc,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null">
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		where 1=1
+		<if test="roleId != null">
+			and role_id = #{roleId,jdbcType=INTEGER}
+		</if>
+		<if test="imgUrl != null">
+			and img_url = #{imgUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="username != null">
+			and username = #{username,jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone,jdbcType=VARCHAR}
+		</if>
+		<if test="password != null">
+			and password = #{password,jdbcType=VARCHAR}
+		</if>
+		<if test="province_id != null">
+			and province_id = #{province_id}
+		</if>
+		<if test="city_id != null">
+			and city_id = #{city_id}
+		</if>
+		<if test="addressText != null">
+			and address_text = #{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="full_address != null">
+			and full_address = #{full_address}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex,jdbcType=INTEGER}
+		</if>
+		<if test="email != null">
+			and email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="realName != null">
+			and real_name = #{realName,jdbcType=VARCHAR}
+		</if>
+		<if test="privilegeCode != null">
+			and privilege_code = #{privilegeCode,jdbcType=VARCHAR}
+		</if>
+		<if test="privilegeCodeInit != null">
+			and privilege_code_init = #{privilegeCodeInit,jdbcType=VARCHAR}
+		</if>
+		<if test="openIda != null">
+			and open_ida = #{openIda,jdbcType=VARCHAR}
+		</if>
+		<if test="openIdb != null">
+			and open_idb = #{openIdb,jdbcType=VARCHAR}
+		</if>
+		<if test="openIdc != null">
+			and open_idc = #{openIdc,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null">
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="query != null">
+			and (phone like '%${query}%' OR address_text like '%${query}%' OR full_address like '%${query}%' OR email like '%${query}%' OR real_name like '%${query}%')
+		</if>
+		<if test="#{sort} != null">
+			<if test="sort != null"> order by ${sort} ${sortUp}
+			</if>
+		</if>
+		limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_user
+		where 1=1
+		<if test="roleId != null">
+			and role_id = #{roleId,jdbcType=INTEGER}
+		</if>
+		<if test="imgUrl != null">
+			and img_url = #{imgUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="username != null">
+			and username =
+			#{username,jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null">
+			and phone = #{phone,jdbcType=VARCHAR}
+		</if>
+		<if test="password != null">
+			and password =
+			#{password,jdbcType=VARCHAR}
+		</if>
+		<if test="province_id != null">
+			and province_id = #{province_id}
+		</if>
+		<if test="city_id != null">
+			and city_id = #{city_id}
+		</if>
+		<if test="addressText != null">
+			and address_text =
+			#{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="full_address != null">
+			and full_address = #{full_address}
+		</if>
+		<if test="sex != null">
+			and sex = #{sex,jdbcType=INTEGER}
+		</if>
+		<if test="email != null">
+			and email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="realName != null">
+			and real_name =
+			#{realName,jdbcType=VARCHAR}
+		</if>
+		<if test="privilegeCode != null">
+			and privilege_code =
+			#{privilegeCode,jdbcType=VARCHAR}
+		</if>
+		<if test="privilegeCodeInit != null">
+			and privilege_code_init =
+			#{privilegeCodeInit,jdbcType=VARCHAR}
+		</if>
+		<if test="openIda != null">
+			and open_ida =
+			#{openIda,jdbcType=VARCHAR}
+		</if>
+		<if test="openIdb != null">
+			and open_idb =
+			#{openIdb,jdbcType=VARCHAR}
+		</if>
+		<if test="openIdc != null">
+			and open_idc =
+			#{openIdc,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null">
+			and create_dtm =
+			#{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="query != null">
+				and (phone like '%${query}%' OR address_text like '%${query}%' OR full_address like '%${query}%' OR email like '%${query}%' OR real_name like '%${query}%')
+			</if>
+	</select>
+	<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">
+		<selectKey resultType="long" keyProperty="id" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into t_user
+		(role_id,img_url,username,phone,password,province_id,city_id,address_text,full_address,sex,email,real_name,privilege_code,privilege_code_init,open_ida,open_idb,open_idc)values
+		<foreach collection="list" item="item" index="index"
+			separator=",">(#{item.roleId},#{item.imgUrl},#{item.username},#{item.phone},#{item.password},#{item.province_id},#{item.city_id},#{item.addressText},#{item.full_address},#{item.sex},#{item.email},#{item.realName},#{item.privilegeCode},#{item.privilegeCodeInit},#{item.openIda},#{item.openIdb},#{item.openIdc})
+		</foreach>
+	</insert>
+	<delete id="deleteBatch" parameterType="java.util.List">
+		delete from t_user where id in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">#{item}</foreach>
+	</delete>
+	<select id="selectByPhone" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from t_user
+		where phone = #{phone,jdbcType=VARCHAR}
+	</select>
+	<update id="updatePassword" parameterType="com.hy.gf.model.User">
+		update t_user set password=#{password,jdbcType=VARCHAR} where id=#{id,jdbcType=INTEGER}
+	</update>
+</mapper>

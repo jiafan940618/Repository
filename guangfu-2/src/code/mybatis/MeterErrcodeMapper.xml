@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.MeterErrcodeMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.MeterErrcode" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="err_code" property="err_code" />
+		<result column="err_reason" property="err_reason" />
+		<result column="is_normal" property="is_normal" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,err_code,err_reason,is_normal,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_meter_errcode
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_meter_errcode
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.MeterErrcode" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_meter_errcode
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="err_code != null" >
+				err_code,
+			</if>
+			<if test="err_reason != null" >
+				err_reason,
+			</if>
+			<if test="is_normal != null" >
+				is_normal,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="err_code != null" >
+				#{err_code},
+			</if>
+			<if test="err_reason != null" >
+				#{err_reason},
+			</if>
+			<if test="is_normal != null" >
+				#{is_normal},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.MeterErrcode" >
+		update t_meter_errcode
+		<set >
+			<if test="err_code != null" >
+				err_code = #{err_code},
+			</if>
+			<if test="err_reason != null" >
+				err_reason = #{err_reason},
+			</if>
+			<if test="is_normal != null" >
+				is_normal = #{is_normal},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_meter_errcode
+		where 1=1
+			<if test="err_code != null" >
+				and err_code = #{err_code}
+			</if>
+			<if test="err_reason != null" >
+				and err_reason = #{err_reason}
+			</if>
+			<if test="is_normal != null" >
+				and is_normal = #{is_normal}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_meter_errcode
+		where 1=1
+			<if test="err_code != null" >
+				and err_code = #{err_code}
+			</if>
+			<if test="err_reason != null" >
+				and err_reason = #{err_reason}
+			</if>
+			<if test="is_normal != null" >
+				and is_normal = #{is_normal}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_meter_errcode
+		where 1=1
+		<if test="err_code != null" >
+			and err_code = #{err_code}
+		</if>
+		<if test="err_reason != null" >
+			and err_reason = #{err_reason}
+		</if>
+		<if test="is_normal != null" >
+			and is_normal = #{is_normal}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_meter_errcode
+(err_code,err_reason,is_normal)values<foreach collection="list" item="item" index="index" separator=",">(#{item.err_code},#{item.err_reason},#{item.is_normal})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_meter_errcode where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+	
+	<select id="selectByErrcode" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_meter_errcode
+		where 1=1
+		and err_code = #{err_code}
+	</select>
+	
+
+</mapper>

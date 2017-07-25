@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.CityMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.City" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="province_id" property="provinceId" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithProvince" type="com.hy.gf.vo.CityVO" extends="BaseResultMap">
+		<association column="province_id" property="province" select="com.hy.gf.mapper.ProvinceMapper.select"></association>
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,city_name,province_id,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from s_city
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from s_city
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.City" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into s_city
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="cityName != null" >
+				city_name,
+			</if>
+			<if test="provinceId != null" >
+				province_id,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="cityName != null" >
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceId != null" >
+				#{provinceId},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.City" >
+		update s_city
+		<set >
+			<if test="cityName != null" >
+				city_name = #{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="provinceId != null" >
+				province_id = #{provinceId},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from s_city
+		where 1=1
+			<if test="cityName != null" >
+				and city_name = #{cityName,jdbcType=VARCHAR}
+			</if>
+			<if test="provinceId != null" >
+				and province_id = #{provinceId}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from s_city
+		where 1=1
+			<if test="cityName != null" >
+				and city_name = #{cityName,jdbcType=VARCHAR}
+			</if>
+			<if test="provinceId != null" >
+				and province_id = #{provinceId}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from s_city
+		where 1=1
+		<if test="cityName != null" >
+			and city_name = #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="provinceId != null" >
+			and province_id = #{provinceId}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into s_city
+(city_name,province_id)values<foreach collection="list" item="item" index="index" separator=",">(#{item.cityName},#{item.provinceId})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from s_city where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+	<select id="findCityListByProvinceId" parameterType="Long" resultMap="BaseResultMap">
+		SELECT * FROM s_city WHERE id IN (SELECT DISTINCT city_id FROM t_subsidy WHERE province_id = #{provinceId} )
+	</select>
+	
+	<select id="findByProvinceId" parameterType="Long" resultMap="BaseResultMap">
+		SELECT * FROM s_city WHERE s_city.province_id = #{provinceId}
+	</select>
+	
+	<!-- 根据服务商可服务的城市来，显示省和城市 -->
+	<select id="findProAndCity" parameterType="Long" resultMap="ResultMapWithProvince">
+		select *
+		from s_city
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectName" resultType="java.lang.String">
+		select city_name
+		from s_city
+		where id = #{id}
+	</select>
+
+
+</mapper>

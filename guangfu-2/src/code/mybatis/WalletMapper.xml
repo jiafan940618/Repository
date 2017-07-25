@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.WalletMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Wallet" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" />
+		<result column="server_id" property="serverId" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="money" property="money" jdbcType="DECIMAL" />
+		<result column="alipay_account" property="alipayAccount" jdbcType="VARCHAR" />
+		<result column="yibao_account" property="yibaoAccount" jdbcType="VARCHAR" />
+		<result column="jifen" property="jifen" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,user_id,server_id,type,money,alipay_account,yibao_account,jifen,status,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_wallet
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_wallet
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Wallet" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_wallet
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="userId != null" >
+				user_id,
+			</if>
+			<if test="serverId != null" >
+				server_id,
+			</if>
+			<if test="type != null" >
+				type,
+			</if>
+			<if test="money != null" >
+				money,
+			</if>
+			<if test="alipayAccount != null" >
+				alipay_account,
+			</if>
+			<if test="yibaoAccount != null" >
+				yibao_account,
+			</if>
+			<if test="jifen != null" >
+				jifen,
+			</if>
+			<if test="status != null" >
+				status,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null" >
+				#{userId},
+			</if>
+			<if test="serverId != null" >
+				#{serverId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null" >
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="money != null" >
+				#{money,jdbcType=DECIMAL},
+			</if>
+			<if test="alipayAccount != null" >
+				#{alipayAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="yibaoAccount != null" >
+				#{yibaoAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="jifen != null" >
+				#{jifen,jdbcType=INTEGER},
+			</if>
+			<if test="status != null" >
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Wallet" >
+		update t_wallet
+		<set >
+			<if test="userId != null" >
+				user_id = #{userId},
+			</if>
+			<if test="serverId != null" >
+				server_id = #{serverId},
+			</if>
+			<if test="type != null" >
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="money != null" >
+				money = #{money,jdbcType=DECIMAL},
+			</if>
+			<if test="alipayAccount != null" >
+				alipay_account = #{alipayAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="yibaoAccount != null" >
+				yibao_account = #{yibaoAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="jifen != null" >
+				jifen = #{jifen,jdbcType=INTEGER},
+			</if>
+			<if test="status != null" >
+				status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_wallet
+		where 1=1
+			<if test="userId != null" >
+				and user_id = #{userId}
+			</if>
+			<if test="serverId != null" >
+				and server_id = #{serverId}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="money != null" >
+				and money = #{money,jdbcType=DECIMAL}
+			</if>
+			<if test="alipayAccount != null" >
+				and alipay_account = #{alipayAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="yibaoAccount != null" >
+				and yibao_account = #{yibaoAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="jifen != null" >
+				and jifen = #{jifen,jdbcType=INTEGER}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_wallet
+		where 1=1
+			<if test="userId != null" >
+				and user_id = #{userId}
+			</if>
+			<if test="serverId != null" >
+				and server_id = #{serverId}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="money != null" >
+				and money = #{money,jdbcType=DECIMAL}
+			</if>
+			<if test="alipayAccount != null" >
+				and alipay_account = #{alipayAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="yibaoAccount != null" >
+				and yibao_account = #{yibaoAccount,jdbcType=VARCHAR}
+			</if>
+			<if test="jifen != null" >
+				and jifen = #{jifen,jdbcType=INTEGER}
+			</if>
+			<if test="status != null" >
+				and status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_wallet
+		where 1=1
+		<if test="userId != null" >
+			and user_id = #{userId}
+		</if>
+		<if test="serverId != null" >
+			and server_id = #{serverId}
+		</if>
+		<if test="type != null" >
+			and type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="money != null" >
+			and money = #{money,jdbcType=DECIMAL}
+		</if>
+		<if test="alipayAccount != null" >
+			and alipay_account = #{alipayAccount,jdbcType=VARCHAR}
+		</if>
+		<if test="yibaoAccount != null" >
+			and yibao_account = #{yibaoAccount,jdbcType=VARCHAR}
+		</if>
+		<if test="jifen != null" >
+			and jifen = #{jifen,jdbcType=INTEGER}
+		</if>
+		<if test="status != null" >
+			and status = #{status,jdbcType=INTEGER},
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_wallet
+(user_id,server_id,type,money,alipay_account,yibao_account,jifen)values<foreach collection="list" item="item" index="index" separator=",">(#{item.userId},#{item.serverId},#{item.type},#{item.money},#{item.alipayAccount},#{item.yibaoAccount},#{item.jifen})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_wallet where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+</mapper>

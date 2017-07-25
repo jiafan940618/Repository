@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.EvaluateMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Evaluate" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="order_id" property="orderId" />
+		<result column="user_id" property="userId" />
+		<result column="server_id" property="server_id" />
+		<result column="server_quality" property="serverQuality" jdbcType="DOUBLE" />
+		<result column="server_speed" property="serverSpeed" jdbcType="DOUBLE" />
+		<result column="content" property="content" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,order_id,user_id,server_id,server_quality,server_speed,content,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_evaluate
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_evaluate
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Evaluate" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_evaluate
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="orderId != null" >
+				order_id,
+			</if>
+			<if test="userId != null" >
+				user_id,
+			</if>
+			<if test="server_id != null" >
+				server_id,
+			</if>
+			<if test="serverQuality != null" >
+				server_quality,
+			</if>
+			<if test="serverSpeed != null" >
+				server_speed,
+			</if>
+			<if test="content != null" >
+				content,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null" >
+				#{orderId},
+			</if>
+			<if test="userId != null" >
+				#{userId},
+			</if>
+			<if test="server_id != null" >
+				#{server_id},
+			</if>
+			<if test="serverQuality != null" >
+				#{serverQuality,jdbcType=DOUBLE},
+			</if>
+			<if test="serverSpeed != null" >
+				#{serverSpeed,jdbcType=DOUBLE},
+			</if>
+			<if test="content != null" >
+				#{content},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Evaluate" >
+		update t_evaluate
+		<set >
+			<if test="orderId != null" >
+				order_id = #{orderId},
+			</if>
+			<if test="userId != null" >
+				user_id = #{userId},
+			</if>
+			<if test="server_id != null" >
+				server_id = #{server_id},
+			</if>
+			<if test="serverQuality != null" >
+				server_quality = #{serverQuality,jdbcType=DOUBLE},
+			</if>
+			<if test="serverSpeed != null" >
+				server_speed = #{serverSpeed,jdbcType=DOUBLE},
+			</if>
+			<if test="content != null" >
+				content = #{content},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_evaluate
+		where 1=1
+			<if test="orderId != null" >
+				and order_id = #{orderId}
+			</if>
+			<if test="userId != null" >
+				and user_id = #{userId}
+			</if>
+			<if test="server_id != null" >
+				and server_id = #{server_id}
+			</if>
+			<if test="serverQuality != null" >
+				and server_quality = #{serverQuality,jdbcType=DOUBLE}
+			</if>
+			<if test="serverSpeed != null" >
+				and server_speed = #{serverSpeed,jdbcType=DOUBLE}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_evaluate
+		where 1=1
+			<if test="orderId != null" >
+				and order_id = #{orderId}
+			</if>
+			<if test="userId != null" >
+				and user_id = #{userId}
+			</if>
+			<if test="server_id != null" >
+				and server_id = #{server_id}
+			</if>
+			<if test="serverQuality != null" >
+				and server_quality = #{serverQuality,jdbcType=DOUBLE}
+			</if>
+			<if test="serverSpeed != null" >
+				and server_speed = #{serverSpeed,jdbcType=DOUBLE}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_evaluate
+		where 1=1
+		<if test="orderId != null" >
+			and order_id = #{orderId}
+		</if>
+		<if test="userId != null" >
+			and user_id = #{userId}
+		</if>
+		<if test="server_id != null" >
+			and server_id = #{server_id}
+		</if>
+		<if test="serverQuality != null" >
+			and server_quality = #{serverQuality,jdbcType=DOUBLE}
+		</if>
+		<if test="serverSpeed != null" >
+			and server_speed = #{serverSpeed,jdbcType=DOUBLE}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_evaluate
+(order_id,user_id,server_id,server_quality,server_speed,content)values<foreach collection="list" item="item" index="index" separator=",">(#{item.orderId},#{item.userId},#{item.server_id},#{item.serverQuality},#{item.serverSpeed},#{item.content})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_evaluate where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+</mapper>

@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.ServerMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Server" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="server_name" property="serverName" jdbcType="VARCHAR" />
+		<result column="address_text" property="addressText" jdbcType="VARCHAR" />
+		<result column="registered_capital" property="registeredCapital" jdbcType="DECIMAL" />
+		<result column="registered_dt" property="registeredDt" jdbcType="DATE" />
+		<result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+		<result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+		<result column="business_url" property="businessUrl" jdbcType="VARCHAR" />
+		<result column="legal_person" property="legalPerson" jdbcType="VARCHAR" />
+		<result column="legal_person_phone" property="legalPersonPhone" jdbcType="VARCHAR" />
+		<result column="company_assets" property="companyAssets"  />
+		<result column="business_text" property="businessText" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="capacity" property="capacity"/>
+		<result column="use_couponcode" property="useCouponcode" jdbcType="VARCHAR" />
+		<result column="couponcode" property="couponcode" jdbcType="VARCHAR" />
+		<result column="texture" property="texture" jdbcType="VARCHAR" />
+		<result column="pricea" property="pricea" jdbcType="DECIMAL" />
+		<result column="priceb" property="priceb" jdbcType="DECIMAL" />
+		<result column="pricea_ring" property="priceaRing"/>
+		<result column="priceb_ring" property="pricebRing"/>
+		<result column="sqm_electric" property="sqmElectric" jdbcType="DOUBLE" />
+		<result column="watt_price" property="wattPrice" jdbcType="DOUBLE" />
+		<result column="aptitude" property="aptitude" jdbcType="VARCHAR" />
+		<result column="three_months" property="threeMonths" />
+		<result column="bank_draft" property="bankDraft" jdbcType="INTEGER" />
+		<result column="project_size_a" property="projectSizeA" jdbcType="INTEGER" />
+		<result column="project_size_b" property="projectSizeB" jdbcType="INTEGER" />
+		<result column="epc" property="epc" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="server_city_ids" property="serverCityIds"/>
+		<result column="server_city" property="serverCity" jdbcType="VARCHAR" />
+		<result column="max_person_size" property="maxPersonSize" jdbcType="DOUBLE" />
+		<result column="max_project_size" property="maxProjectSize" jdbcType="DOUBLE" />
+		<result column="design_price" property="designPrice" jdbcType="DECIMAL" />
+		<result column="falloff" property="falloff" />
+		<result column="cvr" property="cvr" />
+		<result column="module_quality" property="moduleQuality" />
+		<result column="adjunct_quality" property="adjunctQuality" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+		<result column="real_name" property="realName" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="banner_url" property="banner_url" />
+		<result column="factorage" property="factorage" jdbcType="DOUBLE" />
+		<result column="top" property="top" jdbcType="INTEGER" />
+		<result column="saleman_phone" property="salemanPhone" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithDevice" type="com.hy.gf.vo.ServerVO" extends="BaseResultMap">
+		<collection property="device" ofType="com.hy.gf.model.Device">
+			<id column="device_id" property="id" jdbcType="INTEGER" />
+			<result column="serve_id" property="serveId" jdbcType="INTEGER" />
+			<result column="serve_name" property="serveName" jdbcType="VARCHAR" />
+			<result column="devive_type_id" property="deviveTypeId" jdbcType="INTEGER" />
+			<result column="device_type_text" property="deviceTypeText" jdbcType="VARCHAR" />
+			<result column="name" property="name" jdbcType="VARCHAR" />
+			<result column="brand" property="brand" jdbcType="VARCHAR" />
+			<result column="model" property="model" jdbcType="VARCHAR" />
+			<result column="price" property="price" jdbcType="DECIMAL" />
+			<result column="unit" property="unit" jdbcType="VARCHAR" />
+			<result column="quality" property="quality" jdbcType="VARCHAR" />
+			<result column="remark" property="remark" jdbcType="VARCHAR" />
+			<result column="brand_id" property="brandId" jdbcType="INTEGER" />
+		</collection>
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,type,role_id,img_url,banner_url,real_name,phone,password,email,server_name,address_text,registered_capital,registered_dt,contact_name,contact_phone,business_url,legal_person,legal_person_phone,company_assets,business_text,state,capacity,use_couponcode,couponcode,texture,pricea,priceb,pricea_ring,priceb_ring,sqm_electric,watt_price,aptitude,three_months,bank_draft,project_size_a,project_size_b,epc,user_id,server_city_ids,server_city,max_person_size,max_project_size,design_price,falloff,cvr,module_quality,adjunct_quality,factorage,top,saleman_phone,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_server
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="ResultMapWithDevice" parameterType="java.lang.Long" >
+		SELECT
+		t1.id,
+		t1.type,
+		t1.server_name,
+		t1.img_url,
+		t1.banner_url,
+		t1.address_text,
+		t1.registered_capital,
+		t1.registered_dt,
+		t1.contact_name,
+		t1.contact_phone,
+		t1.business_url,
+		t1.legal_person,
+		t1.legal_person_phone,
+		t1.company_assets,
+		t1.business_text,
+		t1.state,
+		t1.capacity,
+		t1.use_couponcode,
+		t1.couponcode,
+		t1.texture,
+		t1.pricea,
+		t1.priceb,
+		t1.pricea_ring,
+		t1.priceb_ring,
+		t1.sqm_electric,
+		t1.watt_price,
+		t1.aptitude,
+		t1.three_months,
+		t1.bank_draft,
+		t1.project_size_a,
+		t1.project_size_b,
+		t1.epc,
+		t1.user_id,
+		t1.server_city_ids,
+		t1.server_city,
+		t1.max_person_size,
+		t1.max_project_size,
+		t1.design_price,
+		t1.falloff,
+		t1.cvr,
+		t1.module_quality,
+		t1.adjunct_quality,
+		t1.factorage,
+		t1.top,
+		t1.saleman_phone,
+		t1.create_dtm,
+		t2.id as device_id,
+		t2.serve_id,
+		t2.serve_name,
+		t2.devive_type_id,
+		t2.device_type_text,
+		t2.`name`,
+		t2.brand,
+		t2.model,
+		t2.price,
+		t2.unit,
+		t2.quality,
+		t2.remark,
+		t2.brand_id
+		FROM t_server t1 LEFT JOIN t_device t2 ON t1.id = t2.serve_id
+		where t1.id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Server" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_server
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="type != null" >
+				type,
+			</if>
+			<if test="serverName != null" >
+				server_name,
+			</if>
+			<if test="addressText != null" >
+				address_text,
+			</if>
+			<if test="registeredCapital != null" >
+				registered_capital,
+			</if>
+			<if test="registeredDt != null" >
+				registered_dt,
+			</if>
+			<if test="contactName != null" >
+				contact_name,
+			</if>
+			<if test="contactPhone != null" >
+				contact_phone,
+			</if>
+			<if test="businessUrl != null" >
+				business_url,
+			</if>
+			<if test="legalPerson != null" >
+				legal_person,
+			</if>
+			<if test="legalPersonPhone != null" >
+				legal_person_phone,
+			</if>
+			<if test="companyAssets != null" >
+				company_assets,
+			</if>
+			<if test="businessText != null" >
+				business_text,
+			</if>
+			<if test="state != null" >
+				state,
+			</if>
+			<if test="capacity != null" >
+				capacity,
+			</if>
+			<if test="useCouponcode != null" >
+				use_couponcode,
+			</if>
+			<if test="couponcode != null" >
+				couponcode,
+			</if>
+			<if test="texture != null" >
+				texture,
+			</if>
+			<if test="pricea != null" >
+				pricea,
+			</if>
+			<if test="priceb != null" >
+				priceb,
+			</if>
+			<if test="priceaRing != null" >
+				pricea_ring,
+			</if>
+			<if test="pricebRing != null" >
+				priceb_ring,
+			</if>
+			<if test="sqmElectric != null" >
+				sqm_electric,
+			</if>
+			<if test="wattPrice != null" >
+				watt_price,
+			</if>
+			<if test="aptitude != null" >
+				aptitude,
+			</if>
+			<if test="threeMonths != null" >
+				three_months,
+			</if>
+			<if test="bankDraft != null" >
+				bank_draft,
+			</if>
+			<if test="projectSizeA != null" >
+				project_size_a,
+			</if>
+			<if test="projectSizeB != null" >
+				project_size_b,
+			</if>
+			<if test="epc != null" >
+				epc,
+			</if>
+			<if test="userId != null" >
+				user_id,
+			</if>
+			<if test="serverCityIds != null" >
+				server_city_ids,
+			</if>
+			<if test="serverCity != null" >
+				server_city,
+			</if>
+			<if test="maxPersonSize != null" >
+				max_person_size,
+			</if>
+			<if test="maxProjectSize != null" >
+				max_project_size,
+			</if>
+			<if test="designPrice != null" >
+				design_price,
+			</if>
+			
+			<if test="falloff != null">
+				falloff,
+			</if>
+			<if test="cvr != null">
+				cvr,
+			</if>
+			<if test="moduleQuality != null">
+				module_quality,
+			</if>
+			<if test="adjunctQuality != null">
+				adjunct_quality,
+			</if>
+			
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+			
+			<if test="phone != null">
+				phone,
+			</if>
+			
+			<if test="password != null">
+				password,
+			</if>
+			
+			<if test="realName != null">
+				real_name,
+			</if>
+			
+			<if test="email != null">
+				email,
+			</if>
+			<if test="factorage != null">
+				factorage,
+			</if>
+			<if test="top != null">
+				top,
+			</if>
+			<if test="salemanPhone != null">
+				saleman_phone,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="type != null" >
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="serverName != null" >
+				#{serverName,jdbcType=VARCHAR},
+			</if>
+			<if test="addressText != null" >
+				#{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="registeredCapital != null" >
+				#{registeredCapital,jdbcType=DECIMAL},
+			</if>
+			<if test="registeredDt != null" >
+				#{registeredDt,jdbcType=DATE},
+			</if>
+			<if test="contactName != null" >
+				#{contactName,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhone != null" >
+				#{contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="businessUrl != null" >
+				#{businessUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPerson != null" >
+				#{legalPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonPhone != null" >
+				#{legalPersonPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="companyAssets != null" >
+				#{companyAssets},
+			</if>
+			<if test="businessText != null" >
+				#{businessText,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null" >
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="capacity != null" >
+				#{capacity},
+			</if>
+			<if test="useCouponcode != null" >
+				#{useCouponcode,jdbcType=VARCHAR},
+			</if>
+			<if test="couponcode != null" >
+				#{couponcode,jdbcType=VARCHAR},
+			</if>
+			<if test="texture != null" >
+				#{texture,jdbcType=VARCHAR},
+			</if>
+			<if test="pricea != null" >
+				#{pricea,jdbcType=DECIMAL},
+			</if>
+			<if test="priceb != null" >
+				#{priceb,jdbcType=DECIMAL},
+			</if>
+			<if test="priceaRing != null" >
+				#{priceaRing},
+			</if>
+			<if test="pricebRing != null" >
+				#{pricebRing},
+			</if>
+			<if test="sqmElectric != null" >
+				#{sqmElectric,jdbcType=DOUBLE},
+			</if>
+			<if test="wattPrice != null" >
+				#{wattPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="aptitude != null" >
+				#{aptitude,jdbcType=VARCHAR},
+			</if>
+			<if test="threeMonths != null" >
+				#{threeMonths},
+			</if>
+			<if test="bankDraft != null" >
+				#{bankDraft,jdbcType=INTEGER},
+			</if>
+			<if test="projectSizeA != null" >
+				#{projectSizeA,jdbcType=INTEGER},
+			</if>
+			<if test="projectSizeB != null" >
+				#{projectSizeB,jdbcType=INTEGER},
+			</if>
+			<if test="epc != null" >
+				#{epc,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null" >
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="serverCityIds != null" >
+				#{serverCityIds,jdbcType=VARCHAR},
+			</if>
+			<if test="serverCity != null" >
+				#{serverCity,jdbcType=VARCHAR},
+			</if>
+			<if test="maxPersonSize != null" >
+				#{maxPersonSize,jdbcType=DOUBLE},
+			</if>
+			<if test="maxProjectSize != null" >
+				#{maxProjectSize,jdbcType=DOUBLE},
+			</if>
+			<if test="designPrice != null" >
+				#{designPrice,jdbcType=DECIMAL},
+			</if>
+			
+			<if test="falloff != null">
+				#{falloff},
+			</if>
+			<if test="cvr != null">
+				#{cvr},
+			</if>
+			<if test="moduleQuality != null">
+				#{moduleQuality},
+			</if>
+			<if test="adjunctQuality != null">
+				#{adjunctQuality},
+			</if>
+			
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+			
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="factorage != null">
+				#{factorage,jdbcType=DOUBLE},
+			</if>
+			<if test="top != null">
+				#{top,jdbcType=INTEGER},
+			</if>
+			<if test="salemanPhone != null">
+				#{salemanPhone,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Server" >
+		update t_server
+		<set >
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="imgUrl != null">
+				img_url = #{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="banner_url != null">
+				banner_url = #{banner_url},
+			</if>
+			<if test="type != null" >
+				type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="serverName != null" >
+				server_name = #{serverName,jdbcType=VARCHAR},
+			</if>
+			<if test="addressText != null" >
+				address_text = #{addressText,jdbcType=VARCHAR},
+			</if>
+			<if test="registeredCapital != null" >
+				registered_capital = #{registeredCapital,jdbcType=DECIMAL},
+			</if>
+			<if test="registeredDt != null" >
+				registered_dt = #{registeredDt,jdbcType=DATE},
+			</if>
+			<if test="contactName != null" >
+				contact_name = #{contactName,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPhone != null" >
+				contact_phone = #{contactPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="businessUrl != null" >
+				business_url = #{businessUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPerson != null" >
+				legal_person = #{legalPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="legalPersonPhone != null" >
+				legal_person_phone = #{legalPersonPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="companyAssets != null" >
+				company_assets = #{companyAssets},
+			</if>
+			<if test="businessText != null" >
+				business_text = #{businessText,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null" >
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="capacity != null" >
+				capacity = #{capacity},
+			</if>
+			<if test="useCouponcode != null" >
+				use_couponcode = #{useCouponcode,jdbcType=VARCHAR},
+			</if>
+			<if test="couponcode != null" >
+				couponcode = #{couponcode,jdbcType=VARCHAR},
+			</if>
+			<if test="texture != null" >
+				texture = #{texture,jdbcType=VARCHAR},
+			</if>
+			<if test="pricea != null" >
+				pricea = #{pricea,jdbcType=DECIMAL},
+			</if>
+			<if test="priceb != null" >
+				priceb = #{priceb,jdbcType=DECIMAL},
+			</if>
+			<if test="priceaRing != null" >
+				pricea_ring = #{priceaRing},
+			</if>
+			<if test="pricebRing != null" >
+				priceb_ring = #{pricebRing},
+			</if>
+			<if test="sqmElectric != null" >
+				sqm_electric = #{sqmElectric,jdbcType=DOUBLE},
+			</if>
+			<if test="wattPrice != null" >
+				watt_price = #{wattPrice},
+			</if>
+			<if test="aptitude != null" >
+				aptitude = #{aptitude,jdbcType=VARCHAR},
+			</if>
+			<if test="threeMonths != null" >
+				three_months = #{threeMonths},
+			</if>
+			<if test="bankDraft != null" >
+				bank_draft = #{bankDraft,jdbcType=INTEGER},
+			</if>
+			<if test="projectSizeA != null" >
+				project_size_a = #{projectSizeA,jdbcType=INTEGER},
+			</if>
+			<if test="projectSizeB != null" >
+				project_size_b = #{projectSizeB,jdbcType=INTEGER},
+			</if>
+			<if test="epc != null" >
+				epc = #{epc,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null" >
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="serverCityIds != null" >
+				server_city_ids = #{serverCityIds,jdbcType=VARCHAR},
+			</if>
+			<if test="serverCity != null" >
+				server_city = #{serverCity,jdbcType=VARCHAR},
+			</if>
+			<if test="maxPersonSize != null" >
+				max_person_size = #{maxPersonSize,jdbcType=DOUBLE},
+			</if>
+			<if test="maxProjectSize != null" >
+				max_project_size = #{maxProjectSize,jdbcType=DOUBLE},
+			</if>
+			<if test="designPrice != null" >
+				design_price = #{designPrice,jdbcType=DECIMAL},
+			</if>
+			<if test="cvr != null" >
+				cvr = #{cvr},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+			<if test="phone != null" >
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null" >
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null" >
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="factorage != null" >
+				factorage = #{factorage,jdbcType=DOUBLE},
+			</if>
+			<if test="top != null" >
+				top = #{top,jdbcType=INTEGER},
+			</if>
+			<if test="salemanPhone != null" >
+				saleman_phone = #{salemanPhone,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_server
+		where 1=1
+			<if test="roleId != null">
+				and role_id = #{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="imgUrl != null">
+				and img_url = #{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="banner_url != null">
+				and banner_url = #{banner_url},
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="serverName != null" >
+				and server_name = #{serverName,jdbcType=VARCHAR}
+			</if>
+			<if test="addressText != null" >
+				and address_text = #{addressText,jdbcType=VARCHAR}
+			</if>
+			<if test="registeredCapital != null" >
+				and registered_capital = #{registeredCapital,jdbcType=DECIMAL}
+			</if>
+			<if test="registeredDt != null" >
+				and registered_dt = #{registeredDt,jdbcType=DATE}
+			</if>
+			<if test="contactName != null" >
+				and contact_name = #{contactName,jdbcType=VARCHAR}
+			</if>
+			<if test="contactPhone != null" >
+				and contact_phone = #{contactPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="businessUrl != null" >
+				and business_url = #{businessUrl,jdbcType=VARCHAR}
+			</if>
+			<if test="legalPerson != null" >
+				and legal_person = #{legalPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="legalPersonPhone != null" >
+				and legal_person_phone = #{legalPersonPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="companyAssets != null" >
+				and company_assets = #{companyAssets}
+			</if>
+			<if test="businessText != null" >
+				and business_text = #{businessText,jdbcType=VARCHAR}
+			</if>
+			<if test="state != null" >
+				and state = #{state,jdbcType=INTEGER}
+			</if>
+			<if test="capacity != null" >
+				and capacity = #{capacity}
+			</if>
+			<if test="useCouponcode != null" >
+				and use_couponcode = #{useCouponcode,jdbcType=VARCHAR}
+			</if>
+			<if test="couponcode != null" >
+				and couponcode = #{couponcode,jdbcType=VARCHAR}
+			</if>
+			<if test="texture != null" >
+				and texture = #{texture,jdbcType=VARCHAR}
+			</if>
+			<if test="pricea != null" >
+				and pricea = #{pricea,jdbcType=DECIMAL}
+			</if>
+			<if test="priceb != null" >
+				and priceb = #{priceb,jdbcType=DECIMAL}
+			</if>
+			<if test="priceaRing != null" >
+				and pricea_ring = #{priceaRing}
+			</if>
+			<if test="pricebRing != null" >
+				and priceb_ring = #{pricebRing}
+			</if>
+			<if test="sqmElectric != null" >
+				and sqm_electric = #{sqmElectric,jdbcType=DOUBLE}
+			</if>
+			<if test="wattPrice != null" >
+				and watt_price = #{wattPrice}
+			</if>
+			<if test="aptitude != null" >
+				and aptitude = #{aptitude,jdbcType=VARCHAR}
+			</if>
+			<if test="threeMonths != null" >
+				and three_months = #{threeMonths}
+			</if>
+			<if test="bankDraft != null" >
+				and bank_draft = #{bankDraft,jdbcType=INTEGER}
+			</if>
+			<if test="projectSizeA != null" >
+				and project_size_a = #{projectSizeA,jdbcType=INTEGER}
+			</if>
+			<if test="projectSizeB != null" >
+				and project_size_b = #{projectSizeB,jdbcType=INTEGER}
+			</if>
+			<if test="epc != null" >
+				and epc = #{epc,jdbcType=INTEGER}
+			</if>
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="serverCityIds != null" >
+				and server_city_ids = #{serverCityIds,jdbcType=VARCHAR}
+			</if>
+			<if test="serverCity != null" >
+				and server_city = #{serverCity,jdbcType=VARCHAR}
+			</if>
+			<if test="maxPersonSize != null" >
+				and max_person_size = #{maxPersonSize,jdbcType=DOUBLE}
+			</if>
+			<if test="maxProjectSize != null" >
+				and max_project_size = #{maxProjectSize,jdbcType=DOUBLE}
+			</if>
+			<if test="designPrice != null" >
+				and design_price = #{designPrice,jdbcType=DECIMAL}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="phone != null" >
+				and phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null" >
+				and password = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null" >
+				and email = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="factorage != null" >
+				and factorage = #{factorage,jdbcType=DOUBLE},
+			</if>
+			<if test="top != null" >
+				and top = #{top,jdbcType=INTEGER},
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_server
+		where 1=1
+			<if test="type != null" >
+				and type = #{type,jdbcType=VARCHAR}
+			</if>
+			<if test="serverName != null" >
+				and server_name = #{serverName,jdbcType=VARCHAR}
+			</if>
+			<if test="addressText != null" >
+				and address_text = #{addressText,jdbcType=VARCHAR}
+			</if>
+			<if test="registeredCapital != null" >
+				and registered_capital = #{registeredCapital,jdbcType=DECIMAL}
+			</if>
+			<if test="registeredDt != null" >
+				and registered_dt = #{registeredDt,jdbcType=DATE}
+			</if>
+			<if test="contactName != null" >
+				and contact_name = #{contactName,jdbcType=VARCHAR}
+			</if>
+			<if test="contactPhone != null" >
+				and contact_phone = #{contactPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="businessUrl != null" >
+				and business_url = #{businessUrl,jdbcType=VARCHAR}
+			</if>
+			<if test="legalPerson != null" >
+				and legal_person = #{legalPerson,jdbcType=VARCHAR}
+			</if>
+			<if test="legalPersonPhone != null" >
+				and legal_person_phone = #{legalPersonPhone,jdbcType=VARCHAR}
+			</if>
+			<if test="companyAssets != null" >
+				and company_assets = #{companyAssets}
+			</if>
+			<if test="businessText != null" >
+				and business_text = #{businessText,jdbcType=VARCHAR}
+			</if>
+			<if test="state != null" >
+				and state = #{state,jdbcType=INTEGER}
+			</if>
+			<if test="capacity != null" >
+				and capacity = #{capacity}
+			</if>
+			<if test="useCouponcode != null" >
+				and use_couponcode = #{useCouponcode,jdbcType=VARCHAR}
+			</if>
+			<if test="couponcode != null" >
+				and couponcode = #{couponcode,jdbcType=VARCHAR}
+			</if>
+			<if test="texture != null" >
+				and texture = #{texture,jdbcType=VARCHAR}
+			</if>
+			<if test="pricea != null" >
+				and pricea = #{pricea,jdbcType=DECIMAL}
+			</if>
+			<if test="priceb != null" >
+				and priceb = #{priceb,jdbcType=DECIMAL}
+			</if>
+			<if test="priceaRing != null" >
+				and pricea_ring = #{priceaRing}
+			</if>
+			<if test="pricebRing != null" >
+				and priceb_ring = #{pricebRing}
+			</if>
+			<if test="sqmElectric != null" >
+				and sqm_electric = #{sqmElectric,jdbcType=DOUBLE}
+			</if>
+			<if test="wattPrice != null" >
+				and watt_price = #{wattPrice}
+			</if>
+			<if test="aptitude != null" >
+				and aptitude = #{aptitude,jdbcType=VARCHAR}
+			</if>
+			<if test="threeMonths != null" >
+				and three_months = #{threeMonths}
+			</if>
+			<if test="bankDraft != null" >
+				and bank_draft = #{bankDraft,jdbcType=INTEGER}
+			</if>
+			<if test="projectSizeA != null" >
+				and project_size_a = #{projectSizeA,jdbcType=INTEGER}
+			</if>
+			<if test="projectSizeB != null" >
+				and project_size_b = #{projectSizeB,jdbcType=INTEGER}
+			</if>
+			<if test="epc != null" >
+				and epc = #{epc,jdbcType=INTEGER}
+			</if>
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="serverCityIds != null" >
+				and server_city_ids = #{serverCityIds,jdbcType=VARCHAR}
+			</if>
+			<if test="serverCity != null" >
+				and server_city LIKE CONCAT ('%',#{serverCity,jdbcType=VARCHAR},'%')
+			</if>
+			<if test="maxPersonSize != null" >
+				and max_person_size = #{maxPersonSize,jdbcType=DOUBLE}
+			</if>
+			<if test="maxProjectSize != null" >
+				and max_project_size = #{maxProjectSize,jdbcType=DOUBLE}
+			</if>
+			<if test="designPrice != null" >
+				and design_price = #{designPrice,jdbcType=DECIMAL}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="phone != null" >
+				and phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null" >
+				and password = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null" >
+				and email = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="factorage != null" >
+				and factorage = #{factorage,jdbcType=DOUBLE},
+			</if>
+			<if test="top != null" >
+				and top = #{top,jdbcType=INTEGER},
+			</if>
+			<if test="query != null">
+				and (id like '%${query}%' or server_name like '%${query}%' or address_text like '%${query}%' or contact_phone like '%${query}%' or contact_name like '%${query}%')
+			</if>
+			<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_server
+		where 1=1
+		<if test="type != null" >
+			and type = #{type,jdbcType=VARCHAR}
+		</if>
+		<if test="serverName != null" >
+			and server_name = #{serverName,jdbcType=VARCHAR}
+		</if>
+		<if test="addressText != null" >
+			and address_text = #{addressText,jdbcType=VARCHAR}
+		</if>
+		<if test="registeredCapital != null" >
+			and registered_capital = #{registeredCapital,jdbcType=DECIMAL}
+		</if>
+		<if test="registeredDt != null" >
+			and registered_dt = #{registeredDt,jdbcType=DATE}
+		</if>
+		<if test="contactName != null" >
+			and contact_name = #{contactName,jdbcType=VARCHAR}
+		</if>
+		<if test="contactPhone != null" >
+			and contact_phone = #{contactPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="businessUrl != null" >
+			and business_url = #{businessUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="legalPerson != null" >
+			and legal_person = #{legalPerson,jdbcType=VARCHAR}
+		</if>
+		<if test="legalPersonPhone != null" >
+			and legal_person_phone = #{legalPersonPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="companyAssets != null" >
+			and company_assets = #{companyAssets}
+		</if>
+		<if test="businessText != null" >
+			and business_text = #{businessText,jdbcType=VARCHAR}
+		</if>
+		<if test="state != null" >
+			and state = #{state,jdbcType=INTEGER}
+		</if>
+		<if test="capacity != null" >
+			and capacity = #{capacity}
+		</if>
+		<if test="useCouponcode != null" >
+			and use_couponcode = #{useCouponcode,jdbcType=VARCHAR}
+		</if>
+		<if test="couponcode != null" >
+			and couponcode = #{couponcode,jdbcType=VARCHAR}
+		</if>
+		<if test="texture != null" >
+			and texture = #{texture,jdbcType=VARCHAR}
+		</if>
+		<if test="pricea != null" >
+			and pricea = #{pricea,jdbcType=DECIMAL}
+		</if>
+		<if test="priceb != null" >
+			and priceb = #{priceb,jdbcType=DECIMAL}
+		</if>
+		<if test="priceaRing != null" >
+			and pricea_ring = #{priceaRing}
+		</if>
+		<if test="pricebRing != null" >
+			and priceb_ring = #{pricebRing}
+		</if>
+		<if test="sqmElectric != null" >
+			and sqm_electric = #{sqmElectric,jdbcType=DOUBLE}
+		</if>
+		<if test="wattPrice != null" >
+			and watt_price = #{wattPrice}
+		</if>
+		<if test="aptitude != null" >
+			and aptitude = #{aptitude,jdbcType=VARCHAR}
+		</if>
+		<if test="threeMonths != null" >
+			and three_months = #{threeMonths}
+		</if>
+		<if test="bankDraft != null" >
+			and bank_draft = #{bankDraft,jdbcType=INTEGER}
+		</if>
+		<if test="projectSizeA != null" >
+			and project_size_a = #{projectSizeA,jdbcType=INTEGER}
+		</if>
+		<if test="projectSizeB != null" >
+			and project_size_b = #{projectSizeB,jdbcType=INTEGER}
+		</if>
+		<if test="epc != null" >
+			and epc = #{epc,jdbcType=INTEGER}
+		</if>
+		<if test="userId != null" >
+			and user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		<if test="serverCityIds != null" >
+			and server_city_ids = #{serverCityIds,jdbcType=VARCHAR}
+		</if>
+		<if test="serverCity != null" >
+			and server_city LIKE CONCAT ('%',#{serverCity,jdbcType=VARCHAR},'%')
+		</if>
+		<if test="maxPersonSize != null" >
+			and max_person_size = #{maxPersonSize,jdbcType=DOUBLE}
+		</if>
+		<if test="maxProjectSize != null" >
+			and max_project_size = #{maxProjectSize,jdbcType=DOUBLE}
+		</if>
+		<if test="designPrice != null" >
+			and design_price = #{designPrice,jdbcType=DECIMAL}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="phone != null" >
+			and phone = #{phone,jdbcType=VARCHAR}
+		</if>
+		<if test="password != null" >
+			and password = #{password,jdbcType=VARCHAR}
+		</if>
+		<if test="email != null" >
+			and email = #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="factorage != null" >
+			and factorage = #{factorage,jdbcType=DOUBLE},
+		</if>
+		<if test="top != null" >
+			and top = #{top,jdbcType=INTEGER},
+		</if>
+		<if test="query != null">
+				and (server_name like '%${query}%' or address_text like '%${query}%' or contact_phone like '%${query}%' or contact_name like '%${query}%')
+			</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_server
+(type,server_name,address_text,registered_capital,registered_dt,contact_name,contact_phone,business_url,legal_person,legal_person_phone,company_assets,business_text,state,capacity,use_couponcode,couponcode,texture,pricea,priceb,pricea_ring,priceb_ring,sqm_electric,watt_price,aptitude,three_months,bank_draft,project_size_a,project_size_b,epc,user_id,server_city_ids,server_city,max_person_size,max_project_size,design_price)values<foreach collection="list" item="item" index="index" separator=",">(#{item.type},#{item.serverName},#{item.addressText},#{item.registeredCapital},#{item.registeredDt},#{item.contactName},#{item.contactPhone},#{item.businessUrl},#{item.legalPerson},#{item.legalPersonPhone},#{item.companyAssets},#{item.businessText},#{item.state},#{item.capacity},#{item.useCouponcode},#{item.couponcode},#{item.texture},#{item.pricea},#{item.priceb},#{item.priceaRing},#{item.pricebRing},#{item.sqmElectric},#{item.wattPrice},#{item.aptitude},#{item.threeMonths},#{item.bankDraft},#{item.projectSizeA},#{item.projectSizeB},#{item.epc},#{item.userId},#{item.serverCityIds},#{item.serverCity},#{item.maxPersonSize},#{item.maxProjectSize},#{item.designPrice})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_server where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+
+
+
+	<!-- 分页条件查询服务商 -->
+	<select id="find" parameterType="Map" resultMap="BaseResultMap" >
+		select * from t_server
+		where 1=1
+		<if test="type != null" >
+			and type = #{type}
+		</if>
+		<if test="state != null" >
+			and state = #{state}
+		</if>
+		<if test="addressText != null">
+			and address_text LIKE CONCAT('%',#{addressText},'%')
+		</if>
+		<if test="serverCityIds != null" >
+			and server_city_ids = #{serverCityIds}
+		</if>
+		<if test="serverCity != null">
+			and server_city LIKE CONCAT('%',#{serverCity},'%')
+		</if>
+		<if test="#{sort} != null">
+			<if test="sort != null">			
+				order by ${sort} ${sortUp}
+			</if>
+		</if>
+		<if test="start != null and limit != null" >
+			limit #{start},#{limit}
+		</if>
+	</select>
+	<select id="getTotal" parameterType="Map" resultType="Long">
+		select count(*) from t_server
+		where 1=1	
+		<if test="type != null" >
+			and type = #{type}
+		</if>
+		<if test="state != null" >
+			and state = #{state}
+		</if>
+		<if test="addressText != null">
+			and address_text LIKE CONCAT('%',#{addressText},'%')
+		</if>
+		<if test="serverCity != null">
+			and server_city LIKE CONCAT('%',#{serverCity},'%')
+		</if>
+	</select>
+	
+
+</mapper>

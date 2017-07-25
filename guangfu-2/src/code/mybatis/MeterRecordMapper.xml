@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.MeterRecordMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.MeterRecord" >
+		<id column="id" property="id" />
+		<result column="station_code" property="station_code" />
+		<result column="c_addr" property="c_addr" />
+		<result column="d_addr" property="d_addr" />
+		<result column="d_type" property="d_type" />
+		<result column="w_addr" property="w_addr" />
+		<result column="meter_state" property="meter_state" />
+		<result column="meter_time" property="meter_time" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,station_code,c_addr,d_addr,d_type,w_addr,meter_state,meter_time,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+	delete from t_meter_record
+	where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_meter_record
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.MeterRecord" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_meter_record
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="station_code != null" >
+				station_code,
+			</if>
+			<if test="c_addr != null" >
+				c_addr,
+			</if>
+			<if test="d_addr != null" >
+				d_addr,
+			</if>
+			<if test="d_type != null" >
+				d_type,
+			</if>
+			<if test="w_addr != null" >
+				w_addr,
+			</if>
+			<if test="meter_state != null" >
+				meter_state,
+			</if>
+			<if test="meter_time != null" >
+				meter_time,
+			</if> 
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="station_code != null" >
+				#{station_code},
+			</if>
+			<if test="c_addr != null" >
+				#{c_addr},
+			</if>
+			<if test="d_addr != null" >
+				#{d_addr},
+			</if>
+			<if test="d_type != null" >
+				#{d_type},
+			</if>
+			<if test="w_addr != null" >
+				#{w_addr},
+			</if>
+			<if test="meter_state != null" >
+				#{meter_state},
+			</if> 
+			<if test="meter_time != null" >
+				#{meter_time},
+			</if> 
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.MeterRecord" >
+		update t_meter_record
+		<set >
+			<if test="station_code != null" >
+				station_code = #{station_code},
+			</if>
+			<if test="c_addr != null" >
+				c_addr = #{c_addr},
+			</if>
+			<if test="d_addr != null" >
+				d_addr = #{d_addr},
+			</if>
+			<if test="d_type != null" >
+				d_type = #{d_type},
+			</if>
+			<if test="w_addr != null" >
+				w_addr = #{w_addr},
+			</if>
+			<if test="meter_state != null" >
+				meter_state = #{meter_state},
+			</if> 
+			<if test="meter_time != null" >
+				meter_time = #{meter_time},
+			</if> 
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_meter_record
+		where 1=1
+			<if test="station_code != null" >
+				and station_code = #{station_code}
+			</if>
+			<if test="c_addr != null" >
+				and c_addr = #{c_addr}
+			</if>
+			<if test="d_addr != null" >
+				and d_addr = #{d_addr}
+			</if>
+			<if test="d_type != null" >
+				and d_type = #{d_type}
+			</if>
+			<if test="w_addr != null" >
+				and w_addr = #{w_addr}
+			</if>
+			<if test="meter_state != null" >
+				and meter_state = #{meter_state}
+			</if> 
+			<if test="meter_time != null" >
+				and meter_time = #{meter_time}
+			</if> 
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_meter_record
+		where 1=1
+			<if test="station_code != null" >
+				and station_code = #{station_code}
+			</if>
+			<if test="c_addr != null" >
+				and c_addr = #{c_addr}
+			</if>
+			<if test="d_addr != null" >
+				and d_addr = #{d_addr}
+			</if>
+			<if test="d_type != null" >
+				and d_type = #{d_type}
+			</if>
+			<if test="w_addr != null" >
+				and w_addr = #{w_addr}
+			</if>
+			<if test="meter_state != null" >
+				and meter_state = #{meter_state}
+			</if>
+			<if test="meter_time != null" >
+				and meter_time = #{meter_time}
+			</if>  
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			<if test="time_from != null">
+				and create_dtm <![CDATA[ >= ]]> #{time_from}
+			</if>
+			<if test="time_to != null">
+				and create_dtm <![CDATA[ < ]]> #{time_to}
+			</if>
+			<if test="#{sort} != null">
+				<if test="sort != null"> order by ${sort} ${sortUp} </if>
+			</if>limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_meter_record
+		where 1=1
+		<if test="station_code != null" >
+			and station_code = #{station_code}
+		</if>
+		<if test="c_addr != null" >
+			and c_addr = #{c_addr}
+		</if>
+		<if test="d_addr != null" >
+			and d_addr = #{d_addr}
+		</if>
+		<if test="d_type != null" >
+			and d_type = #{d_type}
+		</if>
+		<if test="w_addr != null" >
+			and w_addr = #{w_addr}
+		</if>
+		<if test="meter_state != null" >
+			and meter_state = #{meter_state}
+		</if> 
+		<if test="meter_time != null" >
+			and meter_time = #{meter_time}
+		</if> 
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+		<if test="time_from != null">
+			and create_dtm <![CDATA[ >= ]]> #{time_from}
+		</if>
+		<if test="time_to != null">
+			and create_dtm <![CDATA[ < ]]> #{time_to}
+		</if>
+	</select>
+	
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+	insert into t_meter_record
+	(station_code,c_addr,d_addr,d_type,w_addr,meter_state,meter_time)values<foreach collection="list" item="item" index="index" separator=",">(#{item.station_code},#{item.c_addr},#{item.d_addr},#{item.d_type},#{item.w_addr},#{item.meter_state},#{item.meter_time})	</foreach>
+</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_meter_record where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+</mapper>

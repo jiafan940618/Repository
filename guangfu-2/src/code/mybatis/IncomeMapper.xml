@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.IncomeMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Income" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
+		<result column="wallet_id" property="walletId" jdbcType="INTEGER" />
+		<result column="withdraw_id" property="withdrawId" jdbcType="INTEGER" />
+		<result column="count" property="count" jdbcType="DECIMAL" />
+		<result column="money" property="money" jdbcType="DECIMAL" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,user_id,wallet_id,withdraw_id,count,money,type,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_income
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_income
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Income" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_income
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="userId != null" >
+				user_id,
+			</if>
+			<if test="walletId != null" >
+				wallet_id,
+			</if>
+			<if test="withdrawId != null" >
+				withdraw_id,
+			</if>
+			<if test="count != null" >
+				count,
+			</if>
+			<if test="money != null" >
+				money,
+			</if>
+			<if test="type != null" >
+				type,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null" >
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="walletId != null" >
+				#{walletId,jdbcType=INTEGER},
+			</if>
+			<if test="withdrawId != null" >
+				#{withdrawId,jdbcType=INTEGER},
+			</if>
+			<if test="count != null" >
+				#{count,jdbcType=DECIMAL},
+			</if>
+			<if test="money != null" >
+				#{money,jdbcType=DECIMAL},
+			</if>
+			<if test="type != null" >
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Income" >
+		update t_income
+		<set >
+			<if test="userId != null" >
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="walletId != null" >
+				wallet_id = #{walletId,jdbcType=INTEGER},
+			</if>
+			<if test="withdrawId != null" >
+				withdraw_id = #{withdrawId,jdbcType=INTEGER},
+			</if>
+			<if test="count != null" >
+				count = #{count,jdbcType=DECIMAL},
+			</if>
+			<if test="money != null" >
+				money = #{money,jdbcType=DECIMAL},
+			</if>
+			<if test="type != null" >
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_income
+		where 1=1
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="walletId != null" >
+				and wallet_id = #{walletId,jdbcType=INTEGER}
+			</if>
+			<if test="withdrawId != null" >
+				and withdraw_id = #{withdrawId,jdbcType=INTEGER}
+			</if>
+			<if test="count != null" >
+				and count = #{count,jdbcType=DECIMAL}
+			</if>
+			<if test="money != null" >
+				and money = #{money,jdbcType=DECIMAL}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_income
+		where 1=1
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="walletId != null" >
+				and wallet_id = #{walletId,jdbcType=INTEGER}
+			</if>
+			<if test="withdrawId != null" >
+				and withdraw_id = #{withdrawId,jdbcType=INTEGER}
+			</if>
+			<if test="count != null" >
+				and count = #{count,jdbcType=DECIMAL}
+			</if>
+			<if test="money != null" >
+				and money = #{money,jdbcType=DECIMAL}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_income
+		where 1=1
+		<if test="userId != null" >
+			and user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		<if test="walletId != null" >
+			and wallet_id = #{walletId,jdbcType=INTEGER}
+		</if>
+		<if test="withdrawId != null" >
+			and withdraw_id = #{withdrawId,jdbcType=INTEGER}
+		</if>
+		<if test="count != null" >
+			and count = #{count,jdbcType=DECIMAL}
+		</if>
+		<if test="money != null" >
+			and money = #{money,jdbcType=DECIMAL}
+		</if>
+		<if test="type != null" >
+			and type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_income
+(user_id,wallet_id,withdraw_id,count,money,type,create_dtm)values<foreach collection="list" item="item" index="index" separator=",">(#{item.userId},#{item.walletId},#{item.withdrawId},#{item.count},#{item.money},#{item.type})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_income where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+
+	<select id="find" parameterType="Map" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_income
+		where 1=1
+			<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+			<if test="type != null" >
+				and type = #{type,jdbcType=INTEGER}
+			</if>
+			<if test="timeFrom != null" >
+				and create_dtm <![CDATA[>=]]> #{timeFrom}
+			</if>
+			<if test="timeTo != null" >
+				and create_dtm <![CDATA[<]]> DATE_ADD(#{timeTo}, INTERVAL 1 DAY)
+			</if>
+			ORDER BY create_dtm DESC			
+			limit #{start},#{limit}
+	</select>
+	<select id="findCount" parameterType="Map" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_income
+		where 1=1
+		<if test="userId != null" >
+				and user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		<if test="type != null" >
+			and type = #{type,jdbcType=INTEGER}
+		</if>
+		<if test="timeFrom != null" >
+			and create_dtm <![CDATA[>=]]> #{timeFrom}
+		</if>
+		<if test="timeTo != null" >
+			and create_dtm <![CDATA[<]]> DATE_ADD(#{timeTo}, INTERVAL 1 DAY)
+		</if>
+	</select>
+	
+	<select id="forIncomeEcharts"  parameterType="java.lang.Long" resultMap="BaseResultMap">
+		SELECT user_id, wallet_id, type, SUM(money) AS money, DATE_FORMAT(create_dtm,'%Y-%m-%d') AS create_dtm 
+		FROM t_income WHERE 1=1 
+		AND user_id = #{userId,jdbcType=INTEGER}
+		AND TYPE = 2 
+		AND create_dtm 
+		LIKE CONCAT('%',DATE_FORMAT(NOW(),'%Y'),'%') 
+		GROUP BY(DATE_FORMAT(create_dtm,'%Y-%m-%d'))
+	</select>
+
+</mapper>

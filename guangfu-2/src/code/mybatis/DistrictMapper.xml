@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.DistrictMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.District" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+		<result column="city_id" property="cityId" jdbcType="INTEGER" />
+		<result column="create_dtm" property="createDtm" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,district_name,city_id,create_dtm
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from s_district
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from s_district
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.District" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into s_district
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="districtName != null" >
+				district_name,
+			</if>
+			<if test="cityId != null" >
+				city_id,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="districtName != null" >
+				#{districtName,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null" >
+				#{cityId,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.District" >
+		update s_district
+		<set >
+			<if test="districtName != null" >
+				district_name = #{districtName,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null" >
+				city_id = #{cityId,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from s_district
+		where 1=1
+			<if test="districtName != null" >
+				and district_name = #{districtName,jdbcType=VARCHAR}
+			</if>
+			<if test="cityId != null" >
+				and city_id = #{cityId,jdbcType=INTEGER}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from s_district
+		where 1=1
+			<if test="districtName != null" >
+				and district_name = #{districtName,jdbcType=VARCHAR}
+			</if>
+			<if test="cityId != null" >
+				and city_id = #{cityId,jdbcType=INTEGER}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from s_district
+		where 1=1
+		<if test="districtName != null" >
+			and district_name = #{districtName,jdbcType=VARCHAR}
+		</if>
+		<if test="cityId != null" >
+			and city_id = #{cityId,jdbcType=INTEGER}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=TIMESTAMP}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into s_district
+(district_name,city_id)values<foreach collection="list" item="item" index="index" separator=",">(#{item.districtName},#{item.cityId})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from s_district where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+</mapper>

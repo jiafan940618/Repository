@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hy.gf.mapper.DeviceMapper" >
+	<resultMap id="BaseResultMap" type="com.hy.gf.model.Device" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="serve_id" property="serveId" jdbcType="INTEGER" />
+		<result column="serve_name" property="serveName" jdbcType="VARCHAR" />
+		<result column="devive_type_id" property="deviveTypeId" jdbcType="INTEGER" />
+		<result column="device_type_text" property="deviceTypeText" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="brand" property="brand" jdbcType="VARCHAR" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DECIMAL" />
+		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="quality" property="quality" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="brand_id" property="brandId" jdbcType="INTEGER" />
+		<result column="create_dtm" property="createDtm" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		id,serve_id,serve_name,devive_type_id,device_type_text,name,brand,model,price,unit,quality,remark,create_dtm,brand_id
+	</sql>
+<delete id="delete" parameterType="java.lang.Long" >
+delete from t_device
+where id = #{id,jdbcType=INTEGER}
+</delete>
+	<select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+		select
+		<include refid="Base_Column_List" />
+		from t_device
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<insert id="insert" parameterType="com.hy.gf.model.Device" >
+	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+		insert into t_device
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="serveId != null" >
+				serve_id,
+			</if>
+			<if test="serveName != null" >
+				serve_name,
+			</if>
+			<if test="deviveTypeId != null" >
+				devive_type_id,
+			</if>
+			<if test="deviceTypeText != null" >
+				device_type_text,
+			</if>
+			<if test="name != null" >
+				name,
+			</if>
+			<if test="brand != null" >
+				brand,
+			</if>
+			<if test="model != null" >
+				model,
+			</if>
+			<if test="price != null" >
+				price,
+			</if>
+			<if test="unit != null" >
+				unit,
+			</if>
+			<if test="quality != null" >
+				quality,
+			</if>
+			<if test="remark != null" >
+				remark,
+			</if>
+			<if test="brandId != null">
+				brand_id,
+			</if>
+			<if test="createDtm != null" >
+				create_dtm,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="serveId != null" >
+				#{serveId,jdbcType=INTEGER},
+			</if>
+			<if test="serveName != null" >
+				#{serveName,jdbcType=VARCHAR},
+			</if>
+			<if test="deviveTypeId != null" >
+				#{deviveTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="deviceTypeText != null" >
+				#{deviceTypeText,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null" >
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="brand != null" >
+				#{brand,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null" >
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null" >
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="unit != null" >
+				#{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="quality != null" >
+				#{quality,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null" >
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="brandId">
+				#{brandId,jdbcType=VARCHAR},
+			</if>
+			<if test="createDtm != null" >
+				#{createDtm,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="update" parameterType="com.hy.gf.model.Device" >
+		update t_device
+		<set >
+			<if test="serveId != null" >
+				serve_id = #{serveId,jdbcType=INTEGER},
+			</if>
+			<if test="serveName != null" >
+				serve_name = #{serveName,jdbcType=VARCHAR},
+			</if>
+			<if test="deviveTypeId != null" >
+				devive_type_id = #{deviveTypeId,jdbcType=INTEGER},
+			</if>
+			<if test="deviceTypeText != null" >
+				device_type_text = #{deviceTypeText,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null" >
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="brand != null" >
+				brand = #{brand,jdbcType=VARCHAR},
+			</if>
+			<if test="model != null" >
+				model = #{model,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null" >
+				price = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="unit != null" >
+				unit = #{unit,jdbcType=VARCHAR},
+			</if>
+			<if test="quality != null" >
+				quality = #{quality,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null" >
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="brandId != null">
+				brand_id = #{brandId,jdbcType=INTEGER},
+			</if>
+			<if test="createDtm != null" >
+				create_dtm = #{createDtm,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectOneByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_device
+		where 1=1
+			<if test="serveId != null" >
+				and serve_id = #{serveId,jdbcType=INTEGER}
+			</if>
+			<if test="serveName != null" >
+				and serve_name = #{serveName,jdbcType=VARCHAR}
+			</if>
+			<if test="deviveTypeId != null" >
+				and devive_type_id = #{deviveTypeId,jdbcType=INTEGER}
+			</if>
+			<if test="deviceTypeText != null" >
+				and device_type_text = #{deviceTypeText,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null" >
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="brand != null" >
+				and brand = #{brand,jdbcType=VARCHAR}
+			</if>
+			<if test="model != null" >
+				and model = #{model,jdbcType=VARCHAR}
+			</if>
+			<if test="price != null" >
+				and price = #{price,jdbcType=DECIMAL}
+			</if>
+			<if test="unit != null" >
+				and unit = #{unit,jdbcType=VARCHAR}
+			</if>
+			<if test="quality != null" >
+				and quality = #{quality,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null" >
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=VARCHAR}
+			</if>
+			limit 0,1
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from t_device
+		where 1=1
+			<if test="serveId != null" >
+				and serve_id = #{serveId,jdbcType=INTEGER}
+			</if>
+			<if test="serveName != null" >
+				and serve_name = #{serveName,jdbcType=VARCHAR}
+			</if>
+			<if test="deviveTypeId != null" >
+				and devive_type_id = #{deviveTypeId,jdbcType=INTEGER}
+			</if>
+			<if test="deviceTypeText != null" >
+				and device_type_text = #{deviceTypeText,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null" >
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="brand != null" >
+				and brand = #{brand,jdbcType=VARCHAR}
+			</if>
+			<if test="model != null" >
+				and model = #{model,jdbcType=VARCHAR}
+			</if>
+			<if test="price != null" >
+				and price = #{price,jdbcType=DECIMAL}
+			</if>
+			<if test="unit != null" >
+				and unit = #{unit,jdbcType=VARCHAR}
+			</if>
+			<if test="quality != null" >
+				and quality = #{quality,jdbcType=VARCHAR}
+			</if>
+			<if test="remark != null" >
+				and remark = #{remark,jdbcType=VARCHAR}
+			</if>
+			<if test="createDtm != null" >
+				and create_dtm = #{createDtm,jdbcType=VARCHAR}
+			</if>
+<if test="#{sort} != null"><if test="sort != null">			order by ${sort} ${sortUp}
+</if></if>			limit #{start},#{limit}
+	</select>
+	<select id="selectByExampleCount" resultType="java.lang.Integer">
+		select
+		count(1) as total
+		from t_device
+		where 1=1
+		<if test="serveId != null" >
+			and serve_id = #{serveId,jdbcType=INTEGER}
+		</if>
+		<if test="serveName != null" >
+			and serve_name = #{serveName,jdbcType=VARCHAR}
+		</if>
+		<if test="deviveTypeId != null" >
+			and devive_type_id = #{deviveTypeId,jdbcType=INTEGER}
+		</if>
+		<if test="deviceTypeText != null" >
+			and device_type_text = #{deviceTypeText,jdbcType=VARCHAR}
+		</if>
+		<if test="name != null" >
+			and name = #{name,jdbcType=VARCHAR}
+		</if>
+		<if test="brand != null" >
+			and brand = #{brand,jdbcType=VARCHAR}
+		</if>
+		<if test="model != null" >
+			and model = #{model,jdbcType=VARCHAR}
+		</if>
+		<if test="price != null" >
+			and price = #{price,jdbcType=DECIMAL}
+		</if>
+		<if test="unit != null" >
+			and unit = #{unit,jdbcType=VARCHAR}
+		</if>
+		<if test="quality != null" >
+			and quality = #{quality,jdbcType=VARCHAR}
+		</if>
+		<if test="remark != null" >
+			and remark = #{remark,jdbcType=VARCHAR}
+		</if>
+		<if test="createDtm != null" >
+			and create_dtm = #{createDtm,jdbcType=VARCHAR}
+		</if>
+	</select>
+<insert id="insertBatch" useGeneratedKeys="true" parameterType="java.util.List">	<selectKey resultType="long" keyProperty="id" order="AFTER">
+	SELECT LAST_INSERT_ID() </selectKey>
+insert into t_device
+(serve_id,serve_name,devive_type_id,device_type_text,name,brand,model,price,unit,quality,remark,brand_id)values<foreach collection="list" item="item" index="index" separator=",">(#{item.serveId},#{item.serveName},#{item.deviveTypeId},#{item.deviceTypeText},#{item.name},#{item.brand},#{item.model},#{item.price},#{item.unit},#{item.quality},#{item.remark},#{item.brandId})	</foreach>
+	</insert>
+<delete id="deleteBatch" parameterType="java.util.List">delete from t_device where id in<foreach collection="list" item="item" open="(" separator="," close=")">#{item}</foreach></delete>
+</mapper>
